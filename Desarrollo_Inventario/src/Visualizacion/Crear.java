@@ -396,9 +396,11 @@ public class Crear extends javax.swing.JFrame {
     }//GEN-LAST:event_txCodigoProductoActionPerformed
 
     private void btPrincipalCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrincipalCrearActionPerformed
-//        DashBoard volverHome= new DashBoard(Obj);
-//        volverHome.setVisible(true);
-//        this.dispose(); // instruccion que cierra la ventana actual
+        VentanaSeleccion volverHome= new VentanaSeleccion(objControlador);
+        volverHome.setVisible(true);
+        this.dispose(); // instruccion que cierra la ventana actual
+        
+        
     }//GEN-LAST:event_btPrincipalCrearActionPerformed
 
     private void btnCrearProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearProductoActionPerformed
