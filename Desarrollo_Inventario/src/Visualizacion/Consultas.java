@@ -136,7 +136,7 @@ public class Consultas extends javax.swing.JFrame {
     }//GEN-LAST:event_CheckExistenciasMouseClicked
 
     private void btnPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrincipalActionPerformed
-        DashBoard volverHome= new DashBoard(objControlador);
+        VentanaSeleccion volverHome= new VentanaSeleccion(objControlador);
         volverHome.setVisible(true);
         this.dispose(); // instruccion que cierra la ventana actual
     }//GEN-LAST:event_btnPrincipalActionPerformed

@@ -117,7 +117,7 @@ public class VisualizarClientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btPrincipalClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrincipalClientesActionPerformed
-        DashBoard volverHome= new DashBoard(objControlador);
+        VentanaSeleccion volverHome= new VentanaSeleccion(objControlador);
         volverHome.setVisible(true);
         this.dispose(); // instruccion que cierra la ventana actual
     }//GEN-LAST:event_btPrincipalClientesActionPerformed

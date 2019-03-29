@@ -9,7 +9,6 @@ package crudMVC;
 import Visualizacion.*;
 
 import Controlador.*;
-import Modelo.*;
 
 /**
  *

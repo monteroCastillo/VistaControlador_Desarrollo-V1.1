@@ -1,39 +1,33 @@
-package Controlador;
+ package Controlador;
 
-import Modelo.*;
-import Visualizacion.*;
-import PostgreSQL.*;
+import ModeloDAO.*;
+import ModeloVO.DetalleFacturaVO;
 import PostgreSQl.pgsql_dbc;
 import java.util.ArrayList;
 import java.util.Iterator;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
 
 public class Controlador {
 
     ClientesDAO objClientesDAO = new ClientesDAO();
     ProductoDAO objProductoDAO = new ProductoDAO();
-    //Consultas objConsultas = new Consultas();
+    EmpleadoDAO objEmpleadoDAO = new EmpleadoDAO();
+    ProveedorDAO objProveedorDAO = new ProveedorDAO();
+    DetalleFacturaVO objDetalleFacturaVO;
 
     pgsql_dbc objetoConexion = new pgsql_dbc();
-    ///Login objLogin =new  Login();
-
-//    public Controlador(VisualizarClientes objVisualizarClientes, ClientesDAO objClientesDAO, Crear objCrear) {////, //Login objLogin){
-// 
-//        this.objClientesDAO = objClientesDAO;
-//
-//    }
+    ArrayList<DetalleFacturaVO> arregloProductos2 = new ArrayList<>();
+    
+ 
     public Controlador() {
 
     }
 
     public void llenarTablaClientes(JTable tablaD) {
         DefaultTableModel model = new DefaultTableModel();
-        tablaD.setModel(model);
-        //DefaultTableModel  model = (DefaultTableModel )tablaClientes.getModel();
+        tablaD.setModel(model);        
 
         model.addColumn("Nombre");
         model.addColumn("Apellidos");
@@ -61,7 +55,43 @@ public class Controlador {
         }
 
     }
+    
+    public void llenarTablaEmpleados(JTable tablaD) {
+        DefaultTableModel model = new DefaultTableModel();
+        tablaD.setModel(model);       
 
+        model.addColumn("Nombre");       
+        model.addColumn("Identificacion");
+        model.addColumn("Usuario");
+        model.addColumn("Clave");
+        model.addColumn("Direccion");
+        model.addColumn("Telefono");
+        model.addColumn("Tipo empleado");
+
+        Object[] columna = new Object[7];
+
+        int numRegistros = objEmpleadoDAO.listarEmpleados().size();
+
+        for (int i = 0; i < numRegistros; i++) {
+            columna[0] = objEmpleadoDAO.listarEmpleados().get(i).getNombreEmpleado();
+            columna[1] = objEmpleadoDAO.listarEmpleados().get(i).getCedula();
+            columna[2] = objEmpleadoDAO.listarEmpleados().get(i).getUsuario();
+            columna[3] = objEmpleadoDAO.listarEmpleados().get(i).getClave();
+            columna[4] = objEmpleadoDAO.listarEmpleados().get(i).getDireccionEmpleado();
+            columna[5] = objEmpleadoDAO.listarEmpleados().get(i).getTelEmpleado();
+            columna[6] = objEmpleadoDAO.listarEmpleados().get(i).getTipoEmpleado();
+           
+            model.addRow(columna);
+        }
+
+    }
+    
+    
+    /**
+     * Muestra los datos de los productos en una tabla
+     * @param tablaD
+     * @param consulta 
+     */
     public void llenarTablaProductos(JTable tablaD, String consulta) {
         System.out.println("Entro al metodo de llenar tabla");
         DefaultTableModel model = new DefaultTableModel();
@@ -93,7 +123,45 @@ public class Controlador {
         }
 
     }
+    /**
+     * Muestra los datos de los proveedores en una tabla
+     * @param tablaD 
+     */
+    public void llenarTablaProveedores(JTable tablaD) {
+        DefaultTableModel model = new DefaultTableModel();
+        tablaD.setModel(model);       
 
+        model.addColumn("Nombre");       
+        model.addColumn("Nit");
+        model.addColumn("Direccion");
+        model.addColumn("Telefono");
+        model.addColumn("Ciudad");
+        model.addColumn("Email");
+       
+
+        Object[] columna = new Object[6];
+
+        int numRegistros = objProveedorDAO.listarProveedores().size();
+
+        for (int i = 0; i < numRegistros; i++) {
+            columna[0] = objProveedorDAO.listarProveedores().get(i).getNombreProveedor();
+            columna[1] = objProveedorDAO.listarProveedores().get(i).getNit();
+            columna[2] = objProveedorDAO.listarProveedores().get(i).getDireccioProveedor();
+            columna[3] = objProveedorDAO.listarProveedores().get(i).getTelefonoProveedor();
+            columna[4] = objProveedorDAO.listarProveedores().get(i).getCiudad();
+            columna[5] = objProveedorDAO.listarProveedores().get(i).getEmail();
+            
+           
+            model.addRow(columna);
+        }
+
+    }    
+    
+    //************************************************************************************************************
+    /**
+     * Crea un nuevo cliente en la base de datos, agregando una tupla completa a la base de datos
+     * @param arrayClienteNuevo 
+     */
     public void crearCliente(ArrayList<String> arrayClienteNuevo) {
 
         String nom = arrayClienteNuevo.get(0);
@@ -134,8 +202,43 @@ public class Controlador {
         String prov = arregloProductos.get(5);
         String descrip = arregloProductos.get(6);
 
-        objProductoDAO.insertarProducto(codProd, codProd, cant, valcom, valVen, prov, descrip);
-//                    
+        objProductoDAO.insertarProducto(prod, codProd, cant, valcom, valVen, prov, descrip);                 
+
+    }
+    
+    /**
+     * Crea una tupla de tipo empleado en la base de datos
+     * @param arregloEmpleados 
+     */
+    public void crearEmpleado(ArrayList<String> arregloEmpleados) {
+
+        String emp = arregloEmpleados.get(0);
+        String ced = arregloEmpleados.get(1);        
+        String usuario = arregloEmpleados.get(2);    
+        String clave = arregloEmpleados.get(3);       
+        String direccion = arregloEmpleados.get(4);
+        String tel = arregloEmpleados.get(5);
+        String tipo = arregloEmpleados.get(6);
+        
+        objEmpleadoDAO.insertarEmpleado(emp, ced, usuario, clave, direccion, tel, tipo);
+
+    }
+    /**
+     * 
+     * @param arregloProveedor 
+     */
+    
+     public void crearProveedor(ArrayList<String> arregloProveedor) {
+
+        String nom = arregloProveedor.get(0);
+        String nit = arregloProveedor.get(1);        
+        String dir = arregloProveedor.get(2);    
+        String tel = arregloProveedor.get(3);       
+        String ciud = arregloProveedor.get(4);
+        String email = arregloProveedor.get(5);
+        
+        
+        objProveedorDAO.insertarProveedor(nom, nit, ciud, tel, ciud, email);
 
     }
 
@@ -170,8 +273,6 @@ public class Controlador {
             if (password.equalsIgnoreCase(clave) && user.equalsIgnoreCase(usuario)) {
                 System.out.println("FELICIDADES  ****" + arregloSalida.get(0));
 
-//                DashBoard interfaz = new DashBoard();
-//                interfaz.show();
             } else {
                 String d = JOptionPane.showInputDialog("Usuario NO valido Desea salir (S)");
                 if (d.equals("s")) {
@@ -206,6 +307,12 @@ public class Controlador {
 
     }
 
+    
+    ///*****************************************************************************************************************
+    
+    ////                METODOS DE LA CLASE VENTAS
+    
+    //*****************************************************************************************************************
     /**
      * Valida si un cliente esta creado en la base de datos
      * @param labelInformacionVentas
@@ -228,6 +335,11 @@ public class Controlador {
         }
     }
     
+    /**
+     * LLena el combobox en la clase ventas para hacer limitar la busqueda
+     * @param cBoxMostrarProductosVentas 
+     */
+    
     public void llenarComboboxVentas(JComboBox cBoxMostrarProductosVentas) {
 
         //btMostrarInformacionTablas.setEnabled(false);
@@ -247,5 +359,66 @@ public class Controlador {
         }
     }
 
+    
+    public void extraerDatosTablaProductos_ClaseVentas(JTable tablaVentasProductos, int row){
+        
+        ArrayList<DetalleFacturaVO> arregloProductos = null ;//= new ArrayList<>();
+        //* row devolvera -1 si se ha clicado fuera de la fila pero dentro de la tabla,
+        //si no devolvera el indice de la fila en la que se ha clicado. */
 
-}
+        //saca los valores de la tabla de Productos de la clase Ventas
+        String codigoProducto= ((String) tablaVentasProductos.getValueAt(row, 0));
+        String nombreProducto= ((String) tablaVentasProductos.getValueAt(row, 1));
+        float valorProducto = ((float) tablaVentasProductos.getValueAt(row, 3));
+        
+        arregloProductos.add(new DetalleFacturaVO(codigoProducto,nombreProducto,valorProducto));
+        
+        for (int i = 0; i < arregloProductos.size(); i++) {
+            System.out.println(arregloProductos.get(i).getNombreProducto());
+            System.out.println(arregloProductos.get(i).getCodigoProducto());
+            System.out.println(arregloProductos.get(i).getPrecioProducto());
+        }
+    }
+    
+    public void  mostrarProductos(ArrayList<DetalleFacturaVO> arregloProductos){
+        
+        
+        arregloProductos2 = arregloProductos;
+        for (int i = 0; i < arregloProductos.size(); i++) {
+            System.out.println(arregloProductos.get(i).getNombreProducto());
+            System.out.println(arregloProductos.get(i).getCodigoProducto());
+            System.out.println(arregloProductos.get(i).getPrecioProducto());
+        }
+        
+    }
+    
+    public void llenarTablaCanasta(JTable tablaD) {
+        DefaultTableModel model = new DefaultTableModel();
+        tablaD.setModel(model);        
+        
+        model.addColumn("CANT");
+        model.addColumn("Codigo");
+        model.addColumn("Nombre Producto");        
+        model.addColumn("Valor Producto");
+        model.addColumn("V. total");
+        
+
+        Object[] columna = new Object[5];// Numero de Columnas
+
+        int numRegistros = arregloProductos2.size();
+
+        for (int i = 0; i < numRegistros; i++) {
+            columna[1] = arregloProductos2.get(i).getCodigoProducto();
+            columna[2] = arregloProductos2.get(i).getNombreProducto();            
+            columna[3] = arregloProductos2.get(i).getPrecioProducto();
+            
+            model.addRow(columna);
+        }
+
+    }
+
+    
+    
+    
+    
+}//Fin de la clase

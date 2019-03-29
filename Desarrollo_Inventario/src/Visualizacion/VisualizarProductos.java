@@ -160,7 +160,7 @@ public class VisualizarProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaProductosMouseClicked
 
     private void btPrincipalProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrincipalProductosActionPerformed
-        DashBoard volverHome= new DashBoard(objControlador);
+        VentanaSeleccion volverHome= new VentanaSeleccion(objControlador);
         volverHome.setVisible(true);
         this.dispose(); // instruccion que cierra la ventana actual
     }//GEN-LAST:event_btPrincipalProductosActionPerformed

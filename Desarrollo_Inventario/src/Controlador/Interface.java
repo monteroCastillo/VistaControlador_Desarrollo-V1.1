@@ -5,6 +5,8 @@
  */
 package Controlador;
 
+import ModeloDAO.ClientesDAO;
+import ModeloVO.Clientes;
 import Visualizacion.*;
 
 import java.util.ArrayList;
@@ -12,7 +14,6 @@ import java.util.Iterator;
 
 import PostgreSQl.pgsql_dbc;
 import Visualizacion.*;
-import Modelo.*;
 
 
 

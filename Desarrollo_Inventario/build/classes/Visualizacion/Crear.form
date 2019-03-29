@@ -26,10 +26,10 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTabbedPane1" min="-2" pref="713" max="-2" attributes="0"/>
                   <Component id="btPrincipalCrear" min="-2" pref="170" max="-2" attributes="0"/>
+                  <Component id="jTabbedPane1" min="-2" pref="585" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="27" max="32767" attributes="0"/>
+              <EmptySpace pref="60" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -39,7 +39,8 @@
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Component id="btPrincipalCrear" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" pref="535" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" min="-2" pref="503" max="-2" attributes="0"/>
+              <EmptySpace pref="32" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -103,7 +104,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanel8" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jPanel8" alignment="0" pref="357" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -117,7 +118,6 @@
                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="btnCrearProducto" alignment="1" min="-2" pref="206" max="-2" attributes="0"/>
-                                  <Component id="txCodigoProducto" min="-2" pref="159" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
@@ -143,49 +143,60 @@
                                                   <Component id="txDescripcionProducto" alignment="1" min="-2" pref="159" max="-2" attributes="0"/>
                                                   <Component id="txValorCompraProducto" alignment="1" min="-2" pref="159" max="-2" attributes="0"/>
                                                   <Component id="txCantidadProducto" alignment="1" min="-2" pref="159" max="-2" attributes="0"/>
+                                                  <Component id="txCodigoProducto" alignment="1" min="-2" pref="159" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="207" max="32767" attributes="0"/>
+                              <EmptySpace pref="138" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txNombreProducto" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txCodigoProducto" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="txCantidadProducto" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel13" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lbValorCompraProducto" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txValorCompraProducto" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txNombreProducto" min="-2" pref="28" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txValorVentaProducto" alignment="1" min="-2" pref="20" max="-2" attributes="0"/>
-                                  <Component id="lbValorVentaProducto" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txProveedor" alignment="3" pref="25" max="32767" attributes="0"/>
+                                  <Component id="txCodigoProducto" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jLabel13" pref="26" max="32767" attributes="0"/>
+                                  <Component id="txCantidadProducto" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lbValorCompraProducto" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txValorCompraProducto" alignment="0" min="-2" pref="28" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                                      <Component id="lbValorVentaProducto" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                                      <Component id="txValorVentaProducto" min="-2" pref="27" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txProveedor" min="-2" pref="25" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lbProveedor" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txDescripcionProducto" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
@@ -290,7 +301,7 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="158" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
                               <Component id="jLabel10" min="-2" pref="300" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -298,7 +309,7 @@
                               <Component id="jPanel5" min="-2" pref="412" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="189" max="32767" attributes="0"/>
+                      <EmptySpace pref="61" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

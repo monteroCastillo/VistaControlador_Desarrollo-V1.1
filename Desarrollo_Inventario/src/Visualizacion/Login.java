@@ -101,7 +101,7 @@ public class Login extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         objControlador.login(txNombre.getText(), txContrasenia.getText());
-        DashBoard interfaz = new DashBoard(objControlador);
+        VentanaSeleccion interfaz = new VentanaSeleccion(objControlador);
         interfaz.show();
         this.dispose();
     }//GEN-LAST:event_btnLoginActionPerformed
