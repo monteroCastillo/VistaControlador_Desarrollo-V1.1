@@ -8,12 +8,15 @@ package Visualizacion;
 
 import ModeloVO.*;
 import Controlador.*;
+import ModeloDAO.ProductoDAO;
 import PostgreSQl.pgsql_dbc;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -22,11 +25,15 @@ import javax.swing.table.DefaultTableModel;
 public class Ventas extends javax.swing.JFrame {
 
     Controlador objControlador;
+    ProductoDAO objProductoDAO = new ProductoDAO();
+    TableRowSorter rowSorter;
+    int IDBUSQUEDA = 1;
     
     ArrayList<DetalleFacturaVO> arregloProductos = new ArrayList<>();
     
     pgsql_dbc objetoConexion = new pgsql_dbc();
    
+    DefaultTableModel model = new DefaultTableModel();
     
     
     public Ventas(Controlador objControlador) {
@@ -62,6 +69,7 @@ public class Ventas extends javax.swing.JFrame {
         btPrincipalVentas = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -160,7 +168,10 @@ public class Ventas extends javax.swing.JFrame {
                                 .addGap(43, 43, 43)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(comboBoxMostrarProductosVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton2)
+                                        .addGap(70, 70, 70)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(39, 39, 39)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,7 +219,8 @@ public class Ventas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(mostrarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2))
+                            .addComponent(jButton2)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28))
@@ -234,10 +246,15 @@ public class Ventas extends javax.swing.JFrame {
     private void mostrarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarDatosActionPerformed
         mostrarDatos();
     }//GEN-LAST:event_mostrarDatosActionPerformed
-
+    /**
+     * Permite seleccionar un producto de la tabla de ventas para llevarlo a la canaste de compra.
+     * @param evt 
+     */
     private void tablaVentasProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaVentasProductosMouseClicked
        int row = tablaVentasProductos.rowAtPoint(evt.getPoint());
        
+       String d = JOptionPane.showInputDialog("Desea Agregar este producto \n al carrito de compras (S)");
+       System.out.println("El valor de la variable d es : " +d);
         datosTablaProducto(row);
     }//GEN-LAST:event_tablaVentasProductosMouseClicked
 
@@ -250,7 +267,7 @@ public class Ventas extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         CanastaCompra canasta= new CanastaCompra(objControlador);
         canasta.setVisible(true);
-        this.dispose(); // instruccion que cierra la ventana actual
+       // this.dispose(); // instruccion que cierra la ventana actual
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -268,7 +285,7 @@ public class Ventas extends javax.swing.JFrame {
     public void datosTablaProducto(int row){   
         
         
-
+        
         //saca los valores de la tabla de Productos de la clase Ventas
         String codigoProducto= ((String) tablaVentasProductos.getValueAt(row, 0));
         String nombreProducto= ((String) tablaVentasProductos.getValueAt(row, 1));
@@ -296,9 +313,9 @@ public class Ventas extends javax.swing.JFrame {
         
     private void mostrarDatos(){
        String consulta = "SELECT * FROM producto";
-       objControlador.llenarTablaProductos(tablaVentasProductos, consulta);
+      // objControlador.llenarTablaProductos(tablaVentasProductos, consulta);
         
-       
+       llenarTablaProductos( consulta);
         
     }
 
@@ -306,7 +323,44 @@ public class Ventas extends javax.swing.JFrame {
         return arregloProductos;
     }
     
+     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+         
+        // objControlador.ejemplo( tablaVentasProductos, model);
+        rowSorter.setRowFilter(RowFilter.regexFilter(jTextField1.getText().toUpperCase(), IDBUSQUEDA));
+    }//GEN-LAST:event_jTextField1KeyReleased
+
     
+        public void llenarTablaProductos( String consulta) {
+        
+        DefaultTableModel model = new DefaultTableModel();
+        tablaVentasProductos.setModel(model);
+        
+
+        model.addColumn("Producto");
+        model.addColumn("Codigo");
+        model.addColumn("Cantidad");
+        model.addColumn("Valor Compra");
+        model.addColumn("Valor Venta");
+        model.addColumn("Proveedor");
+        model.addColumn("Descripcion");
+
+        Object[] columna = new Object[7];
+
+        int numRegistros = objProductoDAO.listarProductos(consulta).size();
+        System.out.println("Numero de registros "+ numRegistros);
+        for (int i = 0; i < numRegistros; i++) {
+            columna[0] = objProductoDAO.listarProductos(consulta).get(i).getNombreProducto();
+            columna[1] = objProductoDAO.listarProductos(consulta).get(i).getCodigoProducto();
+            columna[2] = objProductoDAO.listarProductos(consulta).get(i).getCantidad();
+            columna[3] = objProductoDAO.listarProductos(consulta).get(i).getValorCompraProd();
+            columna[4] = objProductoDAO.listarProductos(consulta).get(i).getValorVentaProd();
+            columna[5] = objProductoDAO.listarProductos(consulta).get(i).getProveedor();
+            columna[6] = objProductoDAO.listarProductos(consulta).get(i).getDescripcion();
+
+            model.addRow(columna);
+        }
+
+    }
 
     
 
@@ -323,6 +377,7 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelInformacionVentas;
     private javax.swing.JButton mostrarDatos;
     private javax.swing.JTable tablaVentasProductos;

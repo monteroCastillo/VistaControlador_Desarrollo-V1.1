@@ -1,11 +1,13 @@
  package Controlador;
 
 import ModeloDAO.*;
-import ModeloVO.DetalleFacturaVO;
+import ModeloVO.*;
 import PostgreSQl.pgsql_dbc;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -16,10 +18,13 @@ public class Controlador {
     EmpleadoDAO objEmpleadoDAO = new EmpleadoDAO();
     ProveedorDAO objProveedorDAO = new ProveedorDAO();
     DetalleFacturaVO objDetalleFacturaVO;
+    
 
     pgsql_dbc objetoConexion = new pgsql_dbc();
     ArrayList<DetalleFacturaVO> arregloProductos2 = new ArrayList<>();
+    public ArrayList<Clientes> arregloClienteFactura = new ArrayList<>();
     
+    DefaultTableModel modeloCanasta = new DefaultTableModel();
  
     public Controlador() {
 
@@ -93,10 +98,10 @@ public class Controlador {
      * @param consulta 
      */
     public void llenarTablaProductos(JTable tablaD, String consulta) {
-        System.out.println("Entro al metodo de llenar tabla");
+        
         DefaultTableModel model = new DefaultTableModel();
         tablaD.setModel(model);
-        //DefaultTableModel  model = (DefaultTableModel )tablaClientes.getModel();
+        
 
         model.addColumn("Producto");
         model.addColumn("Codigo");
@@ -109,6 +114,46 @@ public class Controlador {
         Object[] columna = new Object[7];
 
         int numRegistros = objProductoDAO.listarProductos(consulta).size();
+
+        for (int i = 0; i < numRegistros; i++) {
+            columna[0] = objProductoDAO.listarProductos(consulta).get(i).getNombreProducto();
+            columna[1] = objProductoDAO.listarProductos(consulta).get(i).getCodigoProducto();
+            columna[2] = objProductoDAO.listarProductos(consulta).get(i).getCantidad();
+            columna[3] = objProductoDAO.listarProductos(consulta).get(i).getValorCompraProd();
+            columna[4] = objProductoDAO.listarProductos(consulta).get(i).getValorVentaProd();
+            columna[5] = objProductoDAO.listarProductos(consulta).get(i).getProveedor();
+            columna[6] = objProductoDAO.listarProductos(consulta).get(i).getDescripcion();
+
+            model.addRow(columna);
+        }
+
+    }
+    
+    /**
+     * PARA PRUEBAS RECIBE: la consulta, la tabla y el modelo
+     * @param tablaD
+     * @param consulta
+     * @param modelo 
+     */
+    
+    public void llenarTablaProductosVentas(JTable tablaD, String consulta, DefaultTableModel modelo) {
+        
+        DefaultTableModel model = new DefaultTableModel();
+        tablaD.setModel(model);
+        
+
+        model.addColumn("Producto");
+        model.addColumn("Codigo");
+        model.addColumn("Cantidad");
+        model.addColumn("Valor Compra");
+        model.addColumn("Valor Venta");
+        model.addColumn("Proveedor");
+        model.addColumn("Descripcion");
+
+        Object[] columna = new Object[7];
+
+        int numRegistros = objProductoDAO.listarProductos(consulta).size();
+        System.out.println("numero de registros" +numRegistros);
 
         for (int i = 0; i < numRegistros; i++) {
             columna[0] = objProductoDAO.listarProductos(consulta).get(i).getNombreProducto();
@@ -174,7 +219,7 @@ public class Controlador {
         String publicidad;
         publicidad = arrayClienteNuevo.get(7);
 
-        String respuestaRegistro = objClientesDAO.insertarCliente(idClie, apell, idClie, dire, tel, ciu, email, publicidad);
+        String respuestaRegistro = objClientesDAO.insertarCliente(nom, apell, idClie, dire, tel, ciu, email, publicidad);
 
         if (respuestaRegistro != null) {
             JOptionPane.showMessageDialog(null, respuestaRegistro);
@@ -320,11 +365,18 @@ public class Controlador {
     public void consultarIdCliente(JLabel labelInformacionVentas, String txID_cliente_ventas) {
 
         // Declaración el ArrayList
-        ArrayList<String> arregloEntrada = new ArrayList<String>();
-        arregloEntrada = objetoConexion.busqueda("clientes", "ced_nit_cliente =" + "'" + txID_cliente_ventas + "'", 8); //El numero 4 es el numero de parametros que devuelve
-
-        //txID_cliente_ventas.setText("");
-        if (arregloEntrada.isEmpty()) {
+//        ArrayList<String> arregloEntrada = new ArrayList<String>();
+//        arregloEntrada = objetoConexion.busqueda("clientes", "ced_nit_cliente =" + "'" + txID_cliente_ventas + "'", 8); //El numero 4 es el numero de parametros que devuelve
+       // ArrayList<Clientes> arregloEntrada2 = new ArrayList<>();
+       int numRegistros = objClientesDAO.listarClienteFactura(txID_cliente_ventas).size();
+       
+       String nombre = objClientesDAO.listarClienteFactura(txID_cliente_ventas).get(0).getNombreCliente();
+       
+       arregloClienteFactura = objClientesDAO.listarClienteFactura(txID_cliente_ventas);
+        System.out.println("El nombre es: " +nombre);
+        
+        
+        if (arregloClienteFactura.isEmpty()) {
             // JOptionPane.showMessageDialog(this, "No hay datos para Mostrar");
             labelInformacionVentas.setText("NO hay datos para Mostrar, cliente no creado");
 
@@ -393,14 +445,14 @@ public class Controlador {
     }
     
     public void llenarTablaCanasta(JTable tablaD) {
-        DefaultTableModel model = new DefaultTableModel();
-        tablaD.setModel(model);        
+        //DefaultTableModel model = new DefaultTableModel();
+        tablaD.setModel(modeloCanasta);        
         
-        model.addColumn("CANT");
-        model.addColumn("Codigo");
-        model.addColumn("Nombre Producto");        
-        model.addColumn("Valor Producto");
-        model.addColumn("V. total");
+        modeloCanasta.addColumn("CANT");
+        modeloCanasta.addColumn("Codigo");
+        modeloCanasta.addColumn("Nombre Producto");        
+        modeloCanasta.addColumn("Valor Producto");
+        modeloCanasta.addColumn("V. total");
         
 
         Object[] columna = new Object[5];// Numero de Columnas
@@ -412,9 +464,69 @@ public class Controlador {
             columna[2] = arregloProductos2.get(i).getNombreProducto();            
             columna[3] = arregloProductos2.get(i).getPrecioProducto();
             
-            model.addRow(columna);
+            modeloCanasta.addRow(columna);
+        }       
+        
+    }
+    
+    /**
+     * 
+     */
+    public void operaDatosTablaVentas(JTable tablaCanasta, JLabel labelIva, JLabel labelTotal){
+        
+        int numRegistros = arregloProductos2.size();
+        float sumaValorTotal = 0;
+        float[] cantidadFloat  = new float[numRegistros];
+        float[] valorFloat  = new float[numRegistros];
+        String[] cantidad = new  String[numRegistros];
+        String[] valor = new String[numRegistros];
+        
+        
+       for (int i = 0; i < numRegistros; i++) {
+            
+            //cantidad[i] =(String)modeloCanasta.getValueAt(i, 0);  
+            //valor[i] = String.valueOf(modeloCanasta.getValueAt(i, 3));  // Se uso el casting String.valueOf ya que el (String) solo produjo errores
+            
+            
+            cantidadFloat[i] =Float.parseFloat((String)modeloCanasta.getValueAt(i, 0));  
+            valorFloat[i] = Float.parseFloat(String.valueOf(modeloCanasta.getValueAt(i, 3)));  // Se uso el casting String.valueOf ya que el (String) solo produjo errores
+            
+            
+            float valorTotalProducto = cantidadFloat[i] *valorFloat[i]; // multiplica el valor por la cantidad de productos
+            sumaValorTotal +=  valorTotalProducto; 
+            Double iva = sumaValorTotal * 0.19 ;
+            
+            tablaCanasta.setValueAt(valorTotalProducto, i, 4);          //seta el total del valor de cada producto en la tabla
+            labelIva.setText(iva + "");
+            labelTotal.setText(sumaValorTotal + "");
         }
+            
 
+
+//        for (int i = 0; i < numRegistros; i++) {
+//            
+//            System.out.println("cantidad: " + cantidad[i] + " valor " + valor[i]);
+//            
+//        }
+        
+         for (int i = 0; i < numRegistros; i++) {
+            
+            System.out.println("cantidad: " + cantidadFloat[i] + " valor " + valorFloat[i]);
+            
+        }
+         
+        
+        
+
+    }
+    
+   
+    
+    
+    public ArrayList datosClienteCanasta(){
+        
+        return arregloClienteFactura;
+        
     }
 
     

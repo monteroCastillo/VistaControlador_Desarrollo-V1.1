@@ -92,6 +92,36 @@ public class ClientesDAO {
         return listaClientes;
     }
     
+    public ArrayList<Clientes> listarClienteFactura(String consulta){
+        
+        ArrayList listaClientes = new ArrayList();
+        Clientes clientes;
+        try {
+            Connection accesoDB = conexion.getConexion();
+            PreparedStatement ps = accesoDB.prepareStatement("SELECT * FROM clientes WHERE ced_nit_cliente = '" + consulta +"'" );
+            System.out.println("La sentencia es: " +ps);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                clientes = new Clientes();
+                
+                clientes.setNombreCliente(rs.getString(1));
+                clientes.setApellidos(rs.getString(2));
+                clientes.setIdCliente(rs.getString(3));
+                clientes.setDireccion(rs.getString(4));
+                clientes.setTelefono(rs.getString(5));
+                clientes.setCiudad(rs.getString(6));
+                clientes.setEmail(rs.getString(7));
+                clientes.setPublicidad(rs.getString(8));
+                
+                listaClientes.add(clientes);
+            }
+        } catch (Exception e) {
+        }
+        
+        return listaClientes;
+    }
+    
+    
     
 }
     

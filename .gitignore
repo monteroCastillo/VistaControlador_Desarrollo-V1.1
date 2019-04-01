@@ -2,6 +2,7 @@
 
 # Compiled class file
 *.class
+Desarrollo_Inventario\build\*.class
 
 # Log file
 *.log
