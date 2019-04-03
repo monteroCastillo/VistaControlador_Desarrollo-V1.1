@@ -91,7 +91,11 @@ public class ClientesDAO {
         
         return listaClientes;
     }
-    
+    /**
+     * 
+     * @param consulta
+     * @return 
+     */
     public ArrayList<Clientes> listarClienteFactura(String consulta){
         
         ArrayList listaClientes = new ArrayList();

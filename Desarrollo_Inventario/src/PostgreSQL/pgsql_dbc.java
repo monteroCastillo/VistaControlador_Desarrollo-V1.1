@@ -245,8 +245,9 @@ public class pgsql_dbc {
 
                     stmt = db.createStatement();
                     rs = stmt.executeQuery(tupla);
-                    while (rs.next()) {                        
-                        System.out.println("el valor de la consulta es ");                        
+                    while (rs.next()) {  
+                        valido = rs.getString(1);
+                        System.out.println("el valor de la consulta es " + valido);                        
                     } 
                     rs.close();                       
                     /* Cerramos la conexi�n a la base de datos */

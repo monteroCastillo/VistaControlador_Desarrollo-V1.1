@@ -14,6 +14,7 @@ public class DetalleFacturaVO {
    String nombreProducto;
    String codigoProducto;
    Float precioProducto;
+   int cantidad;
 
     public DetalleFacturaVO(String nombreProducto, String codigoProducto, Float precioProducto) {
         this.nombreProducto = nombreProducto;
@@ -33,6 +34,15 @@ public class DetalleFacturaVO {
         return precioProducto;
     }
 
+    public int getCantidad() {
+        return cantidad;
+    }
+    
+    
+    
+    
+    //******************************************
+
     public void setNombreProducto(String nombreProducto) {
         this.nombreProducto = nombreProducto;
     }
@@ -44,6 +54,12 @@ public class DetalleFacturaVO {
     public void setPrecioProducto(Float precioProducto) {
         this.precioProducto = precioProducto;
     }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+    
+    
     
     public void mostrarDetalleProductoVO(){
         

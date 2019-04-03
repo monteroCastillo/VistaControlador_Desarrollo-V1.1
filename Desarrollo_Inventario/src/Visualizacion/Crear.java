@@ -378,9 +378,9 @@ public class Crear extends javax.swing.JFrame {
     }//GEN-LAST:event_btCrearClienteActionPerformed
 
     private void btPrincipalCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrincipalCrearActionPerformed
-        VentanaSeleccion volverHome= new VentanaSeleccion(objControlador);
+        VentanaSeleccionAdmin volverHome= new VentanaSeleccionAdmin(objControlador);
         volverHome.setVisible(true);
-        this.dispose(); // instruccion que cierra la ventana actual      
+        this.dispose();       
         
     }//GEN-LAST:event_btPrincipalCrearActionPerformed
 

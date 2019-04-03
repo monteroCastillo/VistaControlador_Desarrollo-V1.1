@@ -22,12 +22,11 @@ import jdk.nashorn.internal.ir.BreakNode;
 public class VisualizarClientes extends javax.swing.JFrame {
     
     Controlador objControlador;
-    Interface objInterface;
+   
     /**
      * Creates new form VisualizarClientes
      */
-    public VisualizarClientes(Controlador objControlador) {
-        
+    public VisualizarClientes(Controlador objControlador) {       
         
         initComponents();
         
@@ -117,7 +116,7 @@ public class VisualizarClientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btPrincipalClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrincipalClientesActionPerformed
-        VentanaSeleccion volverHome= new VentanaSeleccion(objControlador);
+        VentanaSeleccionAdmin volverHome= new VentanaSeleccionAdmin(objControlador);
         volverHome.setVisible(true);
         this.dispose(); // instruccion que cierra la ventana actual
     }//GEN-LAST:event_btPrincipalClientesActionPerformed

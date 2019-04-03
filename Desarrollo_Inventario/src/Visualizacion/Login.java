@@ -15,7 +15,7 @@ import Controlador.*;
  */
 public class Login extends javax.swing.JFrame {
 
-    Interface objInterface;
+    
    
    Controlador objControlador;
     /**
@@ -100,10 +100,31 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        objControlador.login(txNombre.getText(), txContrasenia.getText());
-        VentanaSeleccion interfaz = new VentanaSeleccion(objControlador);
-        interfaz.show();
-        this.dispose();
+        String[] arregloLogin = new String[2];
+        arregloLogin =  objControlador.login(txNombre.getText(), txContrasenia.getText());
+        
+        try {
+            
+        
+        if(arregloLogin[0].equalsIgnoreCase("true") ){
+            
+            switch(arregloLogin[1]){
+                case "admin":    VentanaSeleccionAdmin interfaz = new VentanaSeleccionAdmin(objControlador);
+                                 interfaz.show();
+                                 this.dispose();
+                                 break;
+                                 
+                case "usuario":  VentanaSeleccionUsuario interfaz2 = new VentanaSeleccionUsuario(objControlador);
+                                 interfaz2.show();
+                                 this.dispose();
+                                 break;
+                default: 
+            } 
+        }
+            } catch (Exception e) {
+        }      
+                          
+        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     

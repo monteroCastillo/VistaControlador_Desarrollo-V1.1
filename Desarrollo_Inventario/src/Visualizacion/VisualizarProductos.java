@@ -37,8 +37,6 @@ public class VisualizarProductos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaProductos = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        textoPrueba = new javax.swing.JTextArea();
         btPrincipalProductos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -68,10 +66,6 @@ public class VisualizarProductos extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Gill Sans MT", 1, 24)); // NOI18N
         jLabel2.setText("Visualizar Productos");
 
-        textoPrueba.setColumns(20);
-        textoPrueba.setRows(5);
-        jScrollPane2.setViewportView(textoPrueba);
-
         btPrincipalProductos.setText("Principal");
         btPrincipalProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,9 +89,7 @@ public class VisualizarProductos extends javax.swing.JFrame {
                                 .addComponent(btPrincipalProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(32, 32, 32)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 91, Short.MAX_VALUE))
+                        .addGap(0, 286, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1)))
@@ -106,17 +98,12 @@ public class VisualizarProductos extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(btPrincipalProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24)
-                        .addComponent(btnMostrarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(btPrincipalProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addComponent(btnMostrarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(43, Short.MAX_VALUE))
@@ -149,85 +136,16 @@ public class VisualizarProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMostrarProductosActionPerformed
 
     private void tablaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductosMouseClicked
-        int row = tablaProductos.rowAtPoint(evt.getPoint());
-
-   /* row devolvera -1 si se ha clicado fuera de la fila pero dentro de la tabla, si no devolvera el indice de la fila en la que se ha clicado. */
-
-       
-        textoPrueba.append((String) tablaProductos.getValueAt(row, 0));
-        textoPrueba.setText((String) tablaProductos.getValueAt(row, 1));
+        int row = tablaProductos.rowAtPoint(evt.getPoint());   
 
     }//GEN-LAST:event_tablaProductosMouseClicked
 
     private void btPrincipalProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrincipalProductosActionPerformed
-        VentanaSeleccion volverHome= new VentanaSeleccion(objControlador);
+        VentanaSeleccionAdmin volverHome= new VentanaSeleccionAdmin(objControlador);
         volverHome.setVisible(true);
         this.dispose(); // instruccion que cierra la ventana actual
     }//GEN-LAST:event_btPrincipalProductosActionPerformed
 
-//   public void mostrarProductos() {
-//
-//        // String[][] arregloEntrada = new String[2][7];
-//       String[][] arregloEntrada ;
-//       arregloEntrada  = (objInterface.mostrarProductos());     /////?????????????????????????? no se creo el new que pasa???   
-//       int numCol = 7;
-//       int numFilas = 2;
-//        
-//        DefaultTableModel  model = (DefaultTableModel )tablaProductos.getModel();
-//        model.setRowCount(11);   //Cantidad de filas
-//        //model.setColumnCount(4);  //cantidad de columnas
-//        
-//        //Se agregan los datos del cliente para que aparezcan en el encabezado de la tabla 
-//        model.addColumn("Producto");
-//        model.addColumn("Codigo");
-//        model.addColumn("Cantidad");
-//        model.addColumn("Valor Compra");
-//        model.addColumn("Valor Venta");
-//        model.addColumn("Proveedor");
-//        model.addColumn("Descripcion");
-//        
-//        for(int i = 0; i<  numFilas; i++){
-//            
-//            for (int j =0; j < numCol; j++) {
-//            
-//            tablaProductos.setValueAt(arregloEntrada[j][i],i,j); // dato, posicion en x, posicion en y
-//            
-//            }
-//           
-//        }
-//   }  
-   
-//   public void mostrarProductosVentas() {
-//
-//        // String[][] arregloEntrada = new String[2][7];
-//       String[][] arregloEntrada ;
-//       arregloEntrada  = (objInterface.mostrarProductos());     /////?????????????????????????? no se creo el new que pasa???   
-//       int numCol = 7;
-//       int numFilas = 2;
-//        
-//        DefaultTableModel  model = (DefaultTableModel )tablaProductos.getModel();
-//        model.setRowCount(11);   //Cantidad de filas
-//        //model.setColumnCount(4);  //cantidad de columnas
-//        
-//        //Se agregan los datos del cliente para que aparezcan en el encabezado de la tabla 
-//        model.addColumn("Producto");
-//        model.addColumn("Codigo");
-//        model.addColumn("Cantidad");
-//        model.addColumn("Valor Compra");
-//        model.addColumn("Valor Venta");
-//        model.addColumn("Proveedor");
-//        model.addColumn("Descripcion");
-//        
-//        for(int i = 0; i<  numFilas; i++){
-//            
-//            for (int j =0; j < numCol; j++) {
-//            
-//            tablaProductos.setValueAt(arregloEntrada[j][i],i,j); // dato, posicion en x, posicion en y
-//            
-//            }
-//           
-//        }
-//   }  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btPrincipalProductos;
@@ -235,8 +153,6 @@ public class VisualizarProductos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     public javax.swing.JTable tablaProductos;
-    private javax.swing.JTextArea textoPrueba;
     // End of variables declaration//GEN-END:variables
 }

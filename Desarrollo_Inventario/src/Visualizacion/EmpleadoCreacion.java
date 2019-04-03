@@ -452,7 +452,7 @@ public class EmpleadoCreacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrincipalActionPerformed
-        VentanaSeleccion volverHome = new VentanaSeleccion(objControlador);
+        VentanaSeleccionAdmin volverHome = new VentanaSeleccionAdmin(objControlador);
         volverHome.setVisible(true);
         this.dispose(); 
     }//GEN-LAST:event_btnPrincipalActionPerformed

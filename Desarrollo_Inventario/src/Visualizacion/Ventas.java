@@ -43,6 +43,7 @@ public class Ventas extends javax.swing.JFrame {
         tablaVentasProductos.setSelectionForeground( Color.yellow );
         //Cuando se selecciona un elemento de la tabla el fondo  se coloca del color seleccionado
         tablaVentasProductos.setSelectionBackground( Color.red );
+//        asignarTitulo();
     }
 
     
@@ -64,8 +65,6 @@ public class Ventas extends javax.swing.JFrame {
         tablaVentasProductos = new javax.swing.JTable();
         botonBuscarProducto = new javax.swing.JButton();
         mostrarDatos = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        textoPrueba = new javax.swing.JTextArea();
         btPrincipalVentas = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -127,10 +126,6 @@ public class Ventas extends javax.swing.JFrame {
             }
         });
 
-        textoPrueba.setColumns(20);
-        textoPrueba.setRows(5);
-        jScrollPane3.setViewportView(textoPrueba);
-
         btPrincipalVentas.setText("Principal");
         btPrincipalVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,9 +178,7 @@ public class Ventas extends javax.swing.JFrame {
                                         .addGap(97, 97, 97)
                                         .addComponent(btValidarIdClienteVentas)))))
                         .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,17 +209,17 @@ public class Ventas extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(comboBoxMostrarProductosVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(botonBuscarProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(mostrarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(mostrarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton2)))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
+                        .addGap(110, 110, 110)
                         .addComponent(jButton1)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
@@ -259,7 +252,7 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaVentasProductosMouseClicked
 
     private void btPrincipalVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrincipalVentasActionPerformed
-        VentanaSeleccion volverHome= new VentanaSeleccion(objControlador);
+        VentanaSeleccionAdmin volverHome= new VentanaSeleccionAdmin(objControlador);
         volverHome.setVisible(true);
         this.dispose(); // instruccion que cierra la ventana actual
     }//GEN-LAST:event_btPrincipalVentasActionPerformed
@@ -362,6 +355,10 @@ public class Ventas extends javax.swing.JFrame {
 
     }
 
+     private void asignarTitulo(){
+        setTitle(objControlador.empleadoSesionAbierta());
+       
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -375,13 +372,11 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelInformacionVentas;
     private javax.swing.JButton mostrarDatos;
     private javax.swing.JTable tablaVentasProductos;
-    private javax.swing.JTextArea textoPrueba;
     private javax.swing.JTextField txID_cliente_ventas;
     // End of variables declaration//GEN-END:variables
 }

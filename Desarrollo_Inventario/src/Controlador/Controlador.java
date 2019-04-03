@@ -17,16 +17,26 @@ public class Controlador {
     ProductoDAO objProductoDAO = new ProductoDAO();
     EmpleadoDAO objEmpleadoDAO = new EmpleadoDAO();
     ProveedorDAO objProveedorDAO = new ProveedorDAO();
+    FacturaDAO objFacturaDAO = new FacturaDAO();
     DetalleFacturaVO objDetalleFacturaVO;
     
 
     pgsql_dbc objetoConexion = new pgsql_dbc();
-    ArrayList<DetalleFacturaVO> arregloProductos2 = new ArrayList<>();
+    ArrayList<DetalleFacturaVO> arregloProductosVendidos = new ArrayList<>();
     public ArrayList<Clientes> arregloClienteFactura = new ArrayList<>();
     
     DefaultTableModel modeloCanasta = new DefaultTableModel();
+    
+    //variables globales
+    float sumaValorTotal = 0;
+    String nombreEmpleado = "vacio"; 
+    String cedulaEmpleado = "vacio";
+    String tipoEmpleado = "vacio";
+    
  
     public Controlador() {
+        
+        
 
     }
 
@@ -286,6 +296,22 @@ public class Controlador {
         objProveedorDAO.insertarProveedor(nom, nit, ciud, tel, ciud, email);
 
     }
+     
+     
+     public void crearFactura(ArrayList<String> arregloFactura) {
+
+        String idCliente = arregloFactura.get(0);
+        String idEmpleado = arregloFactura.get(1);        
+        String hora = arregloFactura.get(2);    
+        String fecha = arregloFactura.get(3);  
+//        float totalAPagar;         
+//        totalAPagar = Float.parseFloat(arregloFactura.get(4));
+        
+        
+        
+        objFacturaDAO.insertarFactura(idCliente,idEmpleado,hora,fecha,sumaValorTotal);
+
+    }
 
     /**
      *
@@ -293,32 +319,41 @@ public class Controlador {
      * @param clave
      * @return
      */
-    public String login(String usuario, String clave) {
-
+    public String[] login(String usuario, String clave) {
+        
+        boolean aceptado = false;
         ArrayList<String> arregloSalida = new ArrayList<>();
-        String nombreEmpleado = "vacio";
+        String[] arregloLogin = new String[2];
         String user = "vacio";
         String password = "vacio";
-        String tipoEmpleado = "vacio";
+       
+        System.out.println("Usuario: " + user + "     password   " + clave);
         try {
 
-            String consulta = "SELECT nombreempleado, usuario,clave,tipoempleado FROM empleado "
-                    + "  WHERE nombreempleado = " + "'" + usuario + "' AND clave = " + " '" + clave + "'";
+            String consulta = "SELECT nombreempleado, cedula, usuario,clave,tipoempleado FROM empleado "
+                    + "  WHERE usuario = " + "'" + usuario + "' AND clave = " + " '" + clave + "'";
 
-            arregloSalida = objetoConexion.tupla(consulta, 4);
+            arregloSalida = objetoConexion.tupla(consulta, 5);
 
             if (!arregloSalida.isEmpty()) {
                 nombreEmpleado = arregloSalida.get(0);
-                user = arregloSalida.get(1);
-                password = arregloSalida.get(2);
-                tipoEmpleado = arregloSalida.get(3);
+                cedulaEmpleado = arregloSalida.get(1);
+                user = arregloSalida.get(2);
+                password = arregloSalida.get(3);
+                tipoEmpleado = arregloSalida.get(4);
 
                 System.out.println(nombreEmpleado + user + password + tipoEmpleado);
-            }
-            if (password.equalsIgnoreCase(clave) && user.equalsIgnoreCase(usuario)) {
-                System.out.println("FELICIDADES  ****" + arregloSalida.get(0));
 
-            } else {
+                if (password.equalsIgnoreCase(clave) && user.equalsIgnoreCase(usuario)) {
+                    System.out.println("FELICIDADES  ****" + arregloSalida.get(0));
+                    aceptado = true;
+                    arregloLogin[0]= "true";
+                    arregloLogin[1]= tipoEmpleado;
+
+                }
+            }
+             
+             else {
                 String d = JOptionPane.showInputDialog("Usuario NO valido Desea salir (S)");
                 if (d.equals("s")) {
                     System.exit(0);
@@ -328,7 +363,9 @@ public class Controlador {
         } catch (Exception e) {
 
         }
-        return "";
+        
+        System.out.println("El valor del booleano es: " +aceptado);
+        return arregloLogin;
     }
 
     /**
@@ -435,7 +472,7 @@ public class Controlador {
     public void  mostrarProductos(ArrayList<DetalleFacturaVO> arregloProductos){
         
         
-        arregloProductos2 = arregloProductos;
+        arregloProductosVendidos = arregloProductos;
         for (int i = 0; i < arregloProductos.size(); i++) {
             System.out.println(arregloProductos.get(i).getNombreProducto());
             System.out.println(arregloProductos.get(i).getCodigoProducto());
@@ -457,12 +494,12 @@ public class Controlador {
 
         Object[] columna = new Object[5];// Numero de Columnas
 
-        int numRegistros = arregloProductos2.size();
+        int numRegistros = arregloProductosVendidos.size();
 
         for (int i = 0; i < numRegistros; i++) {
-            columna[1] = arregloProductos2.get(i).getCodigoProducto();
-            columna[2] = arregloProductos2.get(i).getNombreProducto();            
-            columna[3] = arregloProductos2.get(i).getPrecioProducto();
+            columna[1] = arregloProductosVendidos.get(i).getCodigoProducto();
+            columna[2] = arregloProductosVendidos.get(i).getNombreProducto();            
+            columna[3] = arregloProductosVendidos.get(i).getPrecioProducto();
             
             modeloCanasta.addRow(columna);
         }       
@@ -470,57 +507,41 @@ public class Controlador {
     }
     
     /**
-     * 
+     *Calcula los datos de la factura a partir de la seleccion que se hacen en la vista de ventas
      */
-    public void operaDatosTablaVentas(JTable tablaCanasta, JLabel labelIva, JLabel labelTotal){
-        
-        int numRegistros = arregloProductos2.size();
-        float sumaValorTotal = 0;
-        float[] cantidadFloat  = new float[numRegistros];
-        float[] valorFloat  = new float[numRegistros];
-        String[] cantidad = new  String[numRegistros];
+    public void operaDatosTablaVentas(JTable tablaCanasta, JLabel labelIva, JLabel labelTotal) {
+
+        int numRegistros = arregloProductosVendidos.size();
+
+        float[] cantidadFloat = new float[numRegistros];
+        float[] valorFloat = new float[numRegistros];
+        String[] cantidad = new String[numRegistros];
         String[] valor = new String[numRegistros];
-        
-        
-       for (int i = 0; i < numRegistros; i++) {
-            
-            //cantidad[i] =(String)modeloCanasta.getValueAt(i, 0);  
-            //valor[i] = String.valueOf(modeloCanasta.getValueAt(i, 3));  // Se uso el casting String.valueOf ya que el (String) solo produjo errores
-            
-            
-            cantidadFloat[i] =Float.parseFloat((String)modeloCanasta.getValueAt(i, 0));  
+
+        for (int i = 0; i < numRegistros; i++) {
+
+            cantidadFloat[i] = Float.parseFloat((String) modeloCanasta.getValueAt(i, 0));
             valorFloat[i] = Float.parseFloat(String.valueOf(modeloCanasta.getValueAt(i, 3)));  // Se uso el casting String.valueOf ya que el (String) solo produjo errores
-            
-            
-            float valorTotalProducto = cantidadFloat[i] *valorFloat[i]; // multiplica el valor por la cantidad de productos
-            sumaValorTotal +=  valorTotalProducto; 
-            Double iva = sumaValorTotal * 0.19 ;
-            
+
+            float valorTotalProducto = cantidadFloat[i] * valorFloat[i]; // multiplica el valor por la cantidad de productos
+            sumaValorTotal += valorTotalProducto;
+            Double iva = sumaValorTotal * 0.19;
+
             tablaCanasta.setValueAt(valorTotalProducto, i, 4);          //seta el total del valor de cada producto en la tabla
             labelIva.setText(iva + "");
             labelTotal.setText(sumaValorTotal + "");
-        }
-            
-
-
-//        for (int i = 0; i < numRegistros; i++) {
-//            
-//            System.out.println("cantidad: " + cantidad[i] + " valor " + valor[i]);
-//            
-//        }
-        
-         for (int i = 0; i < numRegistros; i++) {
-            
-            System.out.println("cantidad: " + cantidadFloat[i] + " valor " + valorFloat[i]);
-            
-        }
-         
-        
-        
+        }       
 
     }
     
-   
+    public String asignarNuevoNumFactura(){
+        
+        String consulta = "SELECT MAX(idfactura)FROM factura";
+        String ultimoNumeroFactura = objetoConexion.llenaTabla(consulta);
+        
+        return ultimoNumeroFactura;
+        
+    }
     
     
     public ArrayList datosClienteCanasta(){
@@ -528,6 +549,18 @@ public class Controlador {
         return arregloClienteFactura;
         
     }
+    
+    public String empleadoSesionAbierta(){        
+        
+        return nombreEmpleado;
+    }
+    
+    public String cedulaEmpleadoSesionAbierta(){        
+        
+        return cedulaEmpleado;
+    }
+    
+    
 
     
     
