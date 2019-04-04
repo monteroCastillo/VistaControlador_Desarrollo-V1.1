@@ -357,12 +357,32 @@ public class CanastaCompra extends javax.swing.JFrame {
         arregloFactura.add(arreglo.get(0).getIdCliente()); 
         arregloFactura.add(cedulaEmpleadoSesion);
         arregloFactura.add(hora);
-        arregloFactura.add(fecha);
-        
-       
-        
+        arregloFactura.add(fecha);     
+               
         objControlador.crearFactura(arregloFactura);
 
+    }
+    
+    /**
+     * Agrega la cantidad y el numero de factura al detalle de la factura
+     */
+    public void agregarDatosDetalleFactura(){
+        
+        int numRegistros = objControlador.getArregloProductosVendidos().size();
+        
+        for (int i = 0; i < numRegistros; i++) {
+            
+             String codigoProducto= ((String) tablaCanasta.getValueAt(i, 0));
+        String nombreProducto= ((String) tablaCanasta.getValueAt(i, 1));
+        float valorProducto = ((float) tablaCanasta.getValueAt(i, 3));       
+        arregloProductos.add(new DetalleFacturaVO(codigoProducto,nombreProducto,valorProducto,0,""));
+            
+        }
+         String codigoProducto= ((String) tablaCanasta.getValueAt(row, 0));
+        String nombreProducto= ((String) tablaCanasta.getValueAt(row, 1));
+        float valorProducto = ((float) tablaCanasta.getValueAt(row, 3));       
+        arregloProductos.add(new DetalleFacturaVO(codigoProducto,nombreProducto,valorProducto,0,""));
+        
     }
     
     

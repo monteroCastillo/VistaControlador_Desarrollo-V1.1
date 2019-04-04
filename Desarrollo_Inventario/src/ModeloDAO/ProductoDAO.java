@@ -55,7 +55,7 @@ public class ProductoDAO {
     
     public ArrayList<Productos> listarProductos(String consulta){
         
-        ArrayList listaProductos = new ArrayList();
+        ArrayList<Productos> listaProductos = new ArrayList();
         Productos objProductos;
         try {
             Connection accesoDB = conexion.getConexion();

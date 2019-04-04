@@ -143,7 +143,7 @@ public class Consultas extends javax.swing.JFrame {
 
     public void enviarDatosConsulta(){
         
-        int existencias = 0;
+        int existencias ;
         if(CheckExistencias.isSelected()){
             existencias = Integer.parseInt(txExistenciasConsultar.getText());
             

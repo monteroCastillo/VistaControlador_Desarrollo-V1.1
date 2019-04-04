@@ -275,6 +275,11 @@ public class Ventas extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jButton2ActionPerformed
     
+    
+    /**
+     * al cliquear sobre un elemento de la tabla que se muestra este se agregara a un arreglo para luego pasarlo a la canasta de compra
+     * @param row 
+     */
     public void datosTablaProducto(int row){   
         
         
@@ -283,7 +288,7 @@ public class Ventas extends javax.swing.JFrame {
         String codigoProducto= ((String) tablaVentasProductos.getValueAt(row, 0));
         String nombreProducto= ((String) tablaVentasProductos.getValueAt(row, 1));
         float valorProducto = ((float) tablaVentasProductos.getValueAt(row, 3));       
-        arregloProductos.add(new DetalleFacturaVO(codigoProducto,nombreProducto,valorProducto));
+        arregloProductos.add(new DetalleFacturaVO(codigoProducto,nombreProducto,valorProducto,0,""));
         
         objControlador.mostrarProductos(arregloProductos);
 //        //return arregloProductos;

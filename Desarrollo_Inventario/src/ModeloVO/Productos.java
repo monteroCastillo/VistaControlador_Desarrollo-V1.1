@@ -24,26 +24,31 @@ public class Productos {
      * @param valorCompraProd
      * @param valorVentaProd
      */
-    public Productos() {
-        nombreProducto = "";
-        codigoProducto = "";
-        proveedor = "";
-        descripcion = "";
-        cantidad = 0;
-        valorCompraProd = 0;
-        valorVentaProd = 0;
+//    public Productos() {
+//        nombreProducto = "";
+//        codigoProducto = "";
+//        proveedor = "";
+//        descripcion = "";
+//        cantidad = 0;
+//        valorCompraProd = 0;
+//        valorVentaProd = 0;
+//    }
+
+    public Productos(String nombreProducto, String codigoProducto,
+                     float cantidad,  float valorComprado, float valorVenta,String proveedor,String descripcion) {
+        this.nombreProducto = nombreProducto;
+        this.codigoProducto = codigoProducto;        
+        this.codigoProducto = codigoProducto;
+        this.cantidad = cantidad;
+        this.valorCompraProd = valorComprado;
+        this.valorVentaProd = valorVenta;
+        this.descripcion = descripcion;
     }
 
-//    public Productos(String nombreProducto, String codigoProducto,
-//                     float cantidad,  float valorComprado, float valorVenta,String proveedor,String descripcion) {
-//        this.nombreProducto = nombreProducto;
-//        this.codigoProducto = codigoProducto;        
-//        this.codigoProducto = codigoProducto;
-//        this.cantidad = cantidad;
-//        this.valorCompraProd = valorComprado;
-//        this.valorVentaProd = valorVenta;
-//        this.descripcion = descripcion;
-//    }
+    public Productos() {
+    }
+    
+    
     
     public String getNombreProducto() {
         return nombreProducto;
@@ -101,49 +106,7 @@ public class Productos {
         this.valorVentaProd = valorVentaProd;
     }
     
-    public String getDatosTrabajador()
-    {
-        return nombreProducto+"\t"+codigoProducto+"\t"+cantidad+"\t"+valorCompraProd+"\t"+valorVentaProd+"\t"+descripcion;        
-    }
-    /**
-//     * Atributos de la clase Producto
-//     */
-//    private String nombreProducto, codigoProducto;    
-//    private float valorVentaProd;
-//
-//    public Productos(String codigoProducto,String nombreProducto,  float valorVentaProd) {
-//        this.nombreProducto = nombreProducto;
-//        this.codigoProducto = codigoProducto;
-//        this.valorVentaProd = valorVentaProd;
-//    }
-//
-//    public String getNombreProducto() {
-//        return nombreProducto;
-//    }
-//
-//    public String getCodigoProducto() {
-//        return codigoProducto;
-//    }
-//
-//    public float getValorVentaProd() {
-//        return valorVentaProd;
-//    }
-//
-//    public void setNombreProducto(String nombreProducto) {
-//        this.nombreProducto = nombreProducto;
-//    }
-//
-//    public void setCodigoProducto(String codigoProducto) {
-//        this.codigoProducto = codigoProducto;
-//    }
-//
-//    public void setValorVentaProd(float valorVentaProd) {
-//        this.valorVentaProd = valorVentaProd;
-//    }
-//    
-//     public String getDatosTrabajador()
-//    {
-//        return nombreProducto+"\t"+codigoProducto+"\t"+valorVentaProd;        
-//    }
+    
+
     
 }

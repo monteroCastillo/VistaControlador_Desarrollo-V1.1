@@ -34,10 +34,10 @@ public class ConexionBD {
         
         Connection dataBase = null;
         try {
-            System.out.println("Conectando a la base de datos!");
+           // System.out.println("Conectando a la base de datos!");
             Class.forName("org.postgresql.Driver").newInstance();
             dataBase = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/Proyecto","postgres","1234");
-            System.out.println("Entro a conexion");
+           // System.out.println("Entro a conexion");
                 } catch (Exception e) {
                      System.out.println("No se ha podido conectar a la base.");
                 }

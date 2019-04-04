@@ -13,13 +13,16 @@ public class DetalleFacturaVO {
     
    String nombreProducto;
    String codigoProducto;
+   String serialFactura;
    Float precioProducto;
    int cantidad;
 
-    public DetalleFacturaVO(String nombreProducto, String codigoProducto, Float precioProducto) {
+    public DetalleFacturaVO(String nombreProducto, String codigoProducto, Float precioProducto, int cantidad, String serialFactura) {
         this.nombreProducto = nombreProducto;
         this.codigoProducto = codigoProducto;
         this.precioProducto = precioProducto;
+        this.cantidad = cantidad;
+        this.serialFactura = serialFactura;
     }
 
     public String getNombreProducto() {
@@ -37,9 +40,11 @@ public class DetalleFacturaVO {
     public int getCantidad() {
         return cantidad;
     }
-    
-    
-    
+
+    public String getSerialFactura() {
+        return serialFactura;
+    }        
+       
     
     //******************************************
 
@@ -58,14 +63,10 @@ public class DetalleFacturaVO {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-    
-    
-    
-    public void mostrarDetalleProductoVO(){
-        
-        
+
+    public void setSerialFactura(String serialFactura) {
+        this.serialFactura = serialFactura;
     }
-   
-   
-    
+       
+         
 }
