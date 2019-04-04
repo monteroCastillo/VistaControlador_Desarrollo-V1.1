@@ -327,35 +327,44 @@ public class Ventas extends javax.swing.JFrame {
         rowSorter.setRowFilter(RowFilter.regexFilter(jTextField1.getText().toUpperCase(), IDBUSQUEDA));
     }//GEN-LAST:event_jTextField1KeyReleased
 
-    
-        public void llenarTablaProductos( String consulta) {
-        
+       public void llenarTablaProductos(String consulta) {
+
         DefaultTableModel model = new DefaultTableModel();
         tablaVentasProductos.setModel(model);
-        
+         ArrayList<Productos> listaProductos = new ArrayList();
 
-        model.addColumn("Producto");
-        model.addColumn("Codigo");
-        model.addColumn("Cantidad");
-        model.addColumn("Valor Compra");
-        model.addColumn("Valor Venta");
-        model.addColumn("Proveedor");
-        model.addColumn("Descripcion");
+        try {
 
-        Object[] columna = new Object[7];
+            model.addColumn("Producto");
+            model.addColumn("Codigo");
+            model.addColumn("Cantidad");
+            model.addColumn("Valor Compra");
+            model.addColumn("Valor Venta");
+            model.addColumn("Proveedor");
+            model.addColumn("Descripcion");
 
-        int numRegistros = objProductoDAO.listarProductos(consulta).size();
-        System.out.println("Numero de registros "+ numRegistros);
-        for (int i = 0; i < numRegistros; i++) {
-            columna[0] = objProductoDAO.listarProductos(consulta).get(i).getNombreProducto();
-            columna[1] = objProductoDAO.listarProductos(consulta).get(i).getCodigoProducto();
-            columna[2] = objProductoDAO.listarProductos(consulta).get(i).getCantidad();
-            columna[3] = objProductoDAO.listarProductos(consulta).get(i).getValorCompraProd();
-            columna[4] = objProductoDAO.listarProductos(consulta).get(i).getValorVentaProd();
-            columna[5] = objProductoDAO.listarProductos(consulta).get(i).getProveedor();
-            columna[6] = objProductoDAO.listarProductos(consulta).get(i).getDescripcion();
+            Object[] columna = new Object[7];
 
-            model.addRow(columna);
+            listaProductos = objProductoDAO.listarProductos(consulta);
+            
+            int numRegistros= listaProductos.size();
+            
+            System.out.println("Numero de registros EN LA CLASE VENTAS " + numRegistros);            
+            for (int i = 0; i < numRegistros; i++) {
+                columna[0] = listaProductos.get(i).getNombreProducto();
+                columna[1] = listaProductos.get(i).getCodigoProducto();
+                columna[2] = listaProductos.get(i).getCantidad();
+                columna[3] = listaProductos.get(i).getValorCompraProd();
+                columna[4] = listaProductos.get(i).getValorVentaProd();
+                columna[5] = listaProductos.get(i).getProveedor();
+                columna[6] = listaProductos.get(i).getDescripcion();
+
+                model.addRow(columna);
+            }
+            
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocurrio un error en la carga de los datos ");
         }
 
     }

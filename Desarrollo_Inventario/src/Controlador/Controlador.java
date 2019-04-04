@@ -106,6 +106,7 @@ public class Controlador {
 
         DefaultTableModel model = new DefaultTableModel();
         tablaD.setModel(model);
+        ArrayList<Productos> listaProductos = new ArrayList();
 
 //        for(int i=0;i<list.size();i++){
 //    modelotabla.addRow(new Object[] {list.get(i).getName1(), list.get(i).getCedula(), list.get(i).getAddress(), list.get(i).getGender(), list.get(i).getHobbies()});
@@ -121,16 +122,27 @@ public class Controlador {
 
             Object[] columna = new Object[7];
 
-            int numRegistros = objProductoDAO.listarProductos(consulta).size();
+            //int numRegistros = objProductoDAO.listarProductos(consulta).size();
+            listaProductos = objProductoDAO.listarProductos(consulta);
+            
+            int numRegistros= listaProductos.size();
 
             for (int i = 0; i < numRegistros; i++) {
-                columna[0] = objProductoDAO.listarProductos(consulta).get(i).getNombreProducto();
-                columna[1] = objProductoDAO.listarProductos(consulta).get(i).getCodigoProducto();
-                columna[2] = objProductoDAO.listarProductos(consulta).get(i).getCantidad();
-                columna[3] = objProductoDAO.listarProductos(consulta).get(i).getValorCompraProd();
-                columna[4] = objProductoDAO.listarProductos(consulta).get(i).getValorVentaProd();
-                columna[5] = objProductoDAO.listarProductos(consulta).get(i).getProveedor();
-                columna[6] = objProductoDAO.listarProductos(consulta).get(i).getDescripcion();
+//                columna[0] = objProductoDAO.listarProductos(consulta).get(i).getNombreProducto();
+//                columna[1] = objProductoDAO.listarProductos(consulta).get(i).getCodigoProducto();
+//                columna[2] = objProductoDAO.listarProductos(consulta).get(i).getCantidad();
+//                columna[3] = objProductoDAO.listarProductos(consulta).get(i).getValorCompraProd();
+//                columna[4] = objProductoDAO.listarProductos(consulta).get(i).getValorVentaProd();
+//                columna[5] = objProductoDAO.listarProductos(consulta).get(i).getProveedor();
+//                columna[6] = objProductoDAO.listarProductos(consulta).get(i).getDescripcion();
+
+                    columna[0] = listaProductos.get(i).getNombreProducto();
+                columna[1] = listaProductos.get(i).getCodigoProducto();
+                columna[2] = listaProductos.get(i).getCantidad();
+                columna[3] = listaProductos.get(i).getValorCompraProd();
+                columna[4] = listaProductos.get(i).getValorVentaProd();
+                columna[5] = listaProductos.get(i).getProveedor();
+                columna[6] = listaProductos.get(i).getDescripcion();
 
                 model.addRow(columna);
             }
@@ -321,13 +333,30 @@ public class Controlador {
 
     }
 
-    public void creaDetalleFactura(ArrayList<String> arregloDetalleFactura) {
+    public void creaDetalleFactura(int[] cantidadVendida, String[] serialFactura) {
         
+        int numRegistros  =  getArregloProductosVendidos().size();
+        int cantVendida;
+        String serial;
+        
+        for (int i = 0; i < numRegistros; i++) {
+            
+            cantVendida = cantidadVendida[i];
+            serial = serialFactura[i];
+            arregloProductosVendidos.get(i).setCantidad(cantVendida);
+            arregloProductosVendidos.get(i).setSerialFactura(serial);
+            
+        }
+
+            for (int i = 0; i < numRegistros; i++) {
+            
         
             System.out.println(arregloProductosVendidos.get(i).getNombreProducto());
             System.out.println(arregloProductosVendidos.get(i).getCodigoProducto());
             System.out.println(arregloProductosVendidos.get(i).getPrecioProducto());
-        
+            System.out.println(arregloProductosVendidos.get(i).getCantidad());
+            System.out.println(arregloProductosVendidos.get(i).getSerialFactura());
+        }
 
     }
 
@@ -558,6 +587,8 @@ public class Controlador {
             labelIva.setText(iva + "");
             labelTotal.setText(sumaValorTotal + "");
         }
+        
+        
 
     }
 

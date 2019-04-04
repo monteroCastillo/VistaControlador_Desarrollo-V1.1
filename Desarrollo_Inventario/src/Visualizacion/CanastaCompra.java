@@ -267,7 +267,7 @@ public class CanastaCompra extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         objControlador.operaDatosTablaVentas( tablaCanasta, labelIVA, labelTotalAPagar);
-             
+        agregarDatosDetalleFactura();
         //ejemplo();
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -366,23 +366,29 @@ public class CanastaCompra extends javax.swing.JFrame {
     /**
      * Agrega la cantidad y el numero de factura al detalle de la factura
      */
-    public void agregarDatosDetalleFactura(){
-        
+    public void agregarDatosDetalleFactura() {
+
         int numRegistros = objControlador.getArregloProductosVendidos().size();
-        
+        int[] arregloCantidad = new int[numRegistros];
+        String[] arregloSerialFactura = new String[numRegistros];
+       
+
         for (int i = 0; i < numRegistros; i++) {
-            
-             String codigoProducto= ((String) tablaCanasta.getValueAt(i, 0));
-        String nombreProducto= ((String) tablaCanasta.getValueAt(i, 1));
-        float valorProducto = ((float) tablaCanasta.getValueAt(i, 3));       
-        arregloProductos.add(new DetalleFacturaVO(codigoProducto,nombreProducto,valorProducto,0,""));
-            
+
+            arregloCantidad[i] =  Integer.parseInt((String) tablaCanasta.getValueAt(i, 0));
+           arregloSerialFactura[i] = labelNumFactura.getText();
+
+            ///arregloProductos.add(new DetalleFacturaVO(codigoProducto,nombreProducto,valorProducto,0,""));
         }
-         String codigoProducto= ((String) tablaCanasta.getValueAt(row, 0));
-        String nombreProducto= ((String) tablaCanasta.getValueAt(row, 1));
-        float valorProducto = ((float) tablaCanasta.getValueAt(row, 3));       
-        arregloProductos.add(new DetalleFacturaVO(codigoProducto,nombreProducto,valorProducto,0,""));
         
+        objControlador.creaDetalleFactura(arregloCantidad, arregloSerialFactura);
+        
+        
+//         String codigoProducto= ((String) tablaCanasta.getValueAt(row, 0));
+//        String nombreProducto= ((String) tablaCanasta.getValueAt(row, 1));
+//        float valorProducto = ((float) tablaCanasta.getValueAt(row, 3));       
+//        arregloProductos.add(new DetalleFacturaVO(codigoProducto,nombreProducto,valorProducto,0,""));
+
     }
     
     
