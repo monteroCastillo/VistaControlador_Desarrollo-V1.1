@@ -17,6 +17,7 @@ public class Controlador {
     EmpleadoDAO objEmpleadoDAO = new EmpleadoDAO();
     ProveedorDAO objProveedorDAO = new ProveedorDAO();
     FacturaDAO objFacturaDAO = new FacturaDAO();
+    DetalleFacturaDAO objDetalleFacturaDAO = new DetalleFacturaDAO();
     DetalleFacturaVO objDetalleFacturaVO;
 
     pgsql_dbc objetoConexion = new pgsql_dbc();
@@ -34,8 +35,13 @@ public class Controlador {
     public Controlador() {
 
     }
-
+    /**
+     * Muestra todos los clientes de la base de datos
+     * @param tablaD 
+     */
     public void llenarTablaClientes(JTable tablaD) {
+        
+        ArrayList<Clientes> listaClientes = new ArrayList();
         DefaultTableModel model = new DefaultTableModel();
         tablaD.setModel(model);
 
@@ -50,25 +56,32 @@ public class Controlador {
 
         Object[] columna = new Object[8];
 
-        int numRegistros = objClientesDAO.listarClientes().size();
+        listaClientes = objClientesDAO.listarClientes();
+        int numRegistros =listaClientes.size();
 
         for (int i = 0; i < numRegistros; i++) {
-            columna[0] = objClientesDAO.listarClientes().get(i).getNombreCliente();
-            columna[1] = objClientesDAO.listarClientes().get(i).getApellidos();
-            columna[2] = objClientesDAO.listarClientes().get(i).getIdCliente();
-            columna[3] = objClientesDAO.listarClientes().get(i).getDireccion();
-            columna[4] = objClientesDAO.listarClientes().get(i).getTelefono();
-            columna[5] = objClientesDAO.listarClientes().get(i).getCiudad();
-            columna[6] = objClientesDAO.listarClientes().get(i).getEmail();
-            columna[7] = objClientesDAO.listarClientes().get(i).getPublicidad();
+            columna[0] = listaClientes.get(i).getNombreCliente();
+            columna[1] = listaClientes.get(i).getApellidos();
+            columna[2] = listaClientes.get(i).getIdCliente();
+            columna[3] = listaClientes.get(i).getDireccion();
+            columna[4] = listaClientes.get(i).getTelefono();
+            columna[5] = listaClientes.get(i).getCiudad();
+            columna[6] = listaClientes.get(i).getEmail();
+            columna[7] = listaClientes.get(i).getPublicidad();
             model.addRow(columna);
         }
 
     }
-
+    /**
+     * Muestra todos los empleados de la base de datos
+     * @param tablaD 
+     */
     public void llenarTablaEmpleados(JTable tablaD) {
+        
+        ArrayList<EmpleadoVO> listaEmpleados = new ArrayList();
         DefaultTableModel model = new DefaultTableModel();
         tablaD.setModel(model);
+        
 
         model.addColumn("Nombre");
         model.addColumn("Identificacion");
@@ -80,16 +93,17 @@ public class Controlador {
 
         Object[] columna = new Object[7];
 
-        int numRegistros = objEmpleadoDAO.listarEmpleados().size();
+        listaEmpleados = objEmpleadoDAO.listarEmpleados();
+        int numRegistros = listaEmpleados.size();
 
         for (int i = 0; i < numRegistros; i++) {
-            columna[0] = objEmpleadoDAO.listarEmpleados().get(i).getNombreEmpleado();
-            columna[1] = objEmpleadoDAO.listarEmpleados().get(i).getCedula();
-            columna[2] = objEmpleadoDAO.listarEmpleados().get(i).getUsuario();
-            columna[3] = objEmpleadoDAO.listarEmpleados().get(i).getClave();
-            columna[4] = objEmpleadoDAO.listarEmpleados().get(i).getDireccionEmpleado();
-            columna[5] = objEmpleadoDAO.listarEmpleados().get(i).getTelEmpleado();
-            columna[6] = objEmpleadoDAO.listarEmpleados().get(i).getTipoEmpleado();
+            columna[0] = listaEmpleados.get(i).getNombreEmpleado();
+            columna[1] = listaEmpleados.get(i).getCedula();
+            columna[2] = listaEmpleados.get(i).getUsuario();
+            columna[3] = listaEmpleados.get(i).getClave();
+            columna[4] = listaEmpleados.get(i).getDireccionEmpleado();
+            columna[5] = listaEmpleados.get(i).getTelEmpleado();
+            columna[6] = listaEmpleados.get(i).getTipoEmpleado();
 
             model.addRow(columna);
         }
@@ -107,10 +121,7 @@ public class Controlador {
         DefaultTableModel model = new DefaultTableModel();
         tablaD.setModel(model);
         ArrayList<Productos> listaProductos = new ArrayList();
-
-//        for(int i=0;i<list.size();i++){
-//    modelotabla.addRow(new Object[] {list.get(i).getName1(), list.get(i).getCedula(), list.get(i).getAddress(), list.get(i).getGender(), list.get(i).getHobbies()});
-//}
+        
         try {
             model.addColumn("Producto");
             model.addColumn("Codigo");
@@ -153,44 +164,7 @@ public class Controlador {
 
     }
 
-    /**
-     * PARA PRUEBAS RECIBE: la consulta, la tabla y el modelo
-     *
-     * @param tablaD
-     * @param consulta
-     * @param modelo
-     */
-    public void llenarTablaProductosVentas(JTable tablaD, String consulta, DefaultTableModel modelo) {
-
-        DefaultTableModel model = new DefaultTableModel();
-        tablaD.setModel(model);
-
-        model.addColumn("Producto");
-        model.addColumn("Codigo");
-        model.addColumn("Cantidad");
-        model.addColumn("Valor Compra");
-        model.addColumn("Valor Venta");
-        model.addColumn("Proveedor");
-        model.addColumn("Descripcion");
-
-        Object[] columna = new Object[7];
-
-        int numRegistros = objProductoDAO.listarProductos(consulta).size();
-        System.out.println("numero de registros" + numRegistros);
-
-        for (int i = 0; i < numRegistros; i++) {
-            columna[0] = objProductoDAO.listarProductos(consulta).get(i).getNombreProducto();
-            columna[1] = objProductoDAO.listarProductos(consulta).get(i).getCodigoProducto();
-            columna[2] = objProductoDAO.listarProductos(consulta).get(i).getCantidad();
-            columna[3] = objProductoDAO.listarProductos(consulta).get(i).getValorCompraProd();
-            columna[4] = objProductoDAO.listarProductos(consulta).get(i).getValorVentaProd();
-            columna[5] = objProductoDAO.listarProductos(consulta).get(i).getProveedor();
-            columna[6] = objProductoDAO.listarProductos(consulta).get(i).getDescripcion();
-
-            model.addRow(columna);
-        }
-
-    }
+   
 
     /**
      * Muestra los datos de los proveedores en una tabla
@@ -200,6 +174,7 @@ public class Controlador {
     public void llenarTablaProveedores(JTable tablaD) {
         DefaultTableModel model = new DefaultTableModel();
         tablaD.setModel(model);
+        ArrayList<ProveedorVO> arregloProveedores = new ArrayList();
 
         model.addColumn("Nombre");
         model.addColumn("Nit");
@@ -210,20 +185,88 @@ public class Controlador {
 
         Object[] columna = new Object[6];
 
-        int numRegistros = objProveedorDAO.listarProveedores().size();
+        arregloProveedores = objProveedorDAO.listarProveedores();
+        int numRegistros = arregloProveedores.size();
 
         for (int i = 0; i < numRegistros; i++) {
-            columna[0] = objProveedorDAO.listarProveedores().get(i).getNombreProveedor();
-            columna[1] = objProveedorDAO.listarProveedores().get(i).getNit();
-            columna[2] = objProveedorDAO.listarProveedores().get(i).getDireccioProveedor();
-            columna[3] = objProveedorDAO.listarProveedores().get(i).getTelefonoProveedor();
-            columna[4] = objProveedorDAO.listarProveedores().get(i).getCiudad();
-            columna[5] = objProveedorDAO.listarProveedores().get(i).getEmail();
+            columna[0] = arregloProveedores.get(i).getNombreProveedor();
+            columna[1] = arregloProveedores.get(i).getNit();
+            columna[2] = arregloProveedores.get(i).getDireccioProveedor();
+            columna[3] = arregloProveedores.get(i).getTelefonoProveedor();
+            columna[4] = arregloProveedores.get(i).getCiudad();
+            columna[5] = arregloProveedores.get(i).getEmail();
 
             model.addRow(columna);
         }
 
     }
+    
+    /**
+     * LLena el detalle de la factura en la vista de registro de facturas, 
+     * esto lo hace apartir del serial de la factura
+     * @param tablaD
+     * @param serialFactura 
+     */
+    public void llenarDetalleTablaFacturasHistorico(JTable tablaD, String serialFactura ) {
+        
+        tablaD.setModel(modeloCanasta);
+        ArrayList<DetalleFacturaVO> listaDetalleFactura = new ArrayList();
+        String consulta = "SELECT *FROM  detallefactura WHERE serialfactura = " + "'" + serialFactura + "'"; 
+
+        modeloCanasta.addColumn("CANT");
+        modeloCanasta.addColumn("Codigo");
+        modeloCanasta.addColumn("Nombre Producto");
+        modeloCanasta.addColumn("Valor Producto");
+        modeloCanasta.addColumn("V. total");
+
+        Object[] columna = new Object[5];// Numero de Columnas
+        
+        listaDetalleFactura = objDetalleFacturaDAO.listarDetalleFacturaDAO(consulta);
+
+        int numRegistros = listaDetalleFactura.size();
+
+        for (int i = 0; i < numRegistros; i++) {
+            columna[0] = listaDetalleFactura.get(i).getCantidad();
+            columna[1] = listaDetalleFactura.get(i).getCodigoProducto();
+            columna[2] = listaDetalleFactura.get(i).getNombreProducto();
+            columna[3] = listaDetalleFactura.get(i).getPrecioProducto();
+
+            modeloCanasta.addRow(columna);
+        }    
+        
+
+    }
+    
+    /**
+     * Trae los datos del cliente de la factura seleccionada por el numero de serie
+     * @param serialFactura
+     * @return 
+     */
+    public ArrayList llenarDatosClienteFacturaHistorico(String serialFactura) {
+
+        ArrayList<FacturaVO> listaFacturas = new ArrayList();
+        String consulta = "SELECT *FROM  factura WHERE idfactura = " + "'" + serialFactura + "'"; 
+        System.out.println("la consulta para invocar los datos del cliente desde el historico son: " + consulta);
+        
+        try {
+
+            
+            listaFacturas = objFacturaDAO.listarFacturasDAO(consulta);
+
+        } catch (Exception e) {
+            System.out.println("Problemas invocando el metodo de listarFacturasDAO ");
+        }
+
+        return listaFacturas;
+
+//       labelNombre.setText(arreglo.get(0).getNombreCliente());
+//       labelDireccion.setText(arreglo.get(0).getDireccion());
+//       labelTelefono.setText(arreglo.get(0).getTelefono()); 
+//       label_Nit_CC.setText(arreglo.get(0).getIdCliente());
+//       labelNumFactura.setText(Integer.parseInt(objControlador.asignarNuevoNumFactura()) + 1 +"");
+    }
+    
+    
 
     //************************************************************************************************************
     /**
@@ -326,14 +369,26 @@ public class Controlador {
         String idEmpleado = arregloFactura.get(1);
         String hora = arregloFactura.get(2);
         String fecha = arregloFactura.get(3);
-//        float totalAPagar;         
-//        totalAPagar = Float.parseFloat(arregloFactura.get(4));
 
+        //No se inserta el id de factura por que el atributo en la base de datos es serial(se autoincrementa)
         objFacturaDAO.insertarFactura(idCliente, idEmpleado, hora, fecha, sumaValorTotal);
 
     }
+    
+    /**
+     * termina de llenar el arrylist de detalle de la factura para luego enviarlo a la base de datos
+     * este arraylist de detalle producto esta amarrado a la factura por el serial
+     * @param cantidadVendida
+     * @param serialFactura 
+     */
 
     public void creaDetalleFactura(int[] cantidadVendida, String[] serialFactura) {
+        
+        String  nomProducto;
+        String  codProducto;
+        float  precioProducto;
+        int cantidadProductos;
+        String serieFactura;
         
         int numRegistros  =  getArregloProductosVendidos().size();
         int cantVendida;
@@ -350,19 +405,29 @@ public class Controlador {
 
             for (int i = 0; i < numRegistros; i++) {
             
-        
-            System.out.println(arregloProductosVendidos.get(i).getNombreProducto());
-            System.out.println(arregloProductosVendidos.get(i).getCodigoProducto());
-            System.out.println(arregloProductosVendidos.get(i).getPrecioProducto());
-            System.out.println(arregloProductosVendidos.get(i).getCantidad());
-            System.out.println(arregloProductosVendidos.get(i).getSerialFactura());
+            nomProducto = arregloProductosVendidos.get(i).getNombreProducto();
+            codProducto = arregloProductosVendidos.get(i).getCodigoProducto();
+            precioProducto = arregloProductosVendidos.get(i).getPrecioProducto();
+            cantidadProductos = arregloProductosVendidos.get(i).getCantidad();
+            serieFactura = arregloProductosVendidos.get(i).getSerialFactura();
+                
+            System.out.print(arregloProductosVendidos.get(i).getNombreProducto() +"\t");
+            System.out.print(arregloProductosVendidos.get(i).getCodigoProducto() +"\t");
+            System.out.print(arregloProductosVendidos.get(i).getPrecioProducto() +"\t");
+            System.out.print(arregloProductosVendidos.get(i).getCantidad() +"\t");
+            System.out.print(arregloProductosVendidos.get(i).getSerialFactura()  +"\n");
+            
+            objDetalleFacturaDAO.insertarDetalleFactura(nomProducto, codProducto, precioProducto, cantidadProductos, serieFactura);
+            
         }
+            
+        
 
     }
 
     //***********************************************************************************************
     /**
-     *
+     * valida que el usuario  y la contraseña de la persona que se este registrando esten creados en la BD
      * @param usuario
      * @param clave
      * @return
@@ -565,8 +630,8 @@ public class Controlador {
      * Calcula los datos de la factura a partir de la seleccion que se hacen en
      * la vista de ventas
      */
-    public void operaDatosTablaVentas(JTable tablaCanasta, JLabel labelIva, JLabel labelTotal) {
-
+    public void operaDatosTablaVentas(JTable tablaX, JLabel labelIva, JLabel labelTotal) {
+        System.out.println("Entro a la funcion opera datos ");
         int numRegistros = arregloProductosVendidos.size();
 
         float[] cantidadFloat = new float[numRegistros];
@@ -583,7 +648,7 @@ public class Controlador {
             sumaValorTotal += valorTotalProducto;
             Double iva = sumaValorTotal * 0.19;
 
-            tablaCanasta.setValueAt(valorTotalProducto, i, 4);          //seta el total del valor de cada producto en la tabla
+            tablaX.setValueAt(valorTotalProducto, i, 4);          //seta el total del valor de cada producto en la tabla
             labelIva.setText(iva + "");
             labelTotal.setText(sumaValorTotal + "");
         }

@@ -10,6 +10,11 @@ package ModeloVO;
  * @author ALLCH
  */
 public class DetalleFacturaVO {
+
+    public DetalleFacturaVO() {
+    }
+    
+    
     
    String nombreProducto;
    String codigoProducto;

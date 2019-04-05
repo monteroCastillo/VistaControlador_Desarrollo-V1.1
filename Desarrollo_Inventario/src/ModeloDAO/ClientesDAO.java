@@ -92,7 +92,7 @@ public class ClientesDAO {
         return listaClientes;
     }
     /**
-     * 
+     * consulta los datos de un cliente a partir de la cedula o nit
      * @param consulta
      * @return 
      */

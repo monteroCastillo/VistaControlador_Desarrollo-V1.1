@@ -1,9 +1,12 @@
 
 package ModeloDAO;
 import ModeloVO.Clientes;
+import ModeloVO.DetalleFacturaVO;
+import ModeloVO.FacturaVO;
 import java.sql.*;
 import  PostgreSQL.*;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class FacturaDAO {
     
@@ -54,6 +57,44 @@ public class FacturaDAO {
         }
 
         return respuestaRegistro;
+    }
+    
+    /**
+     * 
+     * @param consulta = "SELECT * FROM factura WHERE idfactura = ' '  ";
+     * @return 
+     */
+    public ArrayList<FacturaVO> listarFacturasDAO(String consulta){
+        
+        
+        
+        ArrayList<FacturaVO> listaFacturas = new ArrayList();
+        FacturaVO objFacturaVO;
+        try {
+            Connection accesoDB = conexion.getConexion();
+            //PreparedStatement ps = accesoDB.prepareStatement("SELECT * FROM producto");
+            PreparedStatement ps = accesoDB.prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+
+                objFacturaVO = new FacturaVO();
+                
+                objFacturaVO.setSerial(Integer.parseInt(rs.getString(1)));
+                objFacturaVO.setIdCliente(rs.getString(2));
+                objFacturaVO.setIdEmpleado(rs.getString(3));
+                objFacturaVO.setHora((rs.getString(4)));
+                objFacturaVO.setFecha(rs.getString(5));
+                objFacturaVO.setTotalA_Pagar(Float.parseFloat(rs.getString(6)));
+                
+               
+                
+                listaFacturas.add(objFacturaVO);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Los datos de la factura \n no se pueden cargar en este momento");
+        }
+        
+        return listaFacturas;
     }
     
     

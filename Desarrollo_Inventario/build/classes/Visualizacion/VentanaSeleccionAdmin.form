@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.8" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -58,16 +58,19 @@
                       <Component id="btnCrearEmpleado" min="-2" pref="112" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="29" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="botonCrear" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
+                      <Component id="btnConsultas" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="botonCrear" min="-2" pref="112" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="botonVisualizarProductos" min="-2" pref="112" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="jButton1" min="-2" pref="112" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="btnConsultas" min="-2" pref="112" max="-2" attributes="0"/>
+                          <Component id="btnSalir1" min="-2" pref="112" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="btnSalir" min="-2" pref="112" max="-2" attributes="0"/>
                       </Group>
@@ -96,6 +99,7 @@
                       <Component id="btnCrearEmpleado" alignment="3" min="-2" pref="87" max="-2" attributes="0"/>
                       <Component id="btnConsultas" alignment="3" min="-2" pref="87" max="-2" attributes="0"/>
                       <Component id="btnSalir" alignment="3" min="-2" pref="87" max="-2" attributes="0"/>
+                      <Component id="btnSalir1" alignment="3" min="-2" pref="87" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="183" max="-2" attributes="0"/>
               </Group>
@@ -165,6 +169,15 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCrearEmpleadoActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnSalir1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Facturacion "/>
+            <Property name="actionCommand" type="java.lang.String" value="Facturacion"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalir1ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
