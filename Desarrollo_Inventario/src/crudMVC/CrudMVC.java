@@ -6,7 +6,7 @@
 package crudMVC;
 
 
-import Visualizacion.*;
+import Vista.Login;
 
 import Controlador.*;
 

@@ -202,37 +202,65 @@ public class Controlador {
     }
     
     /**
-     * LLena el detalle de la factura en la vista de registro de facturas, 
-     * esto lo hace apartir del serial de la factura
+     * LLena el detalle de la factura en la vista de registro de facturas, esto
+     * lo hace apartir del serial de la factura
+     *
      * @param tablaD
-     * @param serialFactura 
+     * @param serialFactura
      */
-    public void llenarDetalleTablaFacturasHistorico(JTable tablaD, String serialFactura ) {
-        
+    public void llenarDetalleTablaFacturasHistorico(JTable tablaD, String serialFactura) {
+
         tablaD.setModel(modeloCanasta);
+        ((DefaultTableModel) tablaD.getModel()).setRowCount(0); //Limpia las filas de la tabla para que no se sumen elementos
+        ((DefaultTableModel) tablaD.getModel()).setColumnCount(0); //Limpia las columnas de la tabla para que no se sumen elementos
         ArrayList<DetalleFacturaVO> listaDetalleFactura = new ArrayList();
-        String consulta = "SELECT *FROM  detallefactura WHERE serialfactura = " + "'" + serialFactura + "'"; 
+        String consulta = "SELECT *FROM  detallefactura WHERE serialfactura = " + "'" + serialFactura + "'";
 
-        modeloCanasta.addColumn("CANT");
-        modeloCanasta.addColumn("Codigo");
-        modeloCanasta.addColumn("Nombre Producto");
-        modeloCanasta.addColumn("Valor Producto");
-        modeloCanasta.addColumn("V. total");
-
-        Object[] columna = new Object[5];// Numero de Columnas
+        try {
+            
         
         listaDetalleFactura = objDetalleFacturaDAO.listarDetalleFacturaDAO(consulta);
+        } catch (Exception e) {
+            
+            String d = JOptionPane.showInputDialog("Numero de factura NO valido Desea salir (S)");
+                if (d.equals("s")) {
+                    System.exit(0);
+                }
+        }
 
-        int numRegistros = listaDetalleFactura.size();
+//        while (listaDetalleFactura.isEmpty()) {
+//            JOptionPane.showInputDialog("Numero de factura NO valido Desea salir (S)");
+//        }
+        
+        if(!listaDetalleFactura.isEmpty()){
 
-        for (int i = 0; i < numRegistros; i++) {
-            columna[0] = listaDetalleFactura.get(i).getCantidad();
-            columna[1] = listaDetalleFactura.get(i).getCodigoProducto();
-            columna[2] = listaDetalleFactura.get(i).getNombreProducto();
-            columna[3] = listaDetalleFactura.get(i).getPrecioProducto();
+            modeloCanasta.addColumn("CANT");
+            modeloCanasta.addColumn("Codigo");
+            modeloCanasta.addColumn("Nombre Producto");
+            modeloCanasta.addColumn("Valor Producto");
+            modeloCanasta.addColumn("V. total");
 
-            modeloCanasta.addRow(columna);
-        }    
+            Object[] columna = new Object[5];// Numero de Columnas
+
+            listaDetalleFactura = objDetalleFacturaDAO.listarDetalleFacturaDAO(consulta);
+
+            //Lo pasa al arreglo global arregloProductosVendidos
+            setArregloProductosVendidos(listaDetalleFactura);
+
+            int numRegistros = listaDetalleFactura.size();
+
+            for (int i = 0; i < numRegistros; i++) {
+                columna[0] = listaDetalleFactura.get(i).getCantidad();
+                columna[1] = listaDetalleFactura.get(i).getCodigoProducto();
+                columna[2] = listaDetalleFactura.get(i).getNombreProducto();
+                columna[3] = listaDetalleFactura.get(i).getPrecioProducto();
+
+                modeloCanasta.addRow(columna);
+            }
+        }
+        else{
+            JOptionPane.showInputDialog("Numero de factura NO valido Desea salir (S)");
+        }
         
 
     }
@@ -250,7 +278,6 @@ public class Controlador {
         
         try {
 
-            
             listaFacturas = objFacturaDAO.listarFacturasDAO(consulta);
 
         } catch (Exception e) {
@@ -629,31 +656,40 @@ public class Controlador {
     /**
      * Calcula los datos de la factura a partir de la seleccion que se hacen en
      * la vista de ventas
+     * @param tablaD
+     * @param labelIva
+     * @param labelTotal
      */
-    public void operaDatosTablaVentas(JTable tablaX, JLabel labelIva, JLabel labelTotal) {
+    public void operaDatosTablaVentas(JTable tablaD, JLabel labelIva, JLabel labelTotal) {
+
+        tablaD.setModel(modeloCanasta);
         System.out.println("Entro a la funcion opera datos ");
-        int numRegistros = arregloProductosVendidos.size();
+        int numRegistros = getArregloProductosVendidos().size();//arregloProductosVendidos.size();
+
+        System.out.println("tamaño del arreglo:  " + numRegistros);
 
         float[] cantidadFloat = new float[numRegistros];
         float[] valorFloat = new float[numRegistros];
-        String[] cantidad = new String[numRegistros];
-        String[] valor = new String[numRegistros];
 
-        for (int i = 0; i < numRegistros; i++) {
+        try {
 
-            cantidadFloat[i] = Float.parseFloat((String) modeloCanasta.getValueAt(i, 0));
-            valorFloat[i] = Float.parseFloat(String.valueOf(modeloCanasta.getValueAt(i, 3)));  // Se uso el casting String.valueOf ya que el (String) solo produjo errores
+            for (int i = 0; i < numRegistros; i++) {
 
-            float valorTotalProducto = cantidadFloat[i] * valorFloat[i]; // multiplica el valor por la cantidad de productos
-            sumaValorTotal += valorTotalProducto;
-            Double iva = sumaValorTotal * 0.19;
+                cantidadFloat[i] = Float.parseFloat(String.valueOf(modeloCanasta.getValueAt(i, 0)));  // Se uso el casting String.valueOf ya que el (String) solo produjo errores                  
 
-            tablaX.setValueAt(valorTotalProducto, i, 4);          //seta el total del valor de cada producto en la tabla
-            labelIva.setText(iva + "");
-            labelTotal.setText(sumaValorTotal + "");
+                valorFloat[i] = Float.parseFloat(String.valueOf(modeloCanasta.getValueAt(i, 3)));  // Se uso el casting String.valueOf ya que el (String) solo produjo errores
+
+                float valorTotalProducto = cantidadFloat[i] * valorFloat[i]; // multiplica el valor por la cantidad de productos
+                sumaValorTotal += valorTotalProducto;
+                Double iva = sumaValorTotal * 0.19;
+
+                tablaD.setValueAt(valorTotalProducto, i, 4);          //seta el total del valor de cada producto en la tabla
+                labelIva.setText(iva + "");
+                labelTotal.setText(sumaValorTotal + "");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se pudieron calcular los valores de la factura");
         }
-        
-        
 
     }
 
@@ -692,4 +728,7 @@ public class Controlador {
         return arregloProductosVendidos;
     }
 
+    public void setArregloProductosVendidos(ArrayList arregloVendidos ){
+        arregloProductosVendidos =arregloVendidos;
+    }
 }//Fin de la clase

@@ -9,6 +9,7 @@ import ModeloVO.DetalleFacturaVO;
 import java.sql.*;
 import  PostgreSQL.*;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -79,6 +80,7 @@ public class DetalleFacturaDAO {
                 listaDetalleFactura.add(objDetalleFacturaVO);
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "NO se encontraron facturas");
         }
         
         return listaDetalleFactura;
