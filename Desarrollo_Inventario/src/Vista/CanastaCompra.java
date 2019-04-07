@@ -10,6 +10,7 @@ import ModeloVO.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 
@@ -312,38 +313,33 @@ public class CanastaCompra extends javax.swing.JFrame {
         
     }
     
-    //public void detectaCambiosEnTablaCanasta(){
-         
-        
-        
-    
-    
-//    public void ejemplo(){
-//        
-//        ArrayList<DetalleFacturaVO> arregloProductos = objVentas.getArregloProductos();
-//        System.out.println("Tamaño del arreglo" + arregloProductos.size());
-//        
-//        for (int i = 0; i < arregloProductos.size(); i++) {
-//            System.out.println(arregloProductos.get(i).getNombreProducto());
-//            System.out.println(arregloProductos.get(i).getCodigoProducto());
-//            System.out.println(arregloProductos.get(i).getPrecioProducto());
-//        }
-//    }
-    /**
+      
+     /**
      * Llena la vista de canasta de compra con los datos del cliente
      */
-    public void llenarInterfazDatosCliente(){
-        
-        ArrayList<Clientes>  arreglo = objControlador.datosClienteCanasta();
-        
-       //String nombre = arreglo.get(0).getNombreCliente();
-       labelNombre.setText(arreglo.get(0).getNombreCliente());
-       labelDireccion.setText(arreglo.get(0).getDireccion());
-       labelTelefono.setText(arreglo.get(0).getTelefono()); 
-       label_Nit_CC.setText(arreglo.get(0).getIdCliente());
-       labelNumFactura.setText(Integer.parseInt(objControlador.asignarNuevoNumFactura()) + 1 +"");
-       
+    public void llenarInterfazDatosCliente() {
+
+        ArrayList<Clientes> arreglo;
+        arreglo = objControlador.getDatosClienteCanasta();
+
+        if (arreglo.isEmpty() || arreglo == null) {
+            JOptionPane.showMessageDialog(null, "Los datos del cliente no pudieron ser cargados");
+            
+        } else {
+
+            //String nombre = arreglo.get(0).getNombreCliente();
+            labelNombre.setText(arreglo.get(0).getNombreCliente());
+            labelDireccion.setText(arreglo.get(0).getDireccion());
+            labelTelefono.setText(arreglo.get(0).getTelefono());
+            label_Nit_CC.setText(arreglo.get(0).getIdCliente());
+            labelNumFactura.setText(Integer.parseInt(objControlador.asignarNuevoNumFactura()) + 1 +"");
+        }
     }
+    
+    /**
+     * Cuando se presiona el boton guardar se llama este metodo que organiza los datos para luego
+     * enviarlos al metodo que los guarda
+     */
     
     public void datosNuevaFactura() {
         
@@ -351,15 +347,19 @@ public class CanastaCompra extends javax.swing.JFrame {
         arregloFactura = new ArrayList<>();
         
         //Traemos todos los datos del cliente que esta haciendo la compra
-        ArrayList<Clientes>  arreglo = objControlador.datosClienteCanasta();
+        ArrayList<Clientes>  arreglo = objControlador.getDatosClienteCanasta();
+        //Se trae el id del empleado para vincularlo a la factura
         String cedulaEmpleadoSesion = objControlador.cedulaEmpleadoSesionAbierta();
+        String numFactura= labelNumFactura.getText();
         
+        arregloFactura.add(numFactura);
         arregloFactura.add(arreglo.get(0).getIdCliente()); 
         arregloFactura.add(cedulaEmpleadoSesion);
         arregloFactura.add(hora);
         arregloFactura.add(fecha);     
                
         objControlador.crearFactura(arregloFactura);
+        JOptionPane.showMessageDialog(null, "Factura Guardada");
 
     }
     
@@ -381,13 +381,8 @@ public class CanastaCompra extends javax.swing.JFrame {
             ///arregloProductos.add(new DetalleFacturaVO(codigoProducto,nombreProducto,valorProducto,0,""));
         }
         
-        objControlador.creaDetalleFactura(arregloCantidad, arregloSerialFactura);
-        
-        
-//         String codigoProducto= ((String) tablaCanasta.getValueAt(row, 0));
-//        String nombreProducto= ((String) tablaCanasta.getValueAt(row, 1));
-//        float valorProducto = ((float) tablaCanasta.getValueAt(row, 3));       
-//        arregloProductos.add(new DetalleFacturaVO(codigoProducto,nombreProducto,valorProducto,0,""));
+        objControlador.creaDetalleFactura(arregloCantidad, arregloSerialFactura);       
+
 
     }
     

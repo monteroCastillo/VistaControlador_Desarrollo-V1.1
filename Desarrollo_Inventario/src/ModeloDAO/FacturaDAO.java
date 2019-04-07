@@ -29,13 +29,13 @@ public class FacturaDAO {
      * @param serial
      * @return 
      */
-    public String insertarFactura(String idCliente, String idEmpleado, 
+    public String insertarFactura(String idFactura,String idCliente, String idEmpleado, 
             String hora, String fecha, float totalAPagar) {
         String respuestaRegistro = "";
         Connection db = null;
         Statement stmt;
-        String consulta = ("INSERT INTO factura  (idcliente, idempleado, hora,fecha, total_a_Pagar)  Values"
-                + "('" +idCliente + "','" + idEmpleado + 
+        String consulta = ("INSERT INTO factura  (idFactura, idcliente, idempleado, hora,fecha, total_a_Pagar)  Values"
+                + "('" +idFactura + "','" +idCliente + "','" + idEmpleado + 
                             "','" + hora + "','" + fecha + "'," +totalAPagar   + ")");
         System.out.println(consulta);
 

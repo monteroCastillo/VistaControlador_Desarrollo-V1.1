@@ -31,12 +31,12 @@ public class ClientesDAO {
      * @param publicidad
      * @return 
      */
-    public String insertarCliente(String nombreCliente, String apellidos, String idCliente,
+    public String insertarCliente(String nombreCliente,  String idCliente,
             String direccion, String telefono, String ciudad, String email, String publicidad) {
         String respuestaRegistro = "";
         Connection db = null;
         Statement stmt;
-        String consulta = ("SELECT llenaTablaClientes ('" + nombreCliente + "','" + apellidos + "','" + idCliente + "','" + direccion + "','" + telefono + "','" + ciudad + "','" + email + "','" + publicidad + "')");
+        String consulta = ("SELECT llenaTablaClientes ('" + nombreCliente  + "','" + idCliente + "','" + direccion + "','" + telefono + "','" + ciudad + "','" + email + "','" + publicidad + "')");
         System.out.println(consulta);
 
         try {
@@ -51,6 +51,8 @@ public class ClientesDAO {
             accesoDB.close();
 
             System.out.println("Base de datos cerrada");
+            
+            respuestaRegistro = "Cliente Creado Exitosamente";
 
         } catch (SQLException se) {
             System.out.println("No se ha podido cerrar la base.");
@@ -75,14 +77,13 @@ public class ClientesDAO {
             while(rs.next()){
                 clientes = new Clientes();
                 
-                clientes.setNombreCliente(rs.getString(1));
-                clientes.setApellidos(rs.getString(2));
-                clientes.setIdCliente(rs.getString(3));
-                clientes.setDireccion(rs.getString(4));
-                clientes.setTelefono(rs.getString(5));
-                clientes.setCiudad(rs.getString(6));
-                clientes.setEmail(rs.getString(7));
-                clientes.setPublicidad(rs.getString(8));
+                clientes.setNombreCliente(rs.getString(1));                
+                clientes.setIdCliente(rs.getString(2));
+                clientes.setDireccion(rs.getString(3));
+                clientes.setTelefono(rs.getString(4));
+                clientes.setCiudad(rs.getString(5));
+                clientes.setEmail(rs.getString(6));
+                clientes.setPublicidad(rs.getString(7));
                 
                 listaClientes.add(clientes);
             }
@@ -99,6 +100,7 @@ public class ClientesDAO {
     public ArrayList<Clientes> listarClienteFactura(String consulta){
         
         ArrayList listaClientes = new ArrayList();
+       
         Clientes clientes;
         try {
             Connection accesoDB = conexion.getConexion();
@@ -109,13 +111,13 @@ public class ClientesDAO {
                 clientes = new Clientes();
                 
                 clientes.setNombreCliente(rs.getString(1));
-                clientes.setApellidos(rs.getString(2));
-                clientes.setIdCliente(rs.getString(3));
-                clientes.setDireccion(rs.getString(4));
-                clientes.setTelefono(rs.getString(5));
-                clientes.setCiudad(rs.getString(6));
-                clientes.setEmail(rs.getString(7));
-                clientes.setPublicidad(rs.getString(8));
+               
+                clientes.setIdCliente(rs.getString(2));
+                clientes.setDireccion(rs.getString(3));
+                clientes.setTelefono(rs.getString(4));
+                clientes.setCiudad(rs.getString(5));
+                clientes.setEmail(rs.getString(6));
+                clientes.setPublicidad(rs.getString(7));
                 
                 listaClientes.add(clientes);
             }

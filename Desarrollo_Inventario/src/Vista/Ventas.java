@@ -43,6 +43,9 @@ public class Ventas extends javax.swing.JFrame {
         tablaVentasProductos.setSelectionForeground( Color.yellow );
         //Cuando se selecciona un elemento de la tabla el fondo  se coloca del color seleccionado
         tablaVentasProductos.setSelectionBackground( Color.red );
+        btnMostrarDatos.setEnabled(false);
+        btnCanasta.setEnabled(false);
+        
 //        asignarTitulo();
 
 //        rowSorter = new TableRowSorter(model);
@@ -65,9 +68,9 @@ public class Ventas extends javax.swing.JFrame {
         labelInformacionVentas = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaVentasProductos = new javax.swing.JTable();
-        mostrarDatos = new javax.swing.JButton();
+        btnMostrarDatos = new javax.swing.JButton();
         btPrincipalVentas = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnCanasta = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
@@ -113,10 +116,10 @@ public class Ventas extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tablaVentasProductos);
 
-        mostrarDatos.setText("Mostrar Todos");
-        mostrarDatos.addActionListener(new java.awt.event.ActionListener() {
+        btnMostrarDatos.setText("Mostrar Productos");
+        btnMostrarDatos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mostrarDatosActionPerformed(evt);
+                btnMostrarDatosActionPerformed(evt);
             }
         });
 
@@ -127,10 +130,10 @@ public class Ventas extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Ir a la canasta");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCanasta.setText("Ir a la canasta");
+        btnCanasta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCanastaActionPerformed(evt);
             }
         });
 
@@ -153,35 +156,37 @@ public class Ventas extends javax.swing.JFrame {
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(labelInformacionVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txID_cliente_ventas, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(97, 97, 97)
-                                        .addComponent(btValidarIdClienteVentas)
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(labelInformacionVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addComponent(txID_cliente_ventas, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(154, 154, 154)
+                                                .addComponent(btValidarIdClienteVentas)))
                                         .addGap(77, 77, 77))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(mostrarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnMostrarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(45, 45, 45)))
+                                        .addGap(60, 60, 60)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnCanasta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btPrincipalVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(81, 81, 81)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 841, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 841, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -195,16 +200,16 @@ public class Ventas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txID_cliente_ventas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btValidarIdClienteVentas)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCanasta, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelInformacionVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mostrarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMostrarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
         );
@@ -213,23 +218,37 @@ public class Ventas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btValidarIdClienteVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btValidarIdClienteVentasActionPerformed
-        consultarIdCliente();
-        
+
+        boolean cliente;
+        cliente = objControlador.consultarIdCliente(labelInformacionVentas, txID_cliente_ventas.getText());
+
+        if (cliente == true) {
+            
+            btnMostrarDatos.setEnabled(true);
+
+        } else {
+
+        }
     }//GEN-LAST:event_btValidarIdClienteVentasActionPerformed
 
-    private void mostrarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarDatosActionPerformed
+    private void btnMostrarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarDatosActionPerformed
         mostrarDatos();
-    }//GEN-LAST:event_mostrarDatosActionPerformed
+    }//GEN-LAST:event_btnMostrarDatosActionPerformed
     /**
      * Permite seleccionar un producto de la tabla de ventas para llevarlo a la canaste de compra.
      * @param evt 
      */
     private void tablaVentasProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaVentasProductosMouseClicked
-       int row = tablaVentasProductos.rowAtPoint(evt.getPoint());
-       
-       String d = JOptionPane.showInputDialog("Desea Agregar este producto \n al carrito de compras (S)");
-       System.out.println("El valor de la variable d es : " +d);
-        datosTablaProducto(row);
+        int row = tablaVentasProductos.rowAtPoint(evt.getPoint());
+
+        String d = JOptionPane.showInputDialog("Desea Agregar este producto \n al carrito de compras (S)");
+        if (d == null) {
+            System.out.println("El valor de la variable d es : " + d);
+        }
+        else {
+            btnCanasta.setEnabled(true);
+            datosTablaProducto(row);
+        }
     }//GEN-LAST:event_tablaVentasProductosMouseClicked
 
     private void btPrincipalVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrincipalVentasActionPerformed
@@ -238,11 +257,11 @@ public class Ventas extends javax.swing.JFrame {
         this.dispose(); // instruccion que cierra la ventana actual
     }//GEN-LAST:event_btPrincipalVentasActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCanastaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCanastaActionPerformed
         CanastaCompra canasta= new CanastaCompra(objControlador);
         canasta.setVisible(true);
        // this.dispose(); // instruccion que cierra la ventana actual
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCanastaActionPerformed
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         System.out.println("Entro al evento de teclado  keyReleased");
@@ -273,10 +292,10 @@ public class Ventas extends javax.swing.JFrame {
         
     }
     
-    private void consultarIdCliente() {
-
-        objControlador.consultarIdCliente(labelInformacionVentas, txID_cliente_ventas.getText());
-    }
+//    private void consultarIdCliente() {
+//        boolean  cliente;
+//        cliente = objControlador.consultarIdCliente(labelInformacionVentas, txID_cliente_ventas.getText());
+//    }
    
     /**
      * Llena el combobox con todos los nombres de los productos
@@ -350,7 +369,8 @@ public class Ventas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btPrincipalVentas;
     private javax.swing.JButton btValidarIdClienteVentas;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnCanasta;
+    private javax.swing.JButton btnMostrarDatos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -359,7 +379,6 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelInformacionVentas;
-    private javax.swing.JButton mostrarDatos;
     private javax.swing.JTable tablaVentasProductos;
     private javax.swing.JTextField txID_cliente_ventas;
     // End of variables declaration//GEN-END:variables

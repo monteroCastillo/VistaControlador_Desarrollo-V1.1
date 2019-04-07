@@ -65,8 +65,6 @@ public class Crear extends javax.swing.JFrame {
         textoTelefono = new javax.swing.JTextField();
         textoCiudad = new javax.swing.JTextField();
         btCrearCliente = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
-        textoApellidos = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         textoEmail = new javax.swing.JTextField();
         checkPublicidad = new javax.swing.JCheckBox();
@@ -183,7 +181,7 @@ public class Crear extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
+            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 357, Short.MAX_VALUE)
         );
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
@@ -232,8 +230,6 @@ public class Crear extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setText("Apellidos");
-
         jLabel12.setText("E - mail");
 
         checkPublicidad.setText("Desea recibir publicidad");
@@ -256,13 +252,11 @@ public class Crear extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(textoCedulaNit)
                             .addComponent(textoNombre, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(textoApellidos, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(checkPublicidad, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -277,14 +271,10 @@ public class Crear extends javax.swing.JFrame {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(textoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textoApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -305,7 +295,7 @@ public class Crear extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(textoEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(checkPublicidad)
                 .addGap(26, 26, 26)
                 .addComponent(btCrearCliente)
@@ -336,7 +326,7 @@ public class Crear extends javax.swing.JFrame {
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Crear Cliente", jPanel3);
@@ -416,8 +406,7 @@ public class Crear extends javax.swing.JFrame {
             publicidad = "si";
         }
         
-            arrayClienteNuevo.add(textoNombre.getText());
-            arrayClienteNuevo.add(textoApellidos.getText());           
+            arrayClienteNuevo.add(textoNombre.getText());                      
             arrayClienteNuevo.add(textoCedulaNit.getText());
             arrayClienteNuevo.add(textoDireccion.getText());
             arrayClienteNuevo.add(textoTelefono.getText());
@@ -438,7 +427,6 @@ public class Crear extends javax.swing.JFrame {
     public javax.swing.JCheckBox checkPublicidad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
@@ -458,7 +446,6 @@ public class Crear extends javax.swing.JFrame {
     private javax.swing.JLabel lbProveedor;
     private javax.swing.JLabel lbValorCompraProducto;
     private javax.swing.JLabel lbValorVentaProducto;
-    public javax.swing.JTextField textoApellidos;
     public javax.swing.JTextField textoCedulaNit;
     public javax.swing.JTextField textoCiudad;
     public javax.swing.JTextField textoDireccion;
