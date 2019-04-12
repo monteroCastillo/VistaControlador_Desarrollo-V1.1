@@ -707,6 +707,10 @@ public class Controlador {
 
         return nombreEmpleado;
     }
+    public String getTipoEmpleadoSesionAbierta() {
+
+        return tipoEmpleado;
+    }
 
     public String cedulaEmpleadoSesionAbierta() {
 

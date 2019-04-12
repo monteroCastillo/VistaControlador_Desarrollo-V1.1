@@ -268,15 +268,26 @@ public class CanastaCompra extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         objControlador.operaDatosTablaVentas( tablaCanasta, labelIVA, labelTotalAPagar);
-        agregarDatosDetalleFactura();
-        //ejemplo();
+        agregarDatosDetalleFactura();     
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Ventas volverVentas=  Ventas.obtenerVentas(objControlador);
-        volverVentas.setVisible(true);
-        this.dispose(); // instruccion que cierra la ventana actual  
+       
+        if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("usuario")){
+            
+            VistaSeleccionUsuario obtenerMenuUsuario = VistaSeleccionUsuario.obtenerVistaClientes(objControlador);
+            obtenerMenuUsuario.setVisible(true);
+            this.dispose();
+        }
+        else if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("admin")  ){
+            VistaSeleccionAdmin volverHome= new VistaSeleccionAdmin(objControlador);
+            volverHome.setVisible(true);
+            this.dispose(); // instruccion que cierra la ventana actual
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Imposible regresar al Menu Principal \n en este momento");            
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnGuardarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarFacturaActionPerformed

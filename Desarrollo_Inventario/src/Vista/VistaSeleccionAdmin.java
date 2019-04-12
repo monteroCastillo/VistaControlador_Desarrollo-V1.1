@@ -15,15 +15,25 @@ import  Controlador.*;
  */
 public class VistaSeleccionAdmin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form DashBoard
-     */
-    
+     
     Controlador objControlador;
+    private static VistaSeleccionAdmin objVistaSeleccionAdmin;
+    
     public VistaSeleccionAdmin(Controlador objControlador) {
         initComponents();
         this.objControlador = objControlador;
+        this.setLocationRelativeTo(null);//Posiona la ventana en el centro
         asignarTitulo();
+    }
+    
+     //Patron Singleton
+    public  static VistaSeleccionAdmin obtenerVistaSeleccionAdmin(Controlador objControlador){
+        
+        if( objVistaSeleccionAdmin == null){
+            
+            objVistaSeleccionAdmin = new VistaSeleccionAdmin(objControlador);            
+        }
+        return objVistaSeleccionAdmin;
     }
     
     @SuppressWarnings("unchecked")
@@ -181,9 +191,7 @@ public class VistaSeleccionAdmin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-//       VistaClientes visual = new VistaClientes(objControlador);
-//       visual.setVisible(true);
-//       this.dispose();
+
         VistaClientes obtenerVistaClientes = VistaClientes.obtenerVistaClientes(objControlador);
         obtenerVistaClientes.setVisible(true);
         this.dispose();
@@ -191,33 +199,26 @@ public class VistaSeleccionAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void botonVisualizarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVisualizarProductosActionPerformed
-//       VisualizarProductos visualProd = new VisualizarProductos(objControlador);
-//       visualProd.setVisible(true);
-//       this.dispose();
+
         VisualizarProductos obtenerVisualizarProductos = VisualizarProductos.obtenerVisualizarProductos(objControlador);
         obtenerVisualizarProductos.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_botonVisualizarProductosActionPerformed
 
     private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearActionPerformed
-        VistaCrearClienteProducto crearNuevos = new VistaCrearClienteProducto(objControlador);
+        VistaCrearClienteProducto crearNuevos =  VistaCrearClienteProducto.obtenerVistaClientes(objControlador);
         crearNuevos.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_botonCrearActionPerformed
 
     private void botonVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVentasActionPerformed
-//        Ventas vistaVentas= new Ventas(objControlador);
-//        vistaVentas.setVisible(true);
-//        this.dispose();
+
         Ventas obtenerVentas = Ventas.obtenerVentas(objControlador);
         obtenerVentas.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_botonVentasActionPerformed
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
-//        Consultas vistaConsultas = new Consultas(objControlador);
-//        vistaConsultas.setVisible(true);
-//        this.dispose();
 
         Consultas obtenerConsultas = Consultas.obtenerConsultas(objControlador);
         obtenerConsultas.setVisible(true);
@@ -229,15 +230,14 @@ public class VistaSeleccionAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnCrearEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearEmpleadoActionPerformed
-        //EmpleadoCreacion vistaCrearEmpleado = new EmpleadoCreacion(objControlador);
-        //vistaCrearEmpleado.setVisible(true);
+        
         VistaEmpleado obtenerEmpleado = VistaEmpleado.obtenerEmpleado(objControlador);
         obtenerEmpleado.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCrearEmpleadoActionPerformed
 
     private void btnSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir1ActionPerformed
-        HistoricoFacturacion historicofacturacion = new HistoricoFacturacion(objControlador);
+        HistoricoFacturacion historicofacturacion = HistoricoFacturacion.obtenerHistoricoFacturacion(objControlador);
         historicofacturacion.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnSalir1ActionPerformed

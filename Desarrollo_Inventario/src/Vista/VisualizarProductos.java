@@ -5,6 +5,7 @@
  */
 package Vista;
 import Controlador.*;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;//Ocupas Importar esta libreria
 
 /**
@@ -22,8 +23,10 @@ public class VisualizarProductos extends javax.swing.JFrame {
     private VisualizarProductos(Controlador objControlador) {
         initComponents();
         this.objControlador = objControlador;
-        
+        this.setLocationRelativeTo(null);//Posiona la ventana en el centro
     }
+    
+    //Patron Singleton
     public  static VisualizarProductos obtenerVisualizarProductos(Controlador objControlador){
         
         if(objVisualizarProductos == null){
@@ -147,9 +150,21 @@ public class VisualizarProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaProductosMouseClicked
 
     private void btPrincipalProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrincipalProductosActionPerformed
-        VistaSeleccionAdmin volverHome= new VistaSeleccionAdmin(objControlador);
-        volverHome.setVisible(true);
-        this.dispose(); // instruccion que cierra la ventana actual
+       if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("usuario")){
+            
+            VistaSeleccionUsuario obtenerMenuUsuario = VistaSeleccionUsuario.obtenerVistaClientes(objControlador);
+            obtenerMenuUsuario.setVisible(true);
+            this.dispose();
+        }
+        else if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("admin")  ){
+            VistaSeleccionAdmin volverHome= new VistaSeleccionAdmin(objControlador);
+            volverHome.setVisible(true);
+            this.dispose(); // instruccion que cierra la ventana actual
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Imposible regresar al Menu Principal \n en este momento");
+            
+        }
     }//GEN-LAST:event_btPrincipalProductosActionPerformed
 
 

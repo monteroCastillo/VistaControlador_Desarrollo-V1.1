@@ -24,8 +24,10 @@ public class VistaSeleccionUsuario extends javax.swing.JFrame {
         initComponents();
         this.objControlador = objControlador;
         asignarTitulo();
+        this.setLocationRelativeTo(null);//Posiona la ventana en el centro
     }
     
+    //Patron Singleton
     public  static VistaSeleccionUsuario obtenerVistaClientes(Controlador objControlador){
         
         if(objVistaSeleccionUsuario == null){
@@ -33,11 +35,9 @@ public class VistaSeleccionUsuario extends javax.swing.JFrame {
             objVistaSeleccionUsuario = new VistaSeleccionUsuario(objControlador);            
         }
         return objVistaSeleccionUsuario;
-    }
+    }  
     
-    
-    
-    
+        
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -152,33 +152,27 @@ public class VistaSeleccionUsuario extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        
-//       VistaClientes visual = new VistaClientes(objControlador);
-//       visual.setVisible(true);
        VistaClientes obtenerVistaClientes = VistaClientes.obtenerVistaClientes(objControlador);
        obtenerVistaClientes.setVisible(true);
-       //this.dispose();
+       this.dispose();
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void botonVisualizarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVisualizarProductosActionPerformed
-//       VisualizarProductos visualProd = new VisualizarProductos(objControlador);
-//       visualProd.setVisible(true);
-//       this.dispose();
+
         Consultas obtenerConsultas = Consultas.obtenerConsultas(objControlador);
         obtenerConsultas.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_botonVisualizarProductosActionPerformed
 
     private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearActionPerformed
-        VistaCrearClienteProducto crearNuevos = new VistaCrearClienteProducto(objControlador);
+        VistaCrearClienteProducto crearNuevos =  VistaCrearClienteProducto.obtenerVistaClientes(objControlador);
         crearNuevos.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_botonCrearActionPerformed
 
     private void botonVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVentasActionPerformed
-//        Ventas vistaVentas= new Ventas(objControlador);
-//        vistaVentas.setVisible(true);
-//        this.dispose();
+
         Ventas obtenerVentas = Ventas.obtenerVentas(objControlador);
         obtenerVentas.setVisible(true);
         this.dispose();

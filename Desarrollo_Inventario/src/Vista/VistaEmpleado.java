@@ -7,6 +7,7 @@ package Vista;
 import Controlador.*;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 
  class VistaEmpleado extends javax.swing.JFrame {
@@ -18,8 +19,10 @@ import java.util.ArrayList;
     private  VistaEmpleado(Controlador objControlador) {
         initComponents();
         this.objControlador = objControlador;
+        this.setLocationRelativeTo(null);//Posiona la ventana en el centro
     }
     
+    //Patron Singleton
     public  static VistaEmpleado obtenerEmpleado(Controlador objControlador){
         
         if(objEmpleado == null){
@@ -466,9 +469,21 @@ import java.util.ArrayList;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrincipalActionPerformed
-        VistaSeleccionAdmin volverHome = new VistaSeleccionAdmin(objControlador);
-        volverHome.setVisible(true);
-        this.dispose(); 
+       if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("usuario")){
+            
+            VistaSeleccionUsuario obtenerMenuUsuario = VistaSeleccionUsuario.obtenerVistaClientes(objControlador);
+            obtenerMenuUsuario.setVisible(true);
+            this.dispose();
+        }
+        else if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("admin")  ){
+            VistaSeleccionAdmin volverHome= new VistaSeleccionAdmin(objControlador);
+            volverHome.setVisible(true);
+            this.dispose(); // instruccion que cierra la ventana actual
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Imposible regresar al Menu Principal \n en este momento");
+            
+        }
     }//GEN-LAST:event_btnPrincipalActionPerformed
 
     private void btnCrearProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearProveedorActionPerformed

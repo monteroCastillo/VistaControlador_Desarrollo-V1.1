@@ -5,6 +5,7 @@
  */
 package Vista;
 import Controlador.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,8 +24,10 @@ public class Consultas extends javax.swing.JFrame {
         
         this.objControlador = objControlador;
         initComponents();
+        this.setLocationRelativeTo(null);//Posiona la ventana en el centro
     }
     
+    //Patron Singleton
     public  static Consultas obtenerConsultas(Controlador objControlador){
         
         if(objConsultas == null){
@@ -148,9 +151,22 @@ public class Consultas extends javax.swing.JFrame {
     }//GEN-LAST:event_CheckExistenciasMouseClicked
 
     private void btnPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrincipalActionPerformed
-        VistaSeleccionAdmin volverHome= new VistaSeleccionAdmin(objControlador);
-        volverHome.setVisible(true);
-        this.dispose(); // instruccion que cierra la ventana actual
+        
+        if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("usuario")){
+            
+            VistaSeleccionUsuario obtenerMenuUsuario = VistaSeleccionUsuario.obtenerVistaClientes(objControlador);
+            obtenerMenuUsuario.setVisible(true);
+            this.dispose();
+        }
+        else if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("admin")  ){
+            VistaSeleccionAdmin volverHome= new VistaSeleccionAdmin(objControlador);
+            volverHome.setVisible(true);
+            this.dispose(); // instruccion que cierra la ventana actual
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Imposible regresar al Menu Principal \n en este momento");
+            
+        }
     }//GEN-LAST:event_btnPrincipalActionPerformed
 
     public void enviarDatosConsulta(){

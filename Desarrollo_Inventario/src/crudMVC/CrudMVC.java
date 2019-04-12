@@ -31,7 +31,9 @@ public class CrudMVC {
         //objDashboard.setVisible(true);
         //objAutenticacion.setVisible(true);
         // vistaClientes.setVisible(true);
+        
         objLogin.setVisible(true);
+        
 
     }
 }

@@ -263,9 +263,22 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaVentasProductosMouseClicked
 
     private void btPrincipalVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrincipalVentasActionPerformed
-        VistaSeleccionAdmin volverHome= new VistaSeleccionAdmin(objControlador);
-        volverHome.setVisible(true);
-        this.dispose(); // instruccion que cierra la ventana actual
+       
+        if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("usuario")){
+            
+            VistaSeleccionUsuario obtenerMenuUsuario = VistaSeleccionUsuario.obtenerVistaClientes(objControlador);
+            obtenerMenuUsuario.setVisible(true);
+            this.dispose();
+        }
+        else if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("admin")  ){
+            VistaSeleccionAdmin volverHome= new VistaSeleccionAdmin(objControlador);
+            volverHome.setVisible(true);
+            this.dispose(); // instruccion que cierra la ventana actual
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Imposible regresar al Menu Principal \n en este momento");
+            
+        }
     }//GEN-LAST:event_btPrincipalVentasActionPerformed
 
     private void btnCanastaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCanastaActionPerformed

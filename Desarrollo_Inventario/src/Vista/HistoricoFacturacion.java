@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import ModeloDAO.ClientesDAO;
 import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 
@@ -21,6 +22,7 @@ import javax.swing.JTable;
 public class HistoricoFacturacion extends javax.swing.JFrame {
 
     Controlador objControlador;
+    private static HistoricoFacturacion objHistFacturacion;
     
     ArrayList<DetalleFacturaVO> arregloProductos = new ArrayList<>();
     ClientesDAO objClientesDAO = new ClientesDAO();
@@ -29,11 +31,22 @@ public class HistoricoFacturacion extends javax.swing.JFrame {
     String hora;
     
     
-    public HistoricoFacturacion(Controlador objControlador) {
+    private HistoricoFacturacion(Controlador objControlador) {
 
         initComponents();
         this.objControlador = objControlador;
+        this.setLocationRelativeTo(null);//Posiona la ventana en el centro
 
+    }
+    
+     //Patron Singleton
+    public  static HistoricoFacturacion obtenerHistoricoFacturacion(Controlador objControlador){
+        
+        if(objHistFacturacion == null){
+            
+            objHistFacturacion = new HistoricoFacturacion(objControlador);            
+        }
+        return objHistFacturacion;
     }
 
     /**
@@ -241,9 +254,21 @@ public class HistoricoFacturacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        VistaSeleccionAdmin volverHome= new VistaSeleccionAdmin(objControlador);
-        volverHome.setVisible(true);
-        this.dispose(); // instruccion que cierra la ventana actual
+        if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("usuario")){
+            
+            VistaSeleccionUsuario obtenerMenuUsuario = VistaSeleccionUsuario.obtenerVistaClientes(objControlador);
+            obtenerMenuUsuario.setVisible(true);
+            this.dispose();
+        }
+        else if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("admin")  ){
+            VistaSeleccionAdmin volverHome= new VistaSeleccionAdmin(objControlador);
+            volverHome.setVisible(true);
+            this.dispose(); // instruccion que cierra la ventana actual
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Imposible regresar al Menu Principal \n en este momento");
+            
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnBuscarFacturaXserialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarFacturaXserialActionPerformed

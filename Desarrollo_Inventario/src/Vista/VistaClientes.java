@@ -23,18 +23,14 @@ public class VistaClientes extends javax.swing.JFrame {
     
     Controlador objControlador;
     private static VistaClientes objVistaClientes;
-    /**
-     * Creates new form VisualizarClientes
-     */
+    
     private VistaClientes(Controlador objControlador) {       
         
         initComponents();
         
-        this.objControlador = objControlador;
-        
-        
+        this.objControlador = objControlador;               
     }
-    
+    //Patron Singleton
     public  static VistaClientes obtenerVistaClientes(Controlador objControlador){
         
         if(objVistaClientes == null){
@@ -121,12 +117,23 @@ public class VistaClientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btPrincipalClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrincipalClientesActionPerformed
-        VistaSeleccionAdmin volverHome= new VistaSeleccionAdmin(objControlador);
-        volverHome.setVisible(true);
-        this.dispose(); // instruccion que cierra la ventana actual
-
-
-       // VistaSeleccionAdmin obtenerVistaAdmin = VistaSeleccionAdmin.obtener
+        
+        if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("usuario")){
+            
+            VistaSeleccionUsuario obtenerMenuUsuario = VistaSeleccionUsuario.obtenerVistaClientes(objControlador);
+            obtenerMenuUsuario.setVisible(true);
+            this.dispose();
+        }
+        else if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("admin")  ){
+            VistaSeleccionAdmin volverHome= new VistaSeleccionAdmin(objControlador);
+            volverHome.setVisible(true);
+            this.dispose(); // instruccion que cierra la ventana actual
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Imposible regresar al Menu Principal \n en este momento");
+            
+        }
+       
     }//GEN-LAST:event_btPrincipalClientesActionPerformed
 
     private void btnMostrarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarClientesActionPerformed
