@@ -15,11 +15,23 @@ public class Consultas extends javax.swing.JFrame {
     /**
      * Creates new form Consultas
      */
-    Controlador objControlador;
-    public Consultas(Controlador objControlador) {
+    
+    Controlador objControlador;    
+    private static Consultas objConsultas;
+    
+    private Consultas(Controlador objControlador) {
         
         this.objControlador = objControlador;
         initComponents();
+    }
+    
+    public  static Consultas obtenerConsultas(Controlador objControlador){
+        
+        if(objConsultas == null){
+            
+            objConsultas = new Consultas(objControlador);            
+        }
+        return objConsultas;
     }
 
     public Consultas() {
@@ -136,7 +148,7 @@ public class Consultas extends javax.swing.JFrame {
     }//GEN-LAST:event_CheckExistenciasMouseClicked
 
     private void btnPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrincipalActionPerformed
-        VentanaSeleccionAdmin volverHome= new VentanaSeleccionAdmin(objControlador);
+        VistaSeleccionAdmin volverHome= new VistaSeleccionAdmin(objControlador);
         volverHome.setVisible(true);
         this.dispose(); // instruccion que cierra la ventana actual
     }//GEN-LAST:event_btnPrincipalActionPerformed

@@ -241,7 +241,7 @@ public class HistoricoFacturacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        VentanaSeleccionAdmin volverHome= new VentanaSeleccionAdmin(objControlador);
+        VistaSeleccionAdmin volverHome= new VistaSeleccionAdmin(objControlador);
         volverHome.setVisible(true);
         this.dispose(); // instruccion que cierra la ventana actual
     }//GEN-LAST:event_jButton2ActionPerformed

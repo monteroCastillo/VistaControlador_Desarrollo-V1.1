@@ -2,7 +2,7 @@ package Controlador;
 
 import ModeloDAO.*;
 import ModeloVO.*;
-import PostgreSQl.pgsql_dbc;
+import PostgreSQL.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.*;

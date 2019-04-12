@@ -22,7 +22,7 @@ import javax.swing.JTable;
 public class CanastaCompra extends javax.swing.JFrame {
 
     Controlador objControlador;
-    Ventas objVentas = new Ventas(objControlador);
+    Ventas objVentas =  Ventas.obtenerVentas(objControlador);
     ArrayList<DetalleFacturaVO> arregloProductos = new ArrayList<>();
     String fecha;
     String hora;
@@ -274,7 +274,7 @@ public class CanastaCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Ventas volverVentas= new Ventas(objControlador);
+        Ventas volverVentas=  Ventas.obtenerVentas(objControlador);
         volverVentas.setVisible(true);
         this.dispose(); // instruccion que cierra la ventana actual  
     }//GEN-LAST:event_jButton2ActionPerformed

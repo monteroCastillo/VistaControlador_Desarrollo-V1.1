@@ -9,7 +9,7 @@ package Vista;
 import ModeloVO.*;
 import Controlador.*;
 import ModeloDAO.ProductoDAO;
-import PostgreSQl.pgsql_dbc;
+import PostgreSQL.pgsql_dbc;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,17 +26,20 @@ public class Ventas extends javax.swing.JFrame {
 
     Controlador objControlador;
     ProductoDAO objProductoDAO = new ProductoDAO();
+    private static Ventas objVentas;
+    
     TableRowSorter rowSorter; // es la variable para realizar el filtro de busqueda
     int IDBUSQUEDA = 0; // Filtraria por nombre de producto
     
     ArrayList<DetalleFacturaVO> arregloProductos = new ArrayList<>();
+    
     
     pgsql_dbc objetoConexion = new pgsql_dbc();
    
     DefaultTableModel model = new DefaultTableModel();
     
     
-    public Ventas(Controlador objControlador) {
+    private Ventas(Controlador objControlador) {
         initComponents();
         this.objControlador = objControlador;
         //Cuando se selecciona un elemento de la tabla las letras se colocan del color seleccionado
@@ -51,8 +54,16 @@ public class Ventas extends javax.swing.JFrame {
 //        rowSorter = new TableRowSorter(model);
 //        tablaVentasProductos.setRowSorter(rowSorter);
     }
-
     
+    public  static Ventas obtenerVentas(Controlador objControlador){
+        
+        if(objVentas == null){
+            
+            objVentas = new Ventas(objControlador);             
+        }        
+        
+        return objVentas;
+    }   
     
     
     @SuppressWarnings("unchecked")
@@ -252,7 +263,7 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaVentasProductosMouseClicked
 
     private void btPrincipalVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrincipalVentasActionPerformed
-        VentanaSeleccionAdmin volverHome= new VentanaSeleccionAdmin(objControlador);
+        VistaSeleccionAdmin volverHome= new VistaSeleccionAdmin(objControlador);
         volverHome.setVisible(true);
         this.dispose(); // instruccion que cierra la ventana actual
     }//GEN-LAST:event_btPrincipalVentasActionPerformed

@@ -1,1 +1,0 @@
-PostgreSQl.pgsql_dbc

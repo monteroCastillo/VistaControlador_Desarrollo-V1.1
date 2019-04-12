@@ -13,18 +13,30 @@ import  Controlador.*;
  *
  * @author ALLCH
  */
-public class VentanaSeleccionUsuario extends javax.swing.JFrame {
+public class VistaSeleccionUsuario extends javax.swing.JFrame {
 
-    /**
-     * Creates new form DashBoard
-     */
+      
     
     Controlador objControlador;
-    public VentanaSeleccionUsuario(Controlador objControlador) {
+    private static VistaSeleccionUsuario objVistaSeleccionUsuario;
+    
+    private VistaSeleccionUsuario(Controlador objControlador) {
         initComponents();
         this.objControlador = objControlador;
         asignarTitulo();
     }
+    
+    public  static VistaSeleccionUsuario obtenerVistaClientes(Controlador objControlador){
+        
+        if(objVistaSeleccionUsuario == null){
+            
+            objVistaSeleccionUsuario = new VistaSeleccionUsuario(objControlador);            
+        }
+        return objVistaSeleccionUsuario;
+    }
+    
+    
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -140,27 +152,35 @@ public class VentanaSeleccionUsuario extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        
-       VisualizarClientes visual = new VisualizarClientes(objControlador);
-       visual.setVisible(true);
-       this.dispose();
+//       VistaClientes visual = new VistaClientes(objControlador);
+//       visual.setVisible(true);
+       VistaClientes obtenerVistaClientes = VistaClientes.obtenerVistaClientes(objControlador);
+       obtenerVistaClientes.setVisible(true);
+       //this.dispose();
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void botonVisualizarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVisualizarProductosActionPerformed
-       VisualizarProductos visualProd = new VisualizarProductos(objControlador);
-       visualProd.setVisible(true);
-       this.dispose();
+//       VisualizarProductos visualProd = new VisualizarProductos(objControlador);
+//       visualProd.setVisible(true);
+//       this.dispose();
+        Consultas obtenerConsultas = Consultas.obtenerConsultas(objControlador);
+        obtenerConsultas.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_botonVisualizarProductosActionPerformed
 
     private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearActionPerformed
-        Crear crearNuevos = new Crear(objControlador);
+        VistaCrearClienteProducto crearNuevos = new VistaCrearClienteProducto(objControlador);
         crearNuevos.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_botonCrearActionPerformed
 
     private void botonVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVentasActionPerformed
-        Ventas vistaVentas= new Ventas(objControlador);
-        vistaVentas.setVisible(true);
+//        Ventas vistaVentas= new Ventas(objControlador);
+//        vistaVentas.setVisible(true);
+//        this.dispose();
+        Ventas obtenerVentas = Ventas.obtenerVentas(objControlador);
+        obtenerVentas.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_botonVentasActionPerformed
 

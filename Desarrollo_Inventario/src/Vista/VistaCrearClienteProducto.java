@@ -7,20 +7,20 @@ package Vista;
 
 import ModeloDAO.ClientesDAO;
 import Controlador.*;
-import PostgreSQl.pgsql_dbc;
+//import PostgreSQL.pgsql_dbc;
 import java.util.ArrayList;
 /**
  *
  * @author ALLCH
  */
-public class Crear extends javax.swing.JFrame {
+public class VistaCrearClienteProducto extends javax.swing.JFrame {
 
    
     Controlador objControlador;  
     
     ClientesDAO objClientesDAO;
 
-    public Crear(Controlador objControlador) {
+    public VistaCrearClienteProducto(Controlador objControlador) {
 
         initComponents();
         this.objControlador = objControlador;
@@ -368,7 +368,7 @@ public class Crear extends javax.swing.JFrame {
     }//GEN-LAST:event_btCrearClienteActionPerformed
 
     private void btPrincipalCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrincipalCrearActionPerformed
-        VentanaSeleccionAdmin volverHome= new VentanaSeleccionAdmin(objControlador);
+        VistaSeleccionAdmin volverHome= new VistaSeleccionAdmin(objControlador);
         volverHome.setVisible(true);
         this.dispose();       
         

@@ -9,14 +9,28 @@ import Controlador.*;
 import java.util.ArrayList;
 
 
-public class EmpleadoCreacion extends javax.swing.JFrame {
+ class VistaEmpleado extends javax.swing.JFrame {
    
     Controlador objControlador;
+    private static VistaEmpleado objEmpleado;
     
-    public EmpleadoCreacion(Controlador objControlador) {
+   
+    private  VistaEmpleado(Controlador objControlador) {
         initComponents();
         this.objControlador = objControlador;
     }
+    
+    public  static VistaEmpleado obtenerEmpleado(Controlador objControlador){
+        
+        if(objEmpleado == null){
+            
+            objEmpleado = new VistaEmpleado(objControlador);
+            
+        }
+        return objEmpleado;
+    }
+    
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -452,7 +466,7 @@ public class EmpleadoCreacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrincipalActionPerformed
-        VentanaSeleccionAdmin volverHome = new VentanaSeleccionAdmin(objControlador);
+        VistaSeleccionAdmin volverHome = new VistaSeleccionAdmin(objControlador);
         volverHome.setVisible(true);
         this.dispose(); 
     }//GEN-LAST:event_btnPrincipalActionPerformed

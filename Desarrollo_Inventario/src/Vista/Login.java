@@ -109,12 +109,12 @@ public class Login extends javax.swing.JFrame {
         if(arregloLogin[0].equalsIgnoreCase("true") ){
             
             switch(arregloLogin[1]){
-                case "admin":    VentanaSeleccionAdmin interfaz = new VentanaSeleccionAdmin(objControlador);
+                case "admin":    VistaSeleccionAdmin interfaz = new VistaSeleccionAdmin(objControlador);
                                  interfaz.show();
                                  this.dispose();
                                  break;
                                  
-                case "usuario":  VentanaSeleccionUsuario interfaz2 = new VentanaSeleccionUsuario(objControlador);
+                case "usuario":  VistaSeleccionUsuario interfaz2 =  VistaSeleccionUsuario.obtenerVistaClientes(objControlador);
                                  interfaz2.show();
                                  this.dispose();
                                  break;

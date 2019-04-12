@@ -3,16 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/ALLCH/Desktop/Proyecto/VistaControlador_Desarrollo%20V1.1/Desarrollo_Inventario/src/Vista/CanastaCompra.java</file>
             <file>file:/C:/Users/ALLCH/Desktop/Proyecto/VistaControlador_Desarrollo%20V1.1/Desarrollo_Inventario/src/ModeloDAO/FacturaDAO.java</file>
-            <file>file:/C:/Users/ALLCH/Desktop/Proyecto/VistaControlador_Desarrollo%20V1.1/Desarrollo_Inventario/src/ModeloDAO/ProductoDAO.java</file>
-            <file>file:/C:/Users/ALLCH/Desktop/Proyecto/VistaControlador_Desarrollo%20V1.1/Desarrollo_Inventario/src/Visualizacion/Consultas.java</file>
-            <file>file:/C:/Users/ALLCH/Desktop/Proyecto/VistaControlador_Desarrollo%20V1.1/Desarrollo_Inventario/src/ModeloVO/Productos.java</file>
-            <file>file:/C:/Users/ALLCH/Desktop/Proyecto/VistaControlador_Desarrollo%20V1.1/Desarrollo_Inventario/src/ModeloVO/FacturaVO.java</file>
-            <file>file:/C:/Users/ALLCH/Desktop/Proyecto/VistaControlador_Desarrollo%20V1.1/Desarrollo_Inventario/src/Visualizacion/VisualizarProductos.java</file>
             <file>file:/C:/Users/ALLCH/Desktop/Proyecto/VistaControlador_Desarrollo%20V1.1/Desarrollo_Inventario/src/crudMVC/CrudMVC.java</file>
-            <file>file:/C:/Users/ALLCH/Desktop/Proyecto/VistaControlador_Desarrollo%20V1.1/Desarrollo_Inventario/src/Visualizacion/CanastaCompra.java</file>
+            <file>file:/C:/Users/ALLCH/Desktop/Proyecto/VistaControlador_Desarrollo%20V1.1/Desarrollo_Inventario/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/ALLCH/Desktop/Proyecto/VistaControlador_Desarrollo%20V1.1/Desarrollo_Inventario/src/PostgreSQL/pgsql_dbc.java</file>
             <file>file:/C:/Users/ALLCH/Desktop/Proyecto/VistaControlador_Desarrollo%20V1.1/Desarrollo_Inventario/src/Controlador/Controlador.java</file>
-            <file>file:/C:/Users/ALLCH/Desktop/Proyecto/VistaControlador_Desarrollo%20V1.1/Desarrollo_Inventario/src/PostgreSQL/ConexionBD.java</file>
+            <file>file:/C:/Users/ALLCH/Desktop/Proyecto/VistaControlador_Desarrollo%20V1.1/Desarrollo_Inventario/src/Vista/HistoricoFacturacion.java</file>
+            <file>file:/C:/Users/ALLCH/Desktop/Proyecto/VistaControlador_Desarrollo%20V1.1/Desarrollo_Inventario/src/Vista/Ventas.java</file>
         </group>
     </open-files>
 </project-private>

@@ -1,4 +1,4 @@
-package PostgreSQl;
+package PostgreSQL;
 
 import java.sql.*;
 import java.util.ArrayList;
