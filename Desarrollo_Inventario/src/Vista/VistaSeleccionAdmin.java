@@ -70,7 +70,7 @@ public class VistaSeleccionAdmin extends javax.swing.JFrame {
             }
         });
 
-        botonCrear.setText("Crear");
+        botonCrear.setText("Producto Cliente");
         botonCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonCrearActionPerformed(evt);
@@ -206,7 +206,7 @@ public class VistaSeleccionAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_botonVisualizarProductosActionPerformed
 
     private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearActionPerformed
-        VistaCrearClienteProducto crearNuevos =  VistaCrearClienteProducto.obtenerVistaClientes(objControlador);
+        VistaClienteProducto crearNuevos =  VistaClienteProducto.obtenerVistaClientes(objControlador);
         crearNuevos.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_botonCrearActionPerformed
@@ -231,7 +231,7 @@ public class VistaSeleccionAdmin extends javax.swing.JFrame {
 
     private void btnCrearEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearEmpleadoActionPerformed
         
-        VistaEmpleado obtenerEmpleado = VistaEmpleado.obtenerEmpleado(objControlador);
+        VistaEmpleadoProveedor obtenerEmpleado = VistaEmpleadoProveedor.obtenerEmpleado(objControlador);
         obtenerEmpleado.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCrearEmpleadoActionPerformed

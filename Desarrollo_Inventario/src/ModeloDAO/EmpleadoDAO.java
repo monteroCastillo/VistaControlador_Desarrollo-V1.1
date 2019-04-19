@@ -97,7 +97,9 @@ public class EmpleadoDAO {
         String respuestaRegistro = "";
         Connection db = null;
         Statement stmt;
-        String consulta = "UPDATE llenaTablaEmpleado('" + nombreEmpleado + "','" + cedula + "','" + usuario + "','" + clave + "','" + direccionEmpleado + "','" + telEmpleado + "','" + tipoEmpleado +  "')";
+        String consulta = "UPDATE empleado SET  nombreEmpleado = '" + nombreEmpleado + "', cedula= '" + cedula 
+                + "',usuario= '" + usuario + "', clave ='" + clave + "', direccionEmpleado ='" + direccionEmpleado + 
+                            "', telEmpleado= '" + telEmpleado + "', publicidad= '" + tipoEmpleado + "' WHERE cedula = '" + cedula +"'";       
         System.out.println(consulta);
 
         try {

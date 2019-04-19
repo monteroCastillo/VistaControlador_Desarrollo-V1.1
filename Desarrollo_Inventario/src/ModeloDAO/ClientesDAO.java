@@ -98,19 +98,18 @@ public class ClientesDAO {
         String respuestaRegistro = "";
         Connection db = null;
         Statement stmt;
-        String consulta = ("SELECT llenaTablaClientes ('" + nombreCliente  + "','" + idCliente + "','" + direccion + "','" + telefono + "','" + ciudad + "','" + email + "','" + publicidad + "')");
+        String consulta = "UPDATE clientes SET  nombreCliente = '" + nombreCliente + "', ced_nit_cliente= '" + idCliente 
+                + "',direccioncliente= '" + direccion + "', telefonocliente ='" + telefono + "', ciudad ='" + ciudad + 
+                            "', email= '" + email + "', publicidad= '" + publicidad + "' WHERE ced_nit_cliente = '" + idCliente +"'";
         System.out.println(consulta);
 
         try {
 
-            Connection accesoDB = conexion.getConexion();
-            stmt = accesoDB.createStatement();
-
-            System.out.println("La sentencia es: ");
-
-            ResultSet rs = stmt.executeQuery(consulta);
-
-            accesoDB.close();
+            try (Connection accesoDB = conexion.getConexion()) {
+                stmt = accesoDB.createStatement();
+                
+                ResultSet rs = stmt.executeQuery(consulta);
+            }
 
             System.out.println("Base de datos cerrada");
             

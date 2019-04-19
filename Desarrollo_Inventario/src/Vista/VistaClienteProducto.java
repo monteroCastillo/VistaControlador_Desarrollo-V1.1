@@ -17,16 +17,16 @@ import javax.swing.JOptionPane;
  *
  * @author ALLCH
  */
-public class VistaCrearClienteProducto extends javax.swing.JFrame {
+public class VistaClienteProducto extends javax.swing.JFrame {
 
    
     Controlador objControlador;  
-    private static VistaCrearClienteProducto objVistaCrear;
+    private static VistaClienteProducto objVistaCrear;
     ClientesDAO objClientesDAO;
     ProductoDAO objProductoDAO;
      ArrayList<String> listaProducto = new ArrayList();
 
-    private VistaCrearClienteProducto(Controlador objControlador) {
+    private VistaClienteProducto(Controlador objControlador) {
 
         initComponents();
         this.objControlador = objControlador;
@@ -36,11 +36,11 @@ public class VistaCrearClienteProducto extends javax.swing.JFrame {
          btnEliminar.setEnabled(false);
     }
      //Patron Singleton
-    public  static VistaCrearClienteProducto obtenerVistaClientes(Controlador objControlador){
+    public  static VistaClienteProducto obtenerVistaClientes(Controlador objControlador){
         
         if(objVistaCrear == null){
             
-            objVistaCrear = new VistaCrearClienteProducto(objControlador);            
+            objVistaCrear = new VistaClienteProducto(objControlador);            
         }
         return objVistaCrear;
     }
@@ -588,7 +588,7 @@ public class VistaCrearClienteProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActualizarCliente1ActionPerformed
 
     private void btnMostrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarClienteActionPerformed
-        objControlador.llenarTablaClientes(jTable1);
+        objControlador.llenarTablaClientes(tablaClientesA_B);
     }//GEN-LAST:event_btnMostrarClienteActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -625,8 +625,7 @@ public class VistaCrearClienteProducto extends javax.swing.JFrame {
             objControlador.crearProducto(arregloProducto);
         
         else if(opcion ==2)
-            objControlador.actualizarProducto(arregloProducto);
-            
+            objControlador.actualizarProducto(arregloProducto);            
 
     }
     
@@ -645,9 +644,7 @@ public class VistaCrearClienteProducto extends javax.swing.JFrame {
         arrayClienteNuevo.add(txTelefonoCliente.getText());
         arrayClienteNuevo.add(txCiudadCliente.getText());
         arrayClienteNuevo.add(txEmailCliente.getText());
-        arrayClienteNuevo.add(publicidad);
-
-        objControlador.crearCliente(arrayClienteNuevo);
+        arrayClienteNuevo.add(publicidad);       
 
         if (opcion == 1) {
             objControlador.crearCliente(arrayClienteNuevo);
@@ -692,8 +689,11 @@ public class VistaCrearClienteProducto extends javax.swing.JFrame {
         txTelefonoCliente.setText(telefonoCliente);
         txCiudadCliente.setText(ciudadCliente);
         txEmailCliente.setText(emailCliente);
-        checkPublicidad.setText(publicidad);
-                       
+        
+        if (publicidad.equalsIgnoreCase("si"))
+            checkPublicidad.setSelected(true);
+        else if(publicidad.equalsIgnoreCase("no"))
+            checkPublicidad.setSelected(false);                  
         
     }
    

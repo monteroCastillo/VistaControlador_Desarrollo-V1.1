@@ -166,7 +166,7 @@ public class VistaSeleccionUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_botonVisualizarProductosActionPerformed
 
     private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearActionPerformed
-        VistaCrearClienteProducto crearNuevos =  VistaCrearClienteProducto.obtenerVistaClientes(objControlador);
+        VistaClienteProducto crearNuevos =  VistaClienteProducto.obtenerVistaClientes(objControlador);
         crearNuevos.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_botonCrearActionPerformed
