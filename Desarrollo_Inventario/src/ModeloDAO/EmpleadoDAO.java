@@ -91,5 +91,35 @@ public class EmpleadoDAO {
     }
     
     
+    public String actualizarEmpleado(String nombreEmpleado,String cedula, String usuario, 
+                                  String clave,String direccionEmpleado,String telEmpleado,String tipoEmpleado){
+
+        String respuestaRegistro = "";
+        Connection db = null;
+        Statement stmt;
+        String consulta = "UPDATE llenaTablaEmpleado('" + nombreEmpleado + "','" + cedula + "','" + usuario + "','" + clave + "','" + direccionEmpleado + "','" + telEmpleado + "','" + tipoEmpleado +  "')";
+        System.out.println(consulta);
+
+        try {
+
+            Connection accesoDB = conexion.getConexion();
+            stmt = accesoDB.createStatement();
+
+            System.out.println("La sentencia es: ");
+
+            ResultSet rs = stmt.executeQuery(consulta);
+
+            accesoDB.close();
+
+            System.out.println("Base de datos cerrada");
+
+        } catch (SQLException se) {
+            System.out.println("No se ha podido cerrar la base.");
+        }
+
+        return respuestaRegistro;
+    }
+    
+    
     
 }

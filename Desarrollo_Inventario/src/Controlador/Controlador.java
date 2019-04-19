@@ -118,7 +118,7 @@ public class Controlador {
 
         DefaultTableModel model = new DefaultTableModel();
         tablaD.setModel(model);
-        ArrayList<Productos> listaProductos = new ArrayList();
+        ArrayList<ProductosVO> listaProductos = new ArrayList();
         
         try {
             model.addColumn("Producto");
@@ -444,6 +444,63 @@ public class Controlador {
             
         
 
+    }
+    
+    
+    
+    //************************************************************************************************
+    //              ACTUALIZACIONES
+    
+    public void actualizarProducto(ArrayList<String> arregloProductos) {
+
+        String prod = arregloProductos.get(0);
+        String codProd = arregloProductos.get(1);
+        float cant;
+        cant = Float.parseFloat(arregloProductos.get(2));
+        float valcom;
+        valcom = Float.parseFloat(arregloProductos.get(3));
+        float valVen;
+        valVen = Float.parseFloat(arregloProductos.get(4));
+        String prov = arregloProductos.get(5);
+        String descrip = arregloProductos.get(6);
+
+        objProductoDAO.actualizarProducto(prod, codProd, cant, valcom, valVen, prov, descrip);
+        
+        JOptionPane.showMessageDialog(null, "Producto Actualizado Exitosamente");
+
+    }
+    
+    public void actualizarProveedor(ArrayList<String> arregloProveedor) {
+
+        String nom = arregloProveedor.get(0);
+        String nit = arregloProveedor.get(1);
+        String dir = arregloProveedor.get(2);
+        String tel = arregloProveedor.get(3);
+        String ciud = arregloProveedor.get(4);
+        String email = arregloProveedor.get(5);
+
+        objProveedorDAO.actualizarProveedor(nom, nit, ciud, tel, ciud, email);
+        JOptionPane.showMessageDialog(null, "Proveedor Actualizado Exitosamente");
+    }
+    
+     public void actualizarCliente(ArrayList<String> arrayClienteNuevo) {
+
+        String nom = arrayClienteNuevo.get(0);        
+        String idClie = arrayClienteNuevo.get(1);
+        String dire = arrayClienteNuevo.get(2);
+        String tel = arrayClienteNuevo.get(3);
+        String ciu = arrayClienteNuevo.get(4);
+        String email = arrayClienteNuevo.get(5);
+        String publicidad;
+        publicidad = arrayClienteNuevo.get(6);
+
+        String respuestaRegistro = objClientesDAO.actualizarCliente(nom, idClie, dire, tel, ciu, email, publicidad);
+
+        if (respuestaRegistro != null) {
+            JOptionPane.showMessageDialog(null, respuestaRegistro);
+        } else {
+            JOptionPane.showMessageDialog(null, "Registro Erroneo");
+        }
     }
 
     //***********************************************************************************************

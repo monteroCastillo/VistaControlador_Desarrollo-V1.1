@@ -108,6 +108,7 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="CheckExistenciasMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CheckExistenciasActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txExistenciasConsultar">

@@ -298,7 +298,8 @@ public class Ventas extends javax.swing.JFrame {
     
     
     /**
-     * al cliquear sobre un elemento de la tabla que se muestra este se agregara a un arreglo para luego pasarlo a la canasta de compra
+     * al cliquear sobre un elemento de la tabla que se muestra,
+     * este se agregara a un arreglo para luego pasarlo a la canasta de compra
      * @param row 
      */
     public void datosTablaProducto(int row){   
@@ -344,7 +345,7 @@ public class Ventas extends javax.swing.JFrame {
 
         DefaultTableModel model = new DefaultTableModel();
         tablaVentasProductos.setModel(model);
-         ArrayList<Productos> listaProductos = new ArrayList();
+         ArrayList<ProductosVO> listaProductos = new ArrayList();
 
         try {
 

@@ -92,6 +92,39 @@ public class ClientesDAO {
         
         return listaClientes;
     }
+    
+    public String actualizarCliente(String nombreCliente,  String idCliente,
+            String direccion, String telefono, String ciudad, String email, String publicidad) {
+        String respuestaRegistro = "";
+        Connection db = null;
+        Statement stmt;
+        String consulta = ("SELECT llenaTablaClientes ('" + nombreCliente  + "','" + idCliente + "','" + direccion + "','" + telefono + "','" + ciudad + "','" + email + "','" + publicidad + "')");
+        System.out.println(consulta);
+
+        try {
+
+            Connection accesoDB = conexion.getConexion();
+            stmt = accesoDB.createStatement();
+
+            System.out.println("La sentencia es: ");
+
+            ResultSet rs = stmt.executeQuery(consulta);
+
+            accesoDB.close();
+
+            System.out.println("Base de datos cerrada");
+            
+            respuestaRegistro = "Cliente Creado Exitosamente";
+
+        } catch (SQLException se) {
+            System.out.println("No se ha podido cerrar la base.");
+        }
+
+        return respuestaRegistro;
+    }
+    
+    
+    
     /**
      * consulta los datos de un cliente a partir de la cedula o nit
      * @param consulta

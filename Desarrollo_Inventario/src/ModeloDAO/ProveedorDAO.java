@@ -82,5 +82,35 @@ public class ProveedorDAO {
     }
     
     
+    public String actualizarProveedor(String nombreProveedor,String nit, String direccionProveedor, 
+                                  String telefonoProveedor,String ciudad,String email){
+        String respuestaRegistro = "";
+        Connection db = null;
+        Statement stmt;
+        String consulta = "UPDATE proveedores SET  nombreProveedor = '" + nombreProveedor + "', nit= '" + nit + "',direccionProveedor= '" + 
+                            direccionProveedor + "', telefonoProveedor ='" + telefonoProveedor + "', ciudad ='" + ciudad + 
+                            "', email= '" + email + "' WHERE nit = '" + nit +"'";
+        System.out.println("Consulta desde DAO " + consulta);
+
+        try {
+
+            Connection accesoDB = conexion.getConexion();
+            stmt = accesoDB.createStatement();
+
+            System.out.println("La sentencia es: " +consulta);
+
+            ResultSet rs = stmt.executeQuery(consulta);
+
+            accesoDB.close();
+
+            System.out.println("Base de datos cerrada");
+
+        } catch (SQLException se) {
+            System.out.println("No se ha podido cerrar la base.");
+        }
+
+        return respuestaRegistro;
+    }
+    
     
 }

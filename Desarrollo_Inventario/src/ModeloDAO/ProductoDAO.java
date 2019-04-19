@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package ModeloDAO;
-import ModeloVO.Productos;
+import ModeloVO.ProductosVO;
 import java.sql.*;
 import  PostgreSQL.*;
 import java.util.ArrayList;
@@ -53,10 +53,10 @@ public class ProductoDAO {
         return respuestaRegistro;
     }
     
-    public ArrayList<Productos> listarProductos(String consulta){
+    public ArrayList<ProductosVO> listarProductos(String consulta){
         
-        ArrayList<Productos> listaProductos = new ArrayList();
-        Productos objProductos;
+        ArrayList<ProductosVO> listaProductos = new ArrayList();
+        ProductosVO objProductos;
         try {
             Connection accesoDB = conexion.getConexion();
             //PreparedStatement ps = accesoDB.prepareStatement("SELECT * FROM producto");
@@ -65,7 +65,7 @@ public class ProductoDAO {
             while(rs.next()){
 
 
-                objProductos = new Productos();
+                objProductos = new ProductosVO();
                 
                 objProductos.setNombreProducto(rs.getString(1));
                 objProductos.setCodigoProducto(rs.getString(2));
@@ -83,5 +83,39 @@ public class ProductoDAO {
         
         return listaProductos;
     }
+    
+    public String actualizarProducto(String nombreProducto,String codProducto, float cantidad, float valorCompraProducto,
+                                   float valorVentaProducto,String proveedor, String descripcion) {
+        System.out.println("Ya entro a la funcion actualizar");
+        String respuestaRegistro = "" ;
+        Connection db = null;
+        Statement stmt;
+        
+   
+        String consulta = ("UPDATE producto SET  nombreProducto = '" + nombreProducto + "', codProducto= '" + codProducto + "',cantidad= " + 
+                            cantidad + ", valorCompraProducto =" + valorCompraProducto + ", valorVentaProducto =" + valorVentaProducto + 
+                            ", proveedor= '" + proveedor + "', descripcion= '" + descripcion+ "' WHERE codProducto = '" + codProducto +"'");
+        System.out.println(consulta);
+
+        try {
+
+            Connection accesoDB = conexion.getConexion();
+            stmt = accesoDB.createStatement();
+
+            System.out.println("La sentencia es: " + consulta);
+
+            ResultSet rs = stmt.executeQuery(consulta);
+
+            accesoDB.close();
+
+            System.out.println("Base de datos cerrada");
+
+        } catch (SQLException se) {
+            System.out.println("No se ha podido cerrar la base.");
+        }
+
+        return respuestaRegistro;
+    }
+    
     
 }

@@ -69,6 +69,11 @@ public class Consultas extends javax.swing.JFrame {
                 CheckExistenciasMouseClicked(evt);
             }
         });
+        CheckExistencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CheckExistenciasActionPerformed(evt);
+            }
+        });
 
         tablaConsultas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -168,6 +173,10 @@ public class Consultas extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_btnPrincipalActionPerformed
+
+    private void CheckExistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckExistenciasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CheckExistenciasActionPerformed
 
     public void enviarDatosConsulta(){
         

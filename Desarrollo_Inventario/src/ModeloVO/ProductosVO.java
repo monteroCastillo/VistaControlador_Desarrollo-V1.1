@@ -5,7 +5,7 @@
  */
 package ModeloVO;
    
-public class Productos {
+public class ProductosVO {
     
     
      /**
@@ -34,7 +34,7 @@ public class Productos {
 //        valorVentaProd = 0;
 //    }
 
-    public Productos(String nombreProducto, String codigoProducto,
+    public ProductosVO(String nombreProducto, String codigoProducto,
                      float cantidad,  float valorComprado, float valorVenta,String proveedor,String descripcion) {
         this.nombreProducto = nombreProducto;
         this.codigoProducto = codigoProducto;        
@@ -45,7 +45,7 @@ public class Productos {
         this.descripcion = descripcion;
     }
 
-    public Productos() {
+    public ProductosVO() {
     }
     
     

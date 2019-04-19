@@ -237,6 +237,7 @@ public class VistaSeleccionAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCrearEmpleadoActionPerformed
 
     private void btnSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir1ActionPerformed
+       
         HistoricoFacturacion historicofacturacion = HistoricoFacturacion.obtenerHistoricoFacturacion(objControlador);
         historicofacturacion.setVisible(true);
         this.dispose();
