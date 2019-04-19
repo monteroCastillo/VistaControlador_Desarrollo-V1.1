@@ -53,7 +53,7 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="27" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -76,10 +76,20 @@
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jScrollPane1" min="-2" pref="610" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Component id="CheckExistencias" min="-2" pref="312" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                          <Component id="txExistenciasConsultar" min="-2" pref="64" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="checkTotalProductos" alignment="0" max="32767" attributes="0"/>
+                              <Component id="CheckExistencias" alignment="0" pref="312" max="32767" attributes="0"/>
+                              <Component id="checkTotalDinero" alignment="0" min="-2" pref="303" max="-2" attributes="0"/>
+                              <Component id="checkTotalGanancia" alignment="0" min="-2" pref="303" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="labelTotalGanancia" max="32767" attributes="0"/>
+                              <Component id="labelTotalDineroInventario" pref="109" max="32767" attributes="0"/>
+                              <Component id="txExistenciasConsultar" alignment="0" pref="109" max="32767" attributes="0"/>
+                              <Component id="labelTotalProductos" alignment="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <EmptySpace pref="36" max="32767" attributes="0"/>
@@ -90,11 +100,32 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="CheckExistencias" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txExistenciasConsultar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="CheckExistencias" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
+                          <Component id="txExistenciasConsultar" min="-2" pref="23" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="199" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                          <Component id="labelTotalProductos" min="-2" pref="21" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="checkTotalProductos" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="checkTotalDinero" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelTotalDineroInventario" min="-2" pref="24" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="checkTotalGanancia" max="32767" attributes="0"/>
+                      <Component id="labelTotalGanancia" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="110" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="133" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               </Group>
@@ -135,6 +166,37 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JLabel" name="labelTotalDineroInventario">
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="checkTotalDinero">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Total Dinero Inventario"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="checkTotalDineroMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkTotalDineroActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="checkTotalGanancia">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ganancias totales de la Mercancia"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="checkTotalGananciaMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="labelTotalGanancia">
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="checkTotalProductos">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cantidad total de productos"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="checkTotalProductosMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="labelTotalProductos">
+        </Component>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JButton" name="btnPrincipal">

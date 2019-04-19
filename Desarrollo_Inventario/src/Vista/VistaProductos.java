@@ -12,26 +12,26 @@ import javax.swing.table.DefaultTableModel;//Ocupas Importar esta libreria
  *
  * @author ALLCH
  */
-public class VisualizarProductos extends javax.swing.JFrame {
+public class VistaProductos extends javax.swing.JFrame {
 
     /**
      * Creates new form VisualizarProductos
      */
     Controlador objControlador;
-    private static VisualizarProductos objVisualizarProductos;
+    private static VistaProductos objVisualizarProductos;
     
-    private VisualizarProductos(Controlador objControlador) {
+    private VistaProductos(Controlador objControlador) {
         initComponents();
         this.objControlador = objControlador;
         this.setLocationRelativeTo(null);//Posiona la ventana en el centro
     }
     
     //Patron Singleton
-    public  static VisualizarProductos obtenerVisualizarProductos(Controlador objControlador){
+    public  static VistaProductos obtenerVisualizarProductos(Controlador objControlador){
         
         if(objVisualizarProductos == null){
             
-            objVisualizarProductos = new VisualizarProductos(objControlador);            
+            objVisualizarProductos = new VistaProductos(objControlador);            
         }
         return objVisualizarProductos;
     }
@@ -152,12 +152,12 @@ public class VisualizarProductos extends javax.swing.JFrame {
     private void btPrincipalProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrincipalProductosActionPerformed
        if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("usuario")){
             
-            VistaSeleccionUsuario obtenerMenuUsuario = VistaSeleccionUsuario.obtenerVistaClientes(objControlador);
+            VistaMenuUsuario obtenerMenuUsuario = VistaMenuUsuario.obtenerVistaClientes(objControlador);
             obtenerMenuUsuario.setVisible(true);
             this.dispose();
         }
         else if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("admin")  ){
-            VistaSeleccionAdmin volverHome= new VistaSeleccionAdmin(objControlador);
+            VistaMenuAdmin volverHome= new VistaMenuAdmin(objControlador);
             volverHome.setVisible(true);
             this.dispose(); // instruccion que cierra la ventana actual
         }

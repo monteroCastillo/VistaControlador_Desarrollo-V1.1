@@ -99,7 +99,36 @@ public class EmpleadoDAO {
         Statement stmt;
         String consulta = "UPDATE empleado SET  nombreEmpleado = '" + nombreEmpleado + "', cedula= '" + cedula 
                 + "',usuario= '" + usuario + "', clave ='" + clave + "', direccionEmpleado ='" + direccionEmpleado + 
-                            "', telEmpleado= '" + telEmpleado + "', publicidad= '" + tipoEmpleado + "' WHERE cedula = '" + cedula +"'";       
+                            "', telEmpleado= '" + telEmpleado + "', tipoEmpleado= '" + tipoEmpleado + "' WHERE cedula = '" + cedula +"'";       
+        System.out.println(consulta);
+
+        try {
+
+            Connection accesoDB = conexion.getConexion();
+            stmt = accesoDB.createStatement();
+
+            System.out.println("La sentencia es: ");
+
+            ResultSet rs = stmt.executeQuery(consulta);
+
+            accesoDB.close();
+
+            System.out.println("Base de datos cerrada");
+
+        } catch (SQLException se) {
+            System.out.println("No se ha podido cerrar la base.");
+        }
+
+        return respuestaRegistro;
+    }
+    
+    public String eliminarEmpleado(String cedula){
+
+        String respuestaRegistro = "";
+        Connection db = null;
+        Statement stmt;
+        String consulta = "DELETE FROM empleado WHERE cedula = '" + cedula+"';";
+                
         System.out.println(consulta);
 
         try {

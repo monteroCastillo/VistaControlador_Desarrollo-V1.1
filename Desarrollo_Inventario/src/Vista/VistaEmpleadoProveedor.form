@@ -145,7 +145,7 @@
                               </Group>
                               <Component id="jComboTipoEmpleado" min="-2" pref="143" max="-2" attributes="0"/>
                               <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="textoNombreEmp" alignment="0" pref="200" max="32767" attributes="0"/>
+                                  <Component id="txNombreEmp" alignment="0" pref="200" max="32767" attributes="0"/>
                                   <Component id="txCedulaEmpleado" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txClaveEmpleado" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txDireccionEmpleado" alignment="0" max="32767" attributes="0"/>
@@ -163,7 +163,7 @@
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="textoNombreEmp" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txNombreEmp" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -208,7 +208,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JTextField" name="textoNombreEmp">
+                <Component class="javax.swing.JTextField" name="txNombreEmp">
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
@@ -324,6 +324,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Eliminar"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarEmpleadoActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

@@ -21,6 +21,7 @@ public class Controlador {
     DetalleFacturaVO objDetalleFacturaVO;
 
     pgsql_dbc objetoConexion = new pgsql_dbc();
+    ConsultasDB objConsultas = new ConsultasDB();
     ArrayList<DetalleFacturaVO> arregloProductosVendidos = new ArrayList<>();
     public ArrayList<Clientes> arregloClienteFactura = new ArrayList<>();
 
@@ -207,7 +208,8 @@ public class Controlador {
      * @param serialFactura
      */
     public void llenarDetalleTablaFacturasHistorico(JTable tablaD, String serialFactura) {
-
+        
+        //arregloProductosVendidos.clear();  //LIMPIA EL ARREGLO PARA QUE NO INTERFIERA CON HISTORICO DE FACTURA
         tablaD.setModel(modeloCanasta);
         ((DefaultTableModel) tablaD.getModel()).setRowCount(0); //Limpia las filas de la tabla para que no se sumen elementos
         ((DefaultTableModel) tablaD.getModel()).setColumnCount(0); //Limpia las columnas de la tabla para que no se sumen elementos
@@ -220,15 +222,12 @@ public class Controlador {
         listaDetalleFactura = objDetalleFacturaDAO.listarDetalleFacturaDAO(consulta);
         } catch (Exception e) {
             
-            String d = JOptionPane.showInputDialog("Numero de factura NO valido Desea salir (S)");
+            String d = JOptionPane.showInputDialog("Numero de factura NO Valido (S)");
                 if (d.equals("s")) {
                     System.exit(0);
                 }
         }
 
-//        while (listaDetalleFactura.isEmpty()) {
-//            JOptionPane.showInputDialog("Numero de factura NO valido Desea salir (S)");
-//        }
         
         if(!listaDetalleFactura.isEmpty()){
 
@@ -241,7 +240,7 @@ public class Controlador {
             Object[] columna = new Object[5];// Numero de Columnas
 
             listaDetalleFactura = objDetalleFacturaDAO.listarDetalleFacturaDAO(consulta);
-
+            
             //Lo pasa al arreglo global arregloProductosVendidos
             setArregloProductosVendidos(listaDetalleFactura);
 
@@ -502,7 +501,47 @@ public class Controlador {
             JOptionPane.showMessageDialog(null, "Registro Erroneo");
         }
     }
+     
+    public void actualizarEmpleado(ArrayList<String> arregloEmpleados) {
 
+        String emp = arregloEmpleados.get(0);
+        String ced = arregloEmpleados.get(1);
+        String usuario = arregloEmpleados.get(2);
+        String clave = arregloEmpleados.get(3);
+        String direccion = arregloEmpleados.get(4);
+        String tel = arregloEmpleados.get(5);
+        String tipo = arregloEmpleados.get(6);
+
+        objEmpleadoDAO.actualizarEmpleado(emp, ced, usuario, clave, direccion, tel, tipo);
+
+    }
+    
+    //******************  ELIMINACIONES  ***********************************************************************************
+    public void eliminarProducto(String idProducto){
+        
+        objProductoDAO.eliminarProducto(idProducto);
+    }
+    
+    
+    
+    public void eliminarProveedor(String nitProveedor){
+        
+        objProveedorDAO.eliminarProveedor(nitProveedor);
+    }
+    
+    public void eliminarCliente(String idCliente){
+        
+        objClientesDAO.eliminarCliente(idCliente);
+    }
+    
+    public void eliminarEmpleado(String cedulaEmpleado){
+        
+        objEmpleadoDAO.eliminarEmpleado(cedulaEmpleado);
+    }
+    
+    
+    
+    
     //***********************************************************************************************
     /**
      * valida que el usuario  y la contraseña de la persona que se este registrando esten creados en la BD
@@ -576,6 +615,47 @@ public class Controlador {
 
         llenarTablaProductos(tabla, consulta);
 
+    }
+    
+    public void totalDineroInventario(JLabel total) {
+
+        String valorTotal;
+        String consulta;
+
+         consulta = "SELECT SUM( valorcompraproducto * cantidad) FROM producto";
+        
+        
+
+        valorTotal = objConsultas.consultaString(consulta);
+
+        total.setText(valorTotal);
+
+    }
+    
+    public void ganancia(JLabel lbGanancia){
+        
+        String ganancia;
+        
+        String consulta = "SELECT  SUM((valorventaproducto * cantidad)-(valorcompraproducto * cantidad) ) suma\n" +
+                   "FROM producto";
+        
+        ganancia  = objConsultas.consultaString(consulta);
+        
+        lbGanancia.setText(ganancia);
+        
+    }
+    
+    public void totalProductos(JLabel lbProducto){
+        
+        String total;
+        
+        String consulta = "SELECT  SUM(cantidad) suma\n" +
+"              FROM producto";
+        
+        total  = objConsultas.consultaString(consulta);
+        
+        lbProducto.setText(total);
+        
     }
 
     ///*****************************************************************************************************************
@@ -699,9 +779,13 @@ public class Controlador {
      */
     public void operaDatosTablaVentas(JTable tablaD, JLabel labelIva, JLabel labelTotal) {
 
+        sumaValorTotal = 0;
         tablaD.setModel(modeloCanasta);
+        float valorTotalProducto;
+        Double iva;
+        iva = 0.0;
         System.out.println("Entro a la funcion opera datos ");
-        int numRegistros = getArregloProductosVendidos().size();//arregloProductosVendidos.size();
+        int numRegistros = getArregloProductosVendidos().size();
 
         System.out.println("tamaño del arreglo:  " + numRegistros);
 
@@ -716,17 +800,22 @@ public class Controlador {
 
                 valorFloat[i] = Float.parseFloat(String.valueOf(modeloCanasta.getValueAt(i, 3)));  // Se uso el casting String.valueOf ya que el (String) solo produjo errores
 
-                float valorTotalProducto = cantidadFloat[i] * valorFloat[i]; // multiplica el valor por la cantidad de productos
+                valorTotalProducto = cantidadFloat[i] * valorFloat[i]; // multiplica el valor por la cantidad de productos
                 sumaValorTotal += valorTotalProducto;
-                Double iva = sumaValorTotal * 0.19;
+                
 
                 tablaD.setValueAt(valorTotalProducto, i, 4);          //seta el total del valor de cada producto en la tabla
-                labelIva.setText(iva + "");
-                labelTotal.setText(sumaValorTotal + "");
+                
             }
+            System.out.println("el valor de la suma es" +sumaValorTotal);
+            iva = sumaValorTotal * 0.19;
+            labelIva.setText(iva + "");
+            labelTotal.setText(sumaValorTotal + "");
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se pudieron calcular los valores de la factura");
         }
+        //arregloProductosVendidos.clear();  //LIMPIA EL ARREGLO PARA QUE NO INTERFIERA CON HISTORICO DE FACTURA
 
     }
 

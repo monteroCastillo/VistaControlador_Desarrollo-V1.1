@@ -117,5 +117,35 @@ public class ProductoDAO {
         return respuestaRegistro;
     }
     
+    public String eliminarProducto(String idProducto){
+
+        String respuestaRegistro = "";
+        Connection db = null;
+        Statement stmt;
+        String consulta = "DELETE FROM producto WHERE codproducto = '" + idProducto+"';";
+                
+        System.out.println(consulta);
+
+        try {
+
+            Connection accesoDB = conexion.getConexion();
+            stmt = accesoDB.createStatement();
+
+            System.out.println("La sentencia es: ");
+
+            ResultSet rs = stmt.executeQuery(consulta);
+
+            accesoDB.close();
+
+            System.out.println("Base de datos cerrada");
+
+        } catch (SQLException se) {
+            System.out.println("No se ha podido cerrar la base.");
+        }
+
+        return respuestaRegistro;
+    }
+    
+    
     
 }

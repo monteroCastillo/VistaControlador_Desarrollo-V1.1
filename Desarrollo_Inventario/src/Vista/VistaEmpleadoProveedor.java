@@ -4,40 +4,38 @@
  * and open the template in the editor.
  */
 package Vista;
+
 import Controlador.*;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-
- class VistaEmpleadoProveedor extends javax.swing.JFrame {
-   
+class VistaEmpleadoProveedor extends javax.swing.JFrame {
+    
     Controlador objControlador;
     private static VistaEmpleadoProveedor objEmpleado;
     
-   
-    private  VistaEmpleadoProveedor(Controlador objControlador) {
+    private VistaEmpleadoProveedor(Controlador objControlador) {
         initComponents();
         this.objControlador = objControlador;
         this.setLocationRelativeTo(null);//Posiona la ventana en el centro
         btnActualizarProveedores.setEnabled(false);
         btnEliminarProveedores.setEnabled(false);
         btnActualizarEmpleado.setEnabled(false);
+        btnEliminarEmpleado.setEnabled(false);
         btnCrearEmpleado.setEnabled(true);
     }
-    
+
     //Patron Singleton
-    public  static VistaEmpleadoProveedor obtenerEmpleado(Controlador objControlador){
+    public static VistaEmpleadoProveedor obtenerEmpleado(Controlador objControlador) {
         
-        if(objEmpleado == null){
+        if (objEmpleado == null) {
             
             objEmpleado = new VistaEmpleadoProveedor(objControlador);
             
         }
         return objEmpleado;
     }
-    
-    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -47,7 +45,7 @@ import javax.swing.JOptionPane;
         jPanel1 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        textoNombreEmp = new javax.swing.JTextField();
+        txNombreEmp = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -142,6 +140,11 @@ import javax.swing.JOptionPane;
         });
 
         btnEliminarEmpleado.setText("Eliminar");
+        btnEliminarEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarEmpleadoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -173,7 +176,7 @@ import javax.swing.JOptionPane;
                         .addComponent(btnEliminarEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jComboTipoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(textoNombreEmp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                        .addComponent(txNombreEmp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                         .addComponent(txCedulaEmpleado, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txClaveEmpleado, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txDireccionEmpleado, javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,7 +190,7 @@ import javax.swing.JOptionPane;
                 .addGap(15, 15, 15)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(textoNombreEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txNombreEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -546,18 +549,16 @@ import javax.swing.JOptionPane;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrincipalActionPerformed
-       if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("usuario")){
+        if (objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("usuario")) {
             
-            VistaSeleccionUsuario obtenerMenuUsuario = VistaSeleccionUsuario.obtenerVistaClientes(objControlador);
+            VistaMenuUsuario obtenerMenuUsuario = VistaMenuUsuario.obtenerVistaClientes(objControlador);
             obtenerMenuUsuario.setVisible(true);
             this.dispose();
-        }
-        else if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("admin")  ){
-            VistaSeleccionAdmin volverHome= new VistaSeleccionAdmin(objControlador);
+        } else if (objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("admin")) {
+            VistaMenuAdmin volverHome = new VistaMenuAdmin(objControlador);
             volverHome.setVisible(true);
             this.dispose(); // instruccion que cierra la ventana actual
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "Imposible regresar al Menu Principal \n en este momento");
             
         }
@@ -581,14 +582,13 @@ import javax.swing.JOptionPane;
 
     private void tablaProveedoresA_BMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProveedoresA_BMouseClicked
         int row = tablaProveedoresA_B.rowAtPoint(evt.getPoint());
-
+        
         String d = JOptionPane.showInputDialog("Desea Actualizar o borrar ");
         if (d == null) {
             System.out.println("El valor de la variable d es : " + d);
-        }
-        else {
+        } else {
             btnActualizarProveedores.setEnabled(true);
-            btnCrearProveedor.setEnabled(false);
+            btnEliminarProveedores.setEnabled(true);
             datosTablaProveedor(row);
         }
     }//GEN-LAST:event_tablaProveedoresA_BMouseClicked
@@ -602,11 +602,11 @@ import javax.swing.JOptionPane;
     }//GEN-LAST:event_btnActualizarProveedoresActionPerformed
 
     private void btnEliminarProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProveedoresActionPerformed
-        // TODO add your handling code here:
+        enviarDatosProveedores(3);
     }//GEN-LAST:event_btnEliminarProveedoresActionPerformed
 
     private void btnActualizarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarEmpleadoActionPerformed
-        // TODO add your handling code here:
+        enviarDatosEmpleados(2);
     }//GEN-LAST:event_btnActualizarEmpleadoActionPerformed
 
     private void btnMostrarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarEmpleadoActionPerformed
@@ -615,68 +615,88 @@ import javax.swing.JOptionPane;
 
     private void tablaEmpleadoA_BMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEmpleadoA_BMouseClicked
         int row = tablaEmpleadoA_B.rowAtPoint(evt.getPoint());
-
+        
         String d = JOptionPane.showInputDialog("Desea Actualizar o borrar ");
         if (d == null) {
             System.out.println("El valor de la variable d es : " + d);
-        }
-        else {
-            btnActualizarProveedores.setEnabled(true);
+        } else {
+            btnActualizarEmpleado.setEnabled(true);
+            btnEliminarEmpleado.setEnabled(true);
             btnCrearEmpleado.setEnabled(false);
-            datosTablaProveedor(row);
+            datosTablaEmpleado(row);
         }
     }//GEN-LAST:event_tablaEmpleadoA_BMouseClicked
 
-     public void enviarDatosEmpleados(int opcion) {
-
-         ArrayList<String> arrayEmpleadoNuevo = new ArrayList<>();
-
-         String tipoEmpleado;
-         tipoEmpleado = jComboTipoEmpleado.getSelectedItem().toString();
-
-         arrayEmpleadoNuevo.add(textoNombreEmp.getText());
-         arrayEmpleadoNuevo.add(txCedulaEmpleado.getText());
-         arrayEmpleadoNuevo.add(txUsuarioEmpleado.getText());
-         arrayEmpleadoNuevo.add(txClaveEmpleado.getText());
-         arrayEmpleadoNuevo.add(txDireccionEmpleado.getText());
-         arrayEmpleadoNuevo.add(txTelefono.getText());
-         arrayEmpleadoNuevo.add(tipoEmpleado);
-
-         if (opcion == 1) {
-             objControlador.crearEmpleado(arrayEmpleadoNuevo);
-         } else if (opcion == 2) {
-           //  objControlador.actualizarEmpleado(arrayEmpleadoNuevo);
-         }
-
-     }
-     public void enviarDatosProveedores(int opcion) {
-
-         ArrayList<String> arrayProveedorNuevo = new ArrayList<>();
-
-         arrayProveedorNuevo.add(txNombreProveedor.getText());
-         arrayProveedorNuevo.add(txNitProveedor.getText());
-         arrayProveedorNuevo.add(txDireccionProveedor.getText());
-         arrayProveedorNuevo.add(txtelefonoProveedor.getText());
-         arrayProveedorNuevo.add(txCiudadProveedor.getText());
-         arrayProveedorNuevo.add(txEmailProveedor.getText());
-
-         objControlador.crearProveedor(arrayProveedorNuevo);
-
-         if (opcion == 1) {
-            objControlador.crearProveedor(arrayProveedorNuevo);
-         } else if (opcion == 2) {
-            objControlador.actualizarProveedor(arrayProveedorNuevo);
-         }
-     }
-
+    private void btnEliminarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEmpleadoActionPerformed
+        enviarDatosEmpleados(3);
+    }//GEN-LAST:event_btnEliminarEmpleadoActionPerformed
     
-    public void datosTablaProveedor(int row) {        
-                
+    public void enviarDatosEmpleados(int opcion) {
+        
+        ArrayList<String> arrayEmpleadoNuevo = new ArrayList<>();
+        
+        String tipoEmpleado;
+        tipoEmpleado = jComboTipoEmpleado.getSelectedItem().toString();
+        
+        arrayEmpleadoNuevo.add(txNombreEmp.getText());
+        arrayEmpleadoNuevo.add(txCedulaEmpleado.getText());
+        arrayEmpleadoNuevo.add(txUsuarioEmpleado.getText());
+        arrayEmpleadoNuevo.add(txClaveEmpleado.getText());
+        arrayEmpleadoNuevo.add(txDireccionEmpleado.getText());
+        arrayEmpleadoNuevo.add(txTelefono.getText());
+        arrayEmpleadoNuevo.add(tipoEmpleado);
+        
+        switch (opcion) {
+            case 1:
+                objControlador.crearEmpleado(arrayEmpleadoNuevo);
+                break;
+            case 2:
+                objControlador.actualizarEmpleado(arrayEmpleadoNuevo);
+                break;
+            case 3:
+                objControlador.eliminarEmpleado(txCedulaEmpleado.getText());
+                break;
+            default:
+                break;
+        }
+    }
+    
+    public void enviarDatosProveedores(int opcion) {
+        
+        ArrayList<String> arrayProveedorNuevo = new ArrayList<>();
+        
+        arrayProveedorNuevo.add(txNombreProveedor.getText());
+        arrayProveedorNuevo.add(txNitProveedor.getText());
+        arrayProveedorNuevo.add(txDireccionProveedor.getText());
+        arrayProveedorNuevo.add(txtelefonoProveedor.getText());
+        arrayProveedorNuevo.add(txCiudadProveedor.getText());
+        arrayProveedorNuevo.add(txEmailProveedor.getText());
+        
+        objControlador.crearProveedor(arrayProveedorNuevo);
+        
+        switch (opcion) {
+            case 1:
+                objControlador.crearProveedor(arrayProveedorNuevo);
+                break;
+            case 2:
+                objControlador.actualizarProveedor(arrayProveedorNuevo);
+                break;
+            case 3:
+                objControlador.eliminarProveedor(txNitProveedor.getText());
+                break;
+            default:
+                break;
+        }
+        
+    }
+    
+    public void datosTablaProveedor(int row) {
+        
         String nombreProveedor = ((String) tablaProveedoresA_B.getValueAt(row, 0));
         String nitProveedor = ((String) tablaProveedoresA_B.getValueAt(row, 1));
         String direccionProveedor = (String.valueOf(tablaProveedoresA_B.getValueAt(row, 2)));
-        String telefonoProveedor = (String.valueOf( tablaProveedoresA_B.getValueAt(row, 3)));
-        String ciudadProveedor = (String.valueOf( tablaProveedoresA_B.getValueAt(row, 4)));
+        String telefonoProveedor = (String.valueOf(tablaProveedoresA_B.getValueAt(row, 3)));
+        String ciudadProveedor = (String.valueOf(tablaProveedoresA_B.getValueAt(row, 4)));
         String emailProveedor = ((String) tablaProveedoresA_B.getValueAt(row, 5));
         
         txNombreProveedor.setText(nombreProveedor);
@@ -685,6 +705,25 @@ import javax.swing.JOptionPane;
         txtelefonoProveedor.setText(telefonoProveedor + "");
         txCiudadProveedor.setText(ciudadProveedor + "");
         txEmailProveedor.setText(emailProveedor);
+    }
+    
+    public void datosTablaEmpleado(int row) {
+        
+        String nombreEmpleado = ((String) tablaEmpleadoA_B.getValueAt(row, 0));
+        String idEmpleado = ((String) tablaEmpleadoA_B.getValueAt(row, 1));
+        String usuarioEmpleado = (String.valueOf(tablaEmpleadoA_B.getValueAt(row, 2)));
+        String claveEmpleado= (String.valueOf(tablaEmpleadoA_B.getValueAt(row, 3)));
+        String direccionEmpleado = (String.valueOf(tablaEmpleadoA_B.getValueAt(row, 4)));
+        String telEmpleado = ((String) tablaEmpleadoA_B.getValueAt(row, 5));
+        String tipoEmpleado = ((String) tablaEmpleadoA_B.getValueAt(row, 6));
+        
+        txNombreEmp.setText(nombreEmpleado);
+        txCedulaEmpleado.setText(idEmpleado);
+        txUsuarioEmpleado.setText(usuarioEmpleado);
+         txClaveEmpleado.setText(claveEmpleado);
+        txDireccionEmpleado.setText(direccionEmpleado);
+        txTelefono.setText(telEmpleado);       
+        jComboTipoEmpleado.setSelectedItem(tipoEmpleado);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -730,7 +769,6 @@ import javax.swing.JOptionPane;
     private javax.swing.JTable tablaEmpleados;
     public javax.swing.JTable tablaProveedores;
     private javax.swing.JTable tablaProveedoresA_B;
-    public javax.swing.JTextField textoNombreEmp;
     public javax.swing.JTextField txCedulaEmpleado;
     public javax.swing.JTextField txCiudadProveedor;
     public javax.swing.JTextField txClaveEmpleado;
@@ -738,6 +776,7 @@ import javax.swing.JOptionPane;
     private javax.swing.JTextField txDireccionProveedor;
     public javax.swing.JTextField txEmailProveedor;
     public javax.swing.JTextField txNitProveedor;
+    public javax.swing.JTextField txNombreEmp;
     public javax.swing.JTextField txNombreProveedor;
     public javax.swing.JTextField txTelefono;
     private javax.swing.JTextField txUsuarioEmpleado;

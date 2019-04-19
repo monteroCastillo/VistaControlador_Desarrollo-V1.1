@@ -256,12 +256,12 @@ public class HistoricoFacturacion extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("usuario")){
             
-            VistaSeleccionUsuario obtenerMenuUsuario = VistaSeleccionUsuario.obtenerVistaClientes(objControlador);
+            VistaMenuUsuario obtenerMenuUsuario = VistaMenuUsuario.obtenerVistaClientes(objControlador);
             obtenerMenuUsuario.setVisible(true);
             this.dispose();
         }
         else if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("admin")  ){
-            VistaSeleccionAdmin volverHome= new VistaSeleccionAdmin(objControlador);
+            VistaMenuAdmin volverHome= new VistaMenuAdmin(objControlador);
             volverHome.setVisible(true);
             this.dispose(); // instruccion que cierra la ventana actual
         }
@@ -284,8 +284,7 @@ public class HistoricoFacturacion extends javax.swing.JFrame {
         hora = String.format("%TT", new Date());
         fecha = String.format("%tD ", new Date());
         labelFecha.setText(hora + "   " + fecha);
-        System.out.println("La hora es: "+ hora + "   "+fecha);
-        
+        System.out.println("La hora es: "+ hora + "   "+fecha);       
         
     }    
         

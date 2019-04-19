@@ -112,5 +112,35 @@ public class ProveedorDAO {
         return respuestaRegistro;
     }
     
+    public String eliminarProveedor(String nit){
+
+        String respuestaRegistro = "";
+        Connection db = null;
+        Statement stmt;
+        String consulta = "DELETE FROM proveedores WHERE cedula = '" + nit+"';";
+                
+        System.out.println(consulta);
+
+        try {
+
+            Connection accesoDB = conexion.getConexion();
+            stmt = accesoDB.createStatement();
+
+            System.out.println("La sentencia es: ");
+
+            ResultSet rs = stmt.executeQuery(consulta);
+
+            accesoDB.close();
+
+            System.out.println("Base de datos cerrada");
+
+        } catch (SQLException se) {
+            System.out.println("No se ha podido cerrar la base.");
+        }
+
+        return respuestaRegistro;
+    }
+    
+    
     
 }

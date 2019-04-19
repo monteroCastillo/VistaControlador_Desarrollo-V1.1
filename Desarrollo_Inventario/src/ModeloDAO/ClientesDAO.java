@@ -122,6 +122,35 @@ public class ClientesDAO {
         return respuestaRegistro;
     }
     
+    public String eliminarCliente(String idCliente){
+
+        String respuestaRegistro = "";
+        Connection db = null;
+        Statement stmt;
+        String consulta = "DELETE FROM clientes WHERE ced_nit_cliente = '" + idCliente+"';";
+                
+        System.out.println(consulta);
+
+        try {
+
+            Connection accesoDB = conexion.getConexion();
+            stmt = accesoDB.createStatement();
+
+            System.out.println("La sentencia es: ");
+
+            ResultSet rs = stmt.executeQuery(consulta);
+
+            accesoDB.close();
+
+            System.out.println("Base de datos cerrada");
+
+        } catch (SQLException se) {
+            System.out.println("No se ha podido cerrar la base.");
+        }
+
+        return respuestaRegistro;
+    }
+    
     
     
     /**

@@ -20,7 +20,7 @@ public class Consultas extends javax.swing.JFrame {
     Controlador objControlador;    
     private static Consultas objConsultas;
     
-    private Consultas(Controlador objControlador) {
+    public Consultas(Controlador objControlador) {
         
         this.objControlador = objControlador;
         initComponents();
@@ -56,6 +56,12 @@ public class Consultas extends javax.swing.JFrame {
         txExistenciasConsultar = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaConsultas = new javax.swing.JTable();
+        labelTotalDineroInventario = new javax.swing.JLabel();
+        checkTotalDinero = new javax.swing.JCheckBox();
+        checkTotalGanancia = new javax.swing.JCheckBox();
+        labelTotalGanancia = new javax.swing.JLabel();
+        checkTotalProductos = new javax.swing.JCheckBox();
+        labelTotalProductos = new javax.swing.JLabel();
         btnPrincipal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -85,6 +91,32 @@ public class Consultas extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaConsultas);
 
+        checkTotalDinero.setText("Total Dinero Inventario");
+        checkTotalDinero.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                checkTotalDineroMouseClicked(evt);
+            }
+        });
+        checkTotalDinero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkTotalDineroActionPerformed(evt);
+            }
+        });
+
+        checkTotalGanancia.setText("Ganancias totales de la Mercancia");
+        checkTotalGanancia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                checkTotalGananciaMouseClicked(evt);
+            }
+        });
+
+        checkTotalProductos.setText("Cantidad total de productos");
+        checkTotalProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                checkTotalProductosMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -94,19 +126,43 @@ public class Consultas extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(CheckExistencias, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46)
-                        .addComponent(txExistenciasConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(checkTotalProductos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(CheckExistencias, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                            .addComponent(checkTotalDinero, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(checkTotalGanancia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(labelTotalGanancia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelTotalDineroInventario, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                            .addComponent(txExistenciasConsultar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                            .addComponent(labelTotalProductos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(CheckExistencias)
-                    .addComponent(txExistenciasConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(txExistenciasConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(labelTotalProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(checkTotalProductos))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(checkTotalDinero)
+                    .addComponent(labelTotalDineroInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(checkTotalGanancia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelTotalGanancia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
@@ -145,7 +201,7 @@ public class Consultas extends javax.swing.JFrame {
                         .addComponent(btnPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -159,12 +215,12 @@ public class Consultas extends javax.swing.JFrame {
         
         if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("usuario")){
             
-            VistaSeleccionUsuario obtenerMenuUsuario = VistaSeleccionUsuario.obtenerVistaClientes(objControlador);
+            VistaMenuUsuario obtenerMenuUsuario = VistaMenuUsuario.obtenerVistaClientes(objControlador);
             obtenerMenuUsuario.setVisible(true);
             this.dispose();
         }
         else if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("admin")  ){
-            VistaSeleccionAdmin volverHome= new VistaSeleccionAdmin(objControlador);
+            VistaMenuAdmin volverHome= new VistaMenuAdmin(objControlador);
             volverHome.setVisible(true);
             this.dispose(); // instruccion que cierra la ventana actual
         }
@@ -178,22 +234,79 @@ public class Consultas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_CheckExistenciasActionPerformed
 
+    private void checkTotalDineroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkTotalDineroMouseClicked
+        totalDineroInventario();
+    }//GEN-LAST:event_checkTotalDineroMouseClicked
+
+    private void checkTotalDineroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkTotalDineroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_checkTotalDineroActionPerformed
+
+    private void checkTotalGananciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkTotalGananciaMouseClicked
+        gananciaMercancia();
+    }//GEN-LAST:event_checkTotalGananciaMouseClicked
+
+    private void checkTotalProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkTotalProductosMouseClicked
+        totalProductos();
+    }//GEN-LAST:event_checkTotalProductosMouseClicked
+
     public void enviarDatosConsulta(){
         
         int existencias ;
         if(CheckExistencias.isSelected()){
-            existencias = Integer.parseInt(txExistenciasConsultar.getText());
             
-            objControlador.consultas(existencias, tablaConsultas);
+            if(txExistenciasConsultar.getText().equalsIgnoreCase("")){
+                JOptionPane.showMessageDialog(null, "Ingrese un valor para buscar");
+                
+            }else{
+                existencias = Integer.parseInt(txExistenciasConsultar.getText());
+                objControlador.consultas(existencias, tablaConsultas);
+            }                
         }
+    }
+    
+    public void totalDineroInventario(){
+        
+       
+        if(checkTotalDinero.isSelected()){            
+            
+            objControlador.totalDineroInventario(labelTotalDineroInventario);
+        }
+        
+    }    
+    
+    public void gananciaMercancia(){
+        
+       
+        if(checkTotalGanancia.isSelected()){           
+            
+            objControlador.ganancia(labelTotalGanancia);
+        }
+        
+    }
+    
+    public void totalProductos(){
+        
+        
+        if(checkTotalProductos.isSelected()){           
+            
+            objControlador.totalProductos(labelTotalProductos);
+        }
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox CheckExistencias;
     private javax.swing.JButton btnPrincipal;
+    private javax.swing.JCheckBox checkTotalDinero;
+    private javax.swing.JCheckBox checkTotalGanancia;
+    private javax.swing.JCheckBox checkTotalProductos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelTotalDineroInventario;
+    private javax.swing.JLabel labelTotalGanancia;
+    private javax.swing.JLabel labelTotalProductos;
     private javax.swing.JTable tablaConsultas;
     private javax.swing.JTextField txExistenciasConsultar;
     // End of variables declaration//GEN-END:variables
