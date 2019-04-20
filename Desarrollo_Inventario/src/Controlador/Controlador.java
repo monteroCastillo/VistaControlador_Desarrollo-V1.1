@@ -24,6 +24,7 @@ import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.apache.commons.codec.digest.DigestUtils;
 
 public class Controlador {
 
@@ -573,12 +574,14 @@ public class Controlador {
         String[] arregloLogin = new String[2];
         String user = "vacio";
         String password = "vacio";
+        String claveEncriptada=DigestUtils.md5Hex(clave);
+        
 
-        System.out.println("Usuario: " + user + "     password   " + clave);
+        System.out.println("Usuario: " + user + "     password   " + claveEncriptada);
         try {
 
             String consulta = "SELECT nombreempleado, cedula, usuario,clave,tipoempleado FROM empleado "
-                    + "  WHERE usuario = " + "'" + usuario + "' AND clave = " + " '" + clave + "'";
+                    + "  WHERE usuario = " + "'" + usuario + "' AND clave = " + " '" + claveEncriptada + "'";
 
             arregloSalida = objetoConexion.tupla(consulta, 5);
 
@@ -591,7 +594,7 @@ public class Controlador {
 
                 System.out.println(nombreEmpleado + user + password + tipoEmpleado);
 
-                if (password.equalsIgnoreCase(clave) && user.equalsIgnoreCase(usuario)) {
+                if (password.equalsIgnoreCase(claveEncriptada) && user.equalsIgnoreCase(usuario)) {
                     System.out.println("FELICIDADES  ****" + arregloSalida.get(0));
                     aceptado = true;
                     arregloLogin[0] = "true";
@@ -691,13 +694,11 @@ public class Controlador {
         arregloClienteFactura = objClientesDAO.listarClienteFactura(txID_cliente_ventas);      
         
         if (arregloClienteFactura.isEmpty() || arregloClienteFactura == null) {
-            // JOptionPane.showMessageDialog(this, "No hay datos para Mostrar");
+            JOptionPane.showInputDialog(this, "No hay datos para Mostrar");
             labelInformacionVentas.setText("NO hay datos para Mostrar, cliente no creado");
 
-        } else {
+        } else {        
             
-            
-
             String nombre = arregloClienteFactura.get(0).getNombreCliente();
 
             System.out.println("El nombre es: " + nombre);
@@ -708,8 +709,7 @@ public class Controlador {
             System.out.println(arregloClienteFactura.get(0).getNombreCliente());
             System.out.println(arregloClienteFactura.get(0).getIdCliente());
             System.out.println(arregloClienteFactura.get(0).getDireccion());
-            System.out.println(arregloClienteFactura.get(0).getTelefono());
-            
+            System.out.println(arregloClienteFactura.get(0).getTelefono());           
             
         }
         return cliente;
@@ -952,7 +952,7 @@ public class Controlador {
                     nomColumnaY, ds, PlotOrientation.VERTICAL, true, true, true);
             
             ChartFrame f = new ChartFrame("ReportesGraficos", ConfiguracionGrafico);
-            f.setSize(900,600);
+            f.setSize(900,600);// x, y
             f.setLocationRelativeTo(null);
             f.setVisible(true);
             
