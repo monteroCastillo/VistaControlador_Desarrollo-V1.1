@@ -3,12 +3,27 @@ package Controlador;
 import ModeloDAO.*;
 import ModeloVO.*;
 import PostgreSQL.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.*;
+
+import java.io.File;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import java.awt.BorderLayout;
+import java.io.File;
+import java.util.Arrays;
+
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 public class Controlador {
 
@@ -32,6 +47,8 @@ public class Controlador {
     String nombreEmpleado = "vacio";
     String cedulaEmpleado = "vacio";
     String tipoEmpleado = "vacio";
+    
+    GeneraPDF PDF = new GeneraPDF();
 
     public Controlador() {
 
@@ -869,5 +886,81 @@ public class Controlador {
 
     public void setArregloProductosVendidos(ArrayList arregloVendidos ){
         arregloProductosVendidos =arregloVendidos;
+    }  
+    
+    
+    public void generarReportesGraficos(String titulo,String nomColumnaY, String nomColumnaX){
+        
+         ArrayList<String> arregloSalida = new ArrayList<>();
+         ArrayList<ProveedorVO> arregloProveedores = new ArrayList();
+        
+//        String consulta = "select  nombreproducto, sum(cantidad) as total from detallefactura group by\n" +
+//                            "nombreproducto order by total desc limit 5";
+//        
+        String consulta = "SELECT *FROM detallefactura";
+                
+                
+//       arregloSalida =  objConsultas.devuelteArreglo(consulta, 5);
+       
+       //arregloSalida =  objetoConexion.busqueda(consulta,"nombrecliente",10);
+//       arregloSalida = objConsultas.devuelteArreglo(consulta, 20);
+       
+       arregloProveedores = objProveedorDAO.listarReportes();
+        int numRegistros = arregloProveedores.size();
+       
+        String a;
+        String b;
+        
+        String[] cadena = new String[5];
+        int[] cantidad = new int[5];
+        
+       System.out.println("Tamannio arreglo de productos " +numRegistros);
+       for (int i = 0; i < numRegistros; i++) {
+            cadena[i] = arregloProveedores.get(i).getNombreProveedor();
+            cantidad[i] = Integer.parseInt(arregloProveedores.get(i).getNit());
+            
+            //System.out.println(a+ "\t" +b);
+       
+       }
+       
+       System.out.println(Arrays.toString(cantidad));
+       System.out.println(Arrays.toString(cadena));
+                
+        int cantidad1 = cantidad[0];
+        int cantidad2 = cantidad[1];
+        int cantidad3 = cantidad[2];
+        int cantidad4 = cantidad[3];
+        int cantidad5 = cantidad[4];
+        
+        String producto1 = cadena[0];
+        String producto2 = cadena[1];
+        String producto3 = cadena[2];
+        String producto4 = cadena[3];
+        String producto5 = cadena[4];
+        
+        
+        try {
+            DefaultCategoryDataset ds = new DefaultCategoryDataset();
+            ds.addValue(cantidad1, producto1, "");
+            ds.addValue(cantidad2, producto2, "");
+            ds.addValue(cantidad3, producto3, "");
+            ds.addValue(cantidad4, producto4, "");
+            ds.addValue(cantidad5, producto5, "");
+                        
+            
+            JFreeChart ConfiguracionGrafico = ChartFactory.createBarChart3D(titulo, nomColumnaX,
+                    nomColumnaY, ds, PlotOrientation.VERTICAL, true, true, true);
+            
+            ChartFrame f = new ChartFrame("ReportesGraficos", ConfiguracionGrafico);
+            f.setSize(900,600);
+            f.setLocationRelativeTo(null);
+            f.setVisible(true);
+            
+            
+        } catch (Exception e) {
+            System.out.println("Error" + e);
+        }
     }
+    
+
 }//Fin de la clase

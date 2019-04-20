@@ -54,7 +54,7 @@ class VistaEmpleadoProveedor extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txDireccionEmpleado = new javax.swing.JTextField();
-        txTelefono = new javax.swing.JTextField();
+        txTelefonoEmpleado = new javax.swing.JTextField();
         btnCrearEmpleado = new javax.swing.JButton();
         txUsuarioEmpleado = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -180,7 +180,7 @@ class VistaEmpleadoProveedor extends javax.swing.JFrame {
                         .addComponent(txCedulaEmpleado, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txClaveEmpleado, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txDireccionEmpleado, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txTelefono, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txTelefonoEmpleado, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txUsuarioEmpleado, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -209,7 +209,7 @@ class VistaEmpleadoProveedor extends javax.swing.JFrame {
                     .addComponent(txDireccionEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txTelefonoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -268,7 +268,7 @@ class VistaEmpleadoProveedor extends javax.swing.JFrame {
                 .addGap(96, 96, 96))
         );
 
-        jTabbedPane1.addTab("Crear Empleado", jPanel1);
+        jTabbedPane1.addTab("Empleado", jPanel1);
 
         tablaEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -469,7 +469,7 @@ class VistaEmpleadoProveedor extends javax.swing.JFrame {
                 .addGap(273, 273, 273))
         );
 
-        jTabbedPane1.addTab("Crear Proveedor", jPanel3);
+        jTabbedPane1.addTab("Proveedor", jPanel3);
 
         btnMostrarProveedores.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         btnMostrarProveedores.setText("Mostrar Proveedores");
@@ -595,18 +595,22 @@ class VistaEmpleadoProveedor extends javax.swing.JFrame {
 
     private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
         objControlador.llenarTablaProveedores(tablaProveedoresA_B);
+        
     }//GEN-LAST:event_btnMostrarActionPerformed
 
     private void btnActualizarProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarProveedoresActionPerformed
         enviarDatosProveedores(2);
+        limpiarProveedor();
     }//GEN-LAST:event_btnActualizarProveedoresActionPerformed
 
     private void btnEliminarProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProveedoresActionPerformed
         enviarDatosProveedores(3);
+        limpiarProveedor();
     }//GEN-LAST:event_btnEliminarProveedoresActionPerformed
 
     private void btnActualizarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarEmpleadoActionPerformed
         enviarDatosEmpleados(2);
+        limpiarEmpleado();
     }//GEN-LAST:event_btnActualizarEmpleadoActionPerformed
 
     private void btnMostrarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarEmpleadoActionPerformed
@@ -629,6 +633,7 @@ class VistaEmpleadoProveedor extends javax.swing.JFrame {
 
     private void btnEliminarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEmpleadoActionPerformed
         enviarDatosEmpleados(3);
+        limpiarEmpleado();
     }//GEN-LAST:event_btnEliminarEmpleadoActionPerformed
     
     public void enviarDatosEmpleados(int opcion) {
@@ -643,7 +648,7 @@ class VistaEmpleadoProveedor extends javax.swing.JFrame {
         arrayEmpleadoNuevo.add(txUsuarioEmpleado.getText());
         arrayEmpleadoNuevo.add(txClaveEmpleado.getText());
         arrayEmpleadoNuevo.add(txDireccionEmpleado.getText());
-        arrayEmpleadoNuevo.add(txTelefono.getText());
+        arrayEmpleadoNuevo.add(txTelefonoEmpleado.getText());
         arrayEmpleadoNuevo.add(tipoEmpleado);
         
         switch (opcion) {
@@ -722,8 +727,30 @@ class VistaEmpleadoProveedor extends javax.swing.JFrame {
         txUsuarioEmpleado.setText(usuarioEmpleado);
          txClaveEmpleado.setText(claveEmpleado);
         txDireccionEmpleado.setText(direccionEmpleado);
-        txTelefono.setText(telEmpleado);       
+        txTelefonoEmpleado.setText(telEmpleado);       
         jComboTipoEmpleado.setSelectedItem(tipoEmpleado);
+    }
+    
+    public void limpiarProveedor(){
+        
+        txNombreProveedor.setText("");
+        txNitProveedor.setText("");
+        txDireccionProveedor.setText("");
+        txtelefonoProveedor.setText("");
+        txCiudadProveedor.setText("");
+        txEmailProveedor.setText("");     
+              
+    }
+    
+    public void limpiarEmpleado(){
+        
+        txNombreEmp.setText("");
+        txCedulaEmpleado.setText("");
+        txUsuarioEmpleado.setText("");
+        txClaveEmpleado.setText("");
+        txDireccionEmpleado.setText("");
+        txTelefonoEmpleado.setText("");
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -778,7 +805,7 @@ class VistaEmpleadoProveedor extends javax.swing.JFrame {
     public javax.swing.JTextField txNitProveedor;
     public javax.swing.JTextField txNombreEmp;
     public javax.swing.JTextField txNombreProveedor;
-    public javax.swing.JTextField txTelefono;
+    public javax.swing.JTextField txTelefonoEmpleado;
     private javax.swing.JTextField txUsuarioEmpleado;
     public javax.swing.JTextField txtelefonoProveedor;
     // End of variables declaration//GEN-END:variables

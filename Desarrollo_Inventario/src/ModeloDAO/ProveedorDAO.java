@@ -142,5 +142,33 @@ public class ProveedorDAO {
     }
     
     
+    public ArrayList<ProveedorVO> listarReportes(){
+        
+        ArrayList listaProveedores = new ArrayList();
+        ProveedorVO proveedor;
+        try {
+            Connection accesoDB = conexion.getConexion();
+            PreparedStatement ps = accesoDB.prepareStatement("select  nombreproducto, sum(cantidad) as total from detallefactura group by\n" +
+                           "nombreproducto order by total desc limit 5");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                proveedor = new ProveedorVO();
+                
+                proveedor.setNombreProveedor(rs.getString(1));
+                proveedor.setNit(rs.getString(2));
+               
+                
+                
+
+                
+                listaProveedores.add(proveedor);
+            }
+        } catch (Exception e) {
+        }
+        
+        return listaProveedores;
+    }
+    
+    
     
 }
