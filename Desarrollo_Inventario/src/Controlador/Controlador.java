@@ -49,6 +49,7 @@ public class Controlador {
 
     //variables globales
     float sumaValorTotal = 0;
+    int cantidadPrendasTotales ;
     String nombreEmpleado = "vacio";
     String cedulaEmpleado = "vacio";
     String tipoEmpleado = "vacio";
@@ -442,13 +443,15 @@ public class Controlador {
 
     /**
      * Termina de llenar el arrylist de detalle de la factura para luego
-     * enviarlo a la base de datos este arraylist de detalle producto esta
+     * enviarlo a la base de datos, este arraylist de detalle producto esta
      * amarrado a la factura por el serial
      *
      * @param cantidadVendida
      * @param serialFactura
      */
     public void creaDetalleFactura(int[] cantidadVendida, String[] serialFactura) {
+        
+       // System.out.println("ENTRA A CREADETALLEFACTURA  EN EL LA CLASE CONTROLADOR");
 
         String serialFact;
         String codigoPrenda;
@@ -473,7 +476,8 @@ public class Controlador {
             serialFact = arregloPrendasRecibidas.get(i).getSerialFactura();
             codigoPrenda = arregloPrendasRecibidas.get(i).getCodigoPrenda();
             cantidadPrenda = arregloPrendasRecibidas.get(i).getCantidadPrenda();
-            costoPrenda = arregloPrendasRecibidas.get(i).getCostoPrenda();      
+            costoPrenda = arregloPrendasRecibidas.get(i).getCostoPrenda();  
+            
             objDetalleFacturaDAO.insertarDetalleFactura(serialFact, codigoPrenda, cantidadPrenda, costoPrenda);
 
         }
@@ -843,7 +847,8 @@ public class Controlador {
      * @param labelTotal
      */
     public void operaDatosTablaVentas(JTable tablaD, JLabel labelIva, JLabel labelTotal) {
-
+        
+        
         sumaValorTotal = 0;
         tablaD.setModel(modeloCanasta);
         float valorTotalProducto;
@@ -867,7 +872,7 @@ public class Controlador {
 
                 valorTotalProducto = cantidadFloat[i] * valorFloat[i]; // multiplica el valor por la cantidad de productos
                 sumaValorTotal += valorTotalProducto;
-
+                cantidadPrendasTotales +=(int)cantidadFloat[i];
                 tablaD.setValueAt(valorTotalProducto, i, 4);          //seta el total del valor de cada producto en la tabla
 
             }
@@ -932,6 +937,9 @@ public class Controlador {
 
     public ArrayList getArregloProductosVendidos() {
         return arregloPrendasRecibidas;
+    }
+    public int getCantidadPrendasTotales(){
+        return cantidadPrendasTotales;
     }
 
     public void setArregloProductosVendidos(ArrayList arregloVendidos) {

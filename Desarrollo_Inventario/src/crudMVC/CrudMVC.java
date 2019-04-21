@@ -24,8 +24,8 @@ public class CrudMVC {
         
         VistaMenuAdmin objMenu = new VistaMenuAdmin(controlaC);
         
-        objLogin.setVisible(true);
-        //objMenu.setVisible(true);
+       // objLogin.setVisible(true);
+        objMenu.setVisible(true);
         
         
 

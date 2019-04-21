@@ -70,6 +70,7 @@ public class CanastaCompra extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         jComboTipoPago = new javax.swing.JComboBox<String>();
         jComboEstadoPrenda = new javax.swing.JComboBox<String>();
+        jDateFecha = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(820, 0));
@@ -201,12 +202,17 @@ public class CanastaCompra extends javax.swing.JFrame {
                                 .addComponent(btnSalir)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(labelTotalAPagar, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                            .addComponent(labelIVA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(labelTotalAPagar, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                                    .addComponent(labelIVA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jDateFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(57, 57, 57)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -250,9 +256,11 @@ public class CanastaCompra extends javax.swing.JFrame {
                             .addComponent(labelDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
+                        .addComponent(jDateFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labelIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -261,7 +269,6 @@ public class CanastaCompra extends javax.swing.JFrame {
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labelTotalAPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jComboTipoPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboEstadoPrenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -388,15 +395,23 @@ public class CanastaCompra extends javax.swing.JFrame {
         
         String estadoPrenda;
         estadoPrenda = jComboEstadoPrenda.getSelectedItem().toString();
+        
+        Date date = jDateFecha.getDate();
+        long dat = date.getTime();
+        java.sql.Date fechaEntrega = new java.sql.Date(dat);
+        
+        System.out.println("LA FECHA ES: " +fechaEntrega);
+        
+        int totalPrendas =objControlador.getCantidadPrendasTotales();
                 
         arregloFactura.add(numFactura);
         arregloFactura.add(arreglo.get(0).getIdCliente());
         arregloFactura.add(cedulaEmpleadoSesion);
         arregloFactura.add(fecha);
-        arregloFactura.add("5");  //  totalprendas"
+        arregloFactura.add(totalPrendas+"");  //  totalprendas"
         arregloFactura.add(tipoPago);  //tipo pago
         arregloFactura.add(estadoPrenda); //estadoPrenda
-        arregloFactura.add("25/04/19"); //fechaEntrega
+        arregloFactura.add(fechaEntrega+""); //fechaEntrega
         //arregloFactura.add("100.0");  //setTotal
         
 
@@ -406,9 +421,11 @@ public class CanastaCompra extends javax.swing.JFrame {
     }
 
     /**
-     * Agrega la cantidad y el numero de factura al detalle de la factura
+     * Agrega la cantidad y el serial de factura al detalle de la factura
      */
     public void agregarDatosDetalleFactura() {
+        
+       // System.out.println("Entra a agregardatosdetallefactura en la clase canastaCompra BOTON GUARDAR");
 
         int numRegistros = objControlador.getArregloProductosVendidos().size();
         int[] arregloCantidad = new int[numRegistros];
@@ -419,7 +436,7 @@ public class CanastaCompra extends javax.swing.JFrame {
             arregloCantidad[i] = Integer.parseInt((String) tablaCanasta.getValueAt(i, 0));
             arregloSerialFactura[i] = labelNumFactura.getText();
 
-            ///arregloProductos.add(new DetalleFacturaVO(codigoProducto,nombreProducto,valorProducto,0,""));
+           ///arregloProductos.add(new DetalleFacturaVO(arregloSerialFactura[i],nombreProducto,valorProducto,));
         }
 
         objControlador.creaDetalleFactura(arregloCantidad, arregloSerialFactura);
@@ -434,6 +451,7 @@ public class CanastaCompra extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboEstadoPrenda;
     private javax.swing.JComboBox<String> jComboTipoPago;
+    private com.toedter.calendar.JDateChooser jDateFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

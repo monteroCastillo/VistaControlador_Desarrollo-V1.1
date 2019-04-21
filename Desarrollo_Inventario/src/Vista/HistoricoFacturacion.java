@@ -9,6 +9,7 @@ import ModeloVO.*;
 import java.util.ArrayList;
 import java.util.Date;
 import ModeloDAO.ClientesDAO;
+import java.awt.Color;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -36,6 +37,9 @@ public class HistoricoFacturacion extends javax.swing.JFrame {
         initComponents();
         this.objControlador = objControlador;
         this.setLocationRelativeTo(null);//Posiona la ventana en el centro
+        
+        labelColorEstado.setBackground(Color.yellow);
+        //setForeground(Color.red);
 
     }
     
@@ -86,12 +90,15 @@ public class HistoricoFacturacion extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         txSerialFactura = new javax.swing.JTextField();
         btnBuscarFacturaXserial = new javax.swing.JButton();
+        labelColorEstado = new javax.swing.JLabel();
+        jComboEstadoPrenda = new javax.swing.JComboBox<String>();
+        btnEstadoPrenda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(820, 0));
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
-        jLabel2.setText("Historico Facturacion");
+        jLabel2.setText("Seguimiento Servicios");
 
         tablaHistoricoFactura.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -190,6 +197,25 @@ public class HistoricoFacturacion extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
+        labelColorEstado.setForeground(new java.awt.Color(255, 255, 0));
+        labelColorEstado.setText("hola");
+        labelColorEstado.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jComboEstadoPrenda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Recibido", "Proceso", "terminado" }));
+        jComboEstadoPrenda.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jComboEstadoPrenda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboEstadoPrendaMouseClicked(evt);
+            }
+        });
+
+        btnEstadoPrenda.setText("Actualizar");
+        btnEstadoPrenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEstadoPrendaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -198,7 +224,10 @@ public class HistoricoFacturacion extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnEstadoPrenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboEstadoPrenda, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -213,15 +242,17 @@ public class HistoricoFacturacion extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(83, 83, 83)
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGap(9, 9, 9))))
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(0, 0, 0)
+                                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(9, 9, 9))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(83, 83, 83)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(labelColorEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(38, 38, 38))))
                         .addGap(0, 15, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -230,8 +261,9 @@ public class HistoricoFacturacion extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jButton2))
-                .addGap(19, 19, 19)
+                    .addComponent(jButton2)
+                    .addComponent(labelColorEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,14 +271,21 @@ public class HistoricoFacturacion extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelTotalAPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelTotalAPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnEstadoPrenda, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                            .addComponent(jComboEstadoPrenda))))
                 .addContainerGap())
         );
 
@@ -278,6 +317,14 @@ public class HistoricoFacturacion extends javax.swing.JFrame {
         llenarInterfazDatosCliente(serialFactura);
         objControlador.operaDatosTablaVentas(tablaHistoricoFactura, labelIVA, labelTotalAPagar); // metodo que calcula el valor total de los productos,iva y total
     }//GEN-LAST:event_btnBuscarFacturaXserialActionPerformed
+
+    private void jComboEstadoPrendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboEstadoPrendaMouseClicked
+        cambiarColor();
+    }//GEN-LAST:event_jComboEstadoPrendaMouseClicked
+
+    private void btnEstadoPrendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadoPrendaActionPerformed
+        cambiarColor();
+    }//GEN-LAST:event_btnEstadoPrendaActionPerformed
 
     public void fecha(){
        
@@ -315,6 +362,20 @@ public class HistoricoFacturacion extends javax.swing.JFrame {
        
     }
     
+    public void cambiarColor(){
+        
+        System.out.println("entro al metodo cambiar color");
+        String estadoPrenda;
+        estadoPrenda = jComboEstadoPrenda.getSelectedItem().toString();
+        
+        if(estadoPrenda.equalsIgnoreCase("terminado")){
+            labelColorEstado.setForeground(Color.green); 
+            System.out.println("Entro al if");
+        }
+        
+    }
+        
+    
     
     
     
@@ -326,7 +387,9 @@ public class HistoricoFacturacion extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarFacturaXserial;
+    private javax.swing.JButton btnEstadoPrenda;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboEstadoPrenda;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -341,6 +404,7 @@ public class HistoricoFacturacion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelColorEstado;
     private javax.swing.JLabel labelDireccion;
     private javax.swing.JLabel labelEmpleado;
     private javax.swing.JLabel labelFecha;

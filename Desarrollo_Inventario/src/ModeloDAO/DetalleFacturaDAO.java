@@ -28,6 +28,8 @@ public class DetalleFacturaDAO {
         
     public String insertarDetalleFactura(String serialFactura, String codigoPrenda, 
                                             int cantidadPrenda, int costoPrenda  ) {
+        //System.out.println("Entro al DAO");
+        
         String respuestaRegistro = "";
         Connection db = null;
         Statement stmt;
@@ -44,7 +46,7 @@ public class DetalleFacturaDAO {
             Connection accesoDB = conexion.getConexion();
             stmt = accesoDB.createStatement();
 
-            System.out.println("La sentencia es: ");
+            System.out.println("La sentencia es: " +consulta);
 
             ResultSet rs = stmt.executeQuery(consulta);
 
