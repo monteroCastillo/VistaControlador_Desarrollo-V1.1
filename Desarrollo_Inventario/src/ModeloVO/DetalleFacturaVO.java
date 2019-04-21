@@ -14,64 +14,55 @@ public class DetalleFacturaVO {
     public DetalleFacturaVO() {
     }
     
+   
     
-    
-   String nombreProducto;
-   String codigoProducto;
-   String serialFactura;
-   Float precioProducto;
-   int cantidad;
+    String serialFactura;
+    String codigoPrenda;
+    int cantidadPrenda;
+    int costoPrenda;
 
-    public DetalleFacturaVO(String nombreProducto, String codigoProducto, Float precioProducto, int cantidad, String serialFactura) {
-        this.nombreProducto = nombreProducto;
-        this.codigoProducto = codigoProducto;
-        this.precioProducto = precioProducto;
-        this.cantidad = cantidad;
+    public DetalleFacturaVO(String serialFactura, String codigoPrenda, int cantidadPrenda, int costoPrenda) {
         this.serialFactura = serialFactura;
-    }
-
-    public String getNombreProducto() {
-        return nombreProducto;
-    }
-
-    public String getCodigoProducto() {
-        return codigoProducto;
-    }
-
-    public Float getPrecioProducto() {
-        return precioProducto;
-    }
-
-    public int getCantidad() {
-        return cantidad;
+        this.codigoPrenda = codigoPrenda;
+        this.cantidadPrenda = cantidadPrenda;
+        this.costoPrenda = costoPrenda;
     }
 
     public String getSerialFactura() {
         return serialFactura;
-    }        
-       
-    
-    //******************************************
-
-    public void setNombreProducto(String nombreProducto) {
-        this.nombreProducto = nombreProducto;
     }
 
-    public void setCodigoProducto(String codigoProducto) {
-        this.codigoProducto = codigoProducto;
+    public String getCodigoPrenda() {
+        return codigoPrenda;
     }
 
-    public void setPrecioProducto(Float precioProducto) {
-        this.precioProducto = precioProducto;
+    public int getCantidadPrenda() {
+        return cantidadPrenda;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public int getCostoPrenda() {
+        return costoPrenda;
     }
+   
+   //**********
 
     public void setSerialFactura(String serialFactura) {
         this.serialFactura = serialFactura;
     }
-       
+
+    public void setCodigoPrenda(String codigoPrenda) {
+        this.codigoPrenda = codigoPrenda;
+    }
+
+    public void setCantidadPrenda(int cantidadPrenda) {
+        this.cantidadPrenda = cantidadPrenda;
+    }
+
+    public void setCostoPrenda(int costoPrenda) {
+        this.costoPrenda = costoPrenda;
+    }
+    
+    
+   
          
 }

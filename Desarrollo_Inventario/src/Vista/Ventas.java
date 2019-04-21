@@ -3,7 +3,7 @@ package Vista;
 
 import ModeloVO.*;
 import Controlador.*;
-import ModeloDAO.ProductoDAO;
+import ModeloDAO.PrendaDAO;
 import PostgreSQL.pgsql_dbc;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -12,15 +12,17 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import Vista.*;
 
 public class Ventas extends javax.swing.JFrame {
 
     Controlador objControlador;
-    ProductoDAO objProductoDAO = new ProductoDAO();
+    PrendaDAO objPrendaDAO = new PrendaDAO();
+    
     private static Ventas objVentas;
 
     TableRowSorter rowSorter; // es la variable para realizar el filtro de busqueda
-    int IDBUSQUEDA = 0; // Filtraria por nombre de producto
+    int IDBUSQUEDA = 1; // Filtraria por nombre de producto
 
     ArrayList<DetalleFacturaVO> arregloProductos = new ArrayList<>();
 
@@ -33,9 +35,9 @@ public class Ventas extends javax.swing.JFrame {
         initComponents();
         this.objControlador = objControlador;
         //Cuando se selecciona un elemento de la tabla las letras se colocan del color seleccionado
-        tablaVentasProductos.setSelectionForeground(Color.yellow);
+        tablaVentasPrendas.setSelectionForeground(Color.yellow);
         //Cuando se selecciona un elemento de la tabla el fondo  se coloca del color seleccionado
-        tablaVentasProductos.setSelectionBackground(Color.red);
+        tablaVentasPrendas.setSelectionBackground(Color.red);
         btnMostrarDatos.setEnabled(false);
         panelCanasta.setVisible(false);
         this.setLocationRelativeTo(null);//Posiona la ventana en el centro
@@ -67,7 +69,7 @@ public class Ventas extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         labelInformacionVentas = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tablaVentasProductos = new javax.swing.JTable();
+        tablaVentasPrendas = new javax.swing.JTable();
         btnMostrarDatos = new javax.swing.JButton();
         btPrincipalVentas = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
@@ -104,7 +106,7 @@ public class Ventas extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         jLabel2.setText("ID Cliente");
 
-        tablaVentasProductos.setModel(new javax.swing.table.DefaultTableModel(
+        tablaVentasPrendas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -112,12 +114,12 @@ public class Ventas extends javax.swing.JFrame {
 
             }
         ));
-        tablaVentasProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+        tablaVentasPrendas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaVentasProductosMouseClicked(evt);
+                tablaVentasPrendasMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tablaVentasProductos);
+        jScrollPane2.setViewportView(tablaVentasPrendas);
 
         btnMostrarDatos.setText("Mostrar Productos");
         btnMostrarDatos.addActionListener(new java.awt.event.ActionListener() {
@@ -181,39 +183,37 @@ public class Ventas extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jScrollPane2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txID_cliente_ventas, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btValidarIdClienteVentas)
+                        .addGap(135, 135, 135))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txID_cliente_ventas, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btValidarIdClienteVentas)
-                                .addGap(135, 135, 135))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnMostrarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(labelInformacionVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btPrincipalVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(252, 252, 252)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)))
-                        .addComponent(panelCanasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(83, 83, 83)))
-                .addGap(21, 21, 21))
+                                    .addComponent(btnMostrarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(labelInformacionVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btPrincipalVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(252, 252, 252)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)))
+                .addComponent(panelCanasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(104, 104, 104))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,16 +241,17 @@ public class Ventas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(labelInformacionVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGap(76, 76, 76)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btValidarIdClienteVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btValidarIdClienteVentasActionPerformed
-
+        
+        VistaCrearEmpleado objCrearEmpleado = VistaCrearEmpleado.obtenerEmpleado(objControlador);
         boolean cliente;
         cliente = objControlador.consultarIdCliente(labelInformacionVentas, txID_cliente_ventas.getText());
 
@@ -259,12 +260,20 @@ public class Ventas extends javax.swing.JFrame {
             btnMostrarDatos.setEnabled(true);
 
         } else {
+            String d = JOptionPane.showInputDialog("Desea Crear un nuevo Empleado ");
+            if (d == null) {
+                System.out.println("El valor de la variable d es : " + d);
+            } else {
+                objCrearEmpleado.setVisible(true);
+                
+            }
 
         }
     }//GEN-LAST:event_btValidarIdClienteVentasActionPerformed
 
     private void btnMostrarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarDatosActionPerformed
         mostrarDatos();
+       // objControlador.llenarTablaPrenda(tablaVentasPrendas);
     }//GEN-LAST:event_btnMostrarDatosActionPerformed
     /**
      * Permite seleccionar un producto de la tabla de ventas para llevarlo a la
@@ -272,8 +281,8 @@ public class Ventas extends javax.swing.JFrame {
      *
      * @param evt
      */
-    private void tablaVentasProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaVentasProductosMouseClicked
-        int row = tablaVentasProductos.rowAtPoint(evt.getPoint());
+    private void tablaVentasPrendasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaVentasPrendasMouseClicked
+        int row = tablaVentasPrendas.rowAtPoint(evt.getPoint());
 
         String d = JOptionPane.showInputDialog("Desea Agregar este producto \n al carrito de compras (S)");
         if (d == null) {
@@ -284,7 +293,7 @@ public class Ventas extends javax.swing.JFrame {
             labelNumProductos.setVisible(true);
             labelNumProductos.setText(++numProductos +"");
         }
-    }//GEN-LAST:event_tablaVentasProductosMouseClicked
+    }//GEN-LAST:event_tablaVentasPrendasMouseClicked
 
     private void btPrincipalVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrincipalVentasActionPerformed
 
@@ -324,17 +333,18 @@ public class Ventas extends javax.swing.JFrame {
      *
      * @param row
      */
+   
     public void datosTablaProducto(int row) {
 
         //saca los valores de la tabla de Productos de la clase Ventas
-        String codigoProducto = ((String) tablaVentasProductos.getValueAt(row, 0));
-        String nombreProducto = ((String) tablaVentasProductos.getValueAt(row, 1));
-        float valorProducto = ((float) tablaVentasProductos.getValueAt(row, 3));
-        arregloProductos.add(new DetalleFacturaVO(codigoProducto, nombreProducto, valorProducto, 0, ""));
+        String codigoPrenda = ((String) tablaVentasPrendas.getValueAt(row, 0));
+        String valor = String.valueOf( tablaVentasPrendas.getValueAt(row, 2));
+        int costoPrenda = Integer.parseInt(valor);      
+        
+      //  int valorProducto = ((int) tablaVentasPrendas.getValueAt(row, 2));
+        arregloProductos.add(new DetalleFacturaVO("", codigoPrenda, 0,costoPrenda));
 
         objControlador.mostrarProductos(arregloProductos);
-//        //return arregloProductos;
-
     }
 
 
@@ -342,10 +352,9 @@ public class Ventas extends javax.swing.JFrame {
      * Llena el combobox con todos los nombres de los productos
      */
     private void mostrarDatos() {
-        String consulta = "SELECT * FROM producto";
+        String consulta = "SELECT * FROM prenda";
         // objControlador.llenarTablaProductos(tablaVentasProductos, consulta);
-
-        llenarTablaProductos(consulta);
+        llenarTablaPrendas(consulta);
 
     }
 
@@ -353,39 +362,30 @@ public class Ventas extends javax.swing.JFrame {
         return arregloProductos;
     }
 
-//     System.out.println("Entro al evento de teclado  keyReleased");
-//        rowSorter.setRowFilter(RowFilter.regexFilter(jTextField1.getText().toUpperCase(), IDBUSQUEDA));
-    public void llenarTablaProductos(String consulta) {
+    public void llenarTablaPrendas(String consulta) {
 
         DefaultTableModel model = new DefaultTableModel();
-        tablaVentasProductos.setModel(model);
-        ArrayList<ProductosVO> listaProductos = new ArrayList();
+        tablaVentasPrendas.setModel(model);
+        ArrayList<PrendaVO> listaPrenda = new ArrayList();
 
         try {
 
-            model.addColumn("Producto");
             model.addColumn("Codigo");
-            model.addColumn("Cantidad");
-            model.addColumn("Valor Compra");
-            model.addColumn("Valor Venta");
-            model.addColumn("Proveedor");
-            model.addColumn("Descripcion");
+            model.addColumn("Prenda");
+            model.addColumn("Valor");
+           
 
-            Object[] columna = new Object[7];
+            Object[] columna = new Object[3];
 
-            listaProductos = objProductoDAO.listarProductos(consulta);
+            listaPrenda = objPrendaDAO.listarPrenda();
 
-            int numRegistros = listaProductos.size();
+            int numRegistros = listaPrenda.size();
 
             System.out.println("Numero de registros EN LA CLASE VENTAS " + numRegistros);
             for (int i = 0; i < numRegistros; i++) {
-                columna[0] = listaProductos.get(i).getNombreProducto();
-                columna[1] = listaProductos.get(i).getCodigoProducto();
-                columna[2] = listaProductos.get(i).getCantidad();
-                columna[3] = listaProductos.get(i).getValorCompraProd();
-                columna[4] = listaProductos.get(i).getValorVentaProd();
-                columna[5] = listaProductos.get(i).getProveedor();
-                columna[6] = listaProductos.get(i).getDescripcion();
+                columna[0] = listaPrenda.get(i).getNombrePrenda();
+                columna[1] = listaPrenda.get(i).getCodigoPrenda();
+                columna[2] = listaPrenda.get(i).getCostoPrenda();              
 
                 model.addRow(columna);
             }
@@ -395,14 +395,13 @@ public class Ventas extends javax.swing.JFrame {
         }
 
         rowSorter = new TableRowSorter(model);
-        tablaVentasProductos.setRowSorter(rowSorter);
+        tablaVentasPrendas.setRowSorter(rowSorter);
     }
 
     private void asignarTitulo() {
         setTitle(objControlador.empleadoSesionAbierta());
 
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btPrincipalVentas;
@@ -419,7 +418,7 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JLabel labelInformacionVentas;
     private javax.swing.JLabel labelNumProductos;
     private javax.swing.JPanel panelCanasta;
-    private javax.swing.JTable tablaVentasProductos;
+    private javax.swing.JTable tablaVentasPrendas;
     private javax.swing.JTextField txID_cliente_ventas;
     // End of variables declaration//GEN-END:variables
 }

@@ -13,7 +13,7 @@ public class EmpleadoVO {
     
 
     
-    String nombreEmpleado, cedula,usuario, clave, direccionEmpleado,telEmpleado,tipoEmpleado;
+    String nombreEmpleado, cedula,usuario, clave,tipoEmpleado;
 
     public EmpleadoVO() {
         
@@ -21,8 +21,7 @@ public class EmpleadoVO {
         cedula = "";
         usuario = "";
         clave = "";
-        direccionEmpleado = "";
-        telEmpleado= "";
+       
         tipoEmpleado = "";
     }
 
@@ -40,16 +39,8 @@ public class EmpleadoVO {
 
     public String getClave() {
         return clave;
-    }
-
-    public String getDireccionEmpleado() {
-        return direccionEmpleado;
-    }
-
-    public String getTelEmpleado() {
-        return telEmpleado;
-    }
-
+    } 
+    
     public String getTipoEmpleado() {
         return tipoEmpleado;
     }
@@ -68,21 +59,11 @@ public class EmpleadoVO {
 
     public void setClave(String clave) {
         this.clave = clave;
-    }
-
-    public void setDireccionEmpleado(String direccionEmpleado) {
-        this.direccionEmpleado = direccionEmpleado;
-    }
-
-    public void setTelEmpleado(String telEmpleado) {
-        this.telEmpleado = telEmpleado;
-    }
+    }    
 
     public void setTipoEmpleado(String tipoEmpleado) {
         this.tipoEmpleado = tipoEmpleado;
-    }
-    
-    
+    }    
     
     
 }

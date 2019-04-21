@@ -299,9 +299,9 @@ public class HistoricoFacturacion extends javax.swing.JFrame {
         String idCliente = facturas.get(0).getIdCliente();
         String fecha1;
         fecha1 = facturas.get(0).getFecha();
-        String hora1 = facturas.get(0).getHora();
+       // String hora1 = facturas.get(0).getHora();
         String empleado = facturas.get(0).getIdEmpleado();
-        labelFecha.setText(fecha1 + "  " + hora1);
+       // labelFecha.setText(fecha1 + "  " + hora1);
         labelEmpleado.setText(empleado);
         
         ArrayList<Clientes>  arreglo = objClientesDAO.listarClienteFactura(idCliente);      

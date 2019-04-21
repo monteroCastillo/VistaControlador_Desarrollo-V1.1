@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Vista;
+
 import Controlador.*;
 import ModeloDAO.*;
 import ModeloVO.*;
@@ -13,8 +14,6 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
-
-
 /**
  *
  * @author ALLCH
@@ -22,12 +21,11 @@ import javax.swing.JTable;
 public class CanastaCompra extends javax.swing.JFrame {
 
     Controlador objControlador;
-    Ventas objVentas =  Ventas.obtenerVentas(objControlador);
+    Ventas objVentas = Ventas.obtenerVentas(objControlador);
     ArrayList<DetalleFacturaVO> arregloProductos = new ArrayList<>();
     String fecha;
     String hora;
-    
-    
+
     public CanastaCompra(Controlador objControlador) {
         initComponents();
         fecha();
@@ -35,7 +33,7 @@ public class CanastaCompra extends javax.swing.JFrame {
         configuracionesIniciales();
         btnGuardarFactura.setEnabled(false);
         this.setLocationRelativeTo(null);//Posiona la ventana en el centro
-        
+
     }
 
     /**
@@ -70,6 +68,8 @@ public class CanastaCompra extends javax.swing.JFrame {
         labelTotalAPagar = new javax.swing.JLabel();
         btnGuardarFactura = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        jComboTipoPago = new javax.swing.JComboBox<String>();
+        jComboEstadoPrenda = new javax.swing.JComboBox<String>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(820, 0));
@@ -137,6 +137,12 @@ public class CanastaCompra extends javax.swing.JFrame {
             }
         });
 
+        jComboTipoPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "anticipado", "ContraEntrega", " " }));
+        jComboTipoPago.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jComboEstadoPrenda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Recibido", "Proceso", "terminado" }));
+        jComboEstadoPrenda.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -144,20 +150,6 @@ public class CanastaCompra extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnGuardarFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
-                        .addComponent(btnSalir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(labelTotalAPagar, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                            .addComponent(labelIVA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
@@ -194,7 +186,27 @@ public class CanastaCompra extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(labelNumFactura, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
                             .addComponent(label_Nit_CC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(labelTelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(labelTelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jComboTipoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(62, 62, 62)
+                                .addComponent(jComboEstadoPrenda, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnGuardarFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39)
+                                .addComponent(btnSalir)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(labelTotalAPagar, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                            .addComponent(labelIVA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -214,7 +226,7 @@ public class CanastaCompra extends javax.swing.JFrame {
                             .addComponent(jLabel6))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(respuestaIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(labelNumFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -237,19 +249,23 @@ public class CanastaCompra extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(labelDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGap(54, 54, 54)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labelIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labelTotalAPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboTipoPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboEstadoPrenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
                             .addComponent(btnGuardarFactura)
@@ -261,81 +277,76 @@ public class CanastaCompra extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        objControlador.operaDatosTablaVentas( tablaCanasta, labelIVA, labelTotalAPagar);
-        btnGuardarFactura.setEnabled(true);        
-        
+
+        objControlador.operaDatosTablaVentas(tablaCanasta, labelIVA, labelTotalAPagar);
+        btnGuardarFactura.setEnabled(true);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       
-        if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("usuario")){
-            
+
+        if (objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("usuario")) {
+
             VistaMenuUsuario obtenerMenuUsuario = VistaMenuUsuario.obtenerVistaClientes(objControlador);
             obtenerMenuUsuario.setVisible(true);
             this.dispose();
-        }
-        else if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("admin")  ){
-            VistaMenuAdmin volverHome= new VistaMenuAdmin(objControlador);
+        } else if (objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("admin")) {
+            VistaMenuAdmin volverHome = new VistaMenuAdmin(objControlador);
             volverHome.setVisible(true);
             this.dispose(); // instruccion que cierra la ventana actual
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Imposible regresar al Menu Principal \n en este momento");            
+        } else {
+            JOptionPane.showMessageDialog(null, "Imposible regresar al Menu Principal \n en este momento");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnGuardarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarFacturaActionPerformed
         datosNuevaFactura();
-        agregarDatosDetalleFactura(); 
+        agregarDatosDetalleFactura();
     }//GEN-LAST:event_btnGuardarFacturaActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("usuario")){
-            
+        if (objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("usuario")) {
+
             VistaMenuUsuario obtenerMenuUsuario = VistaMenuUsuario.obtenerVistaClientes(objControlador);
             obtenerMenuUsuario.setVisible(true);
             this.dispose();
-        }
-        else if(objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("admin")  ){
-            VistaMenuAdmin volverHome= new VistaMenuAdmin(objControlador);
+        } else if (objControlador.getTipoEmpleadoSesionAbierta().equalsIgnoreCase("admin")) {
+            VistaMenuAdmin volverHome = new VistaMenuAdmin(objControlador);
             volverHome.setVisible(true);
             this.dispose(); // instruccion que cierra la ventana actual
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "Imposible regresar al Menu Principal \n en este momento");
-            
+
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    public void fecha(){
-       
+    public void fecha() {
+
         hora = String.format("%TT", new Date());
         fecha = String.format("%tF ", new Date());
         labelFecha.setText(hora + "   " + fecha);
-        System.out.println("La hora es: "+ hora + "   "+fecha);
-        
-        
+        System.out.println("La hora es: " + hora + "   " + fecha);
+
     }
-    
+
     /**
-     * Este metodo se llama para cargar configuraciones iniciales utiles para el manejo de la tabla 
+     * Este metodo se llama para cargar configuraciones iniciales utiles para el
+     * manejo de la tabla
      */
-    public void configuracionesIniciales(){
+    public void configuracionesIniciales() {
         //Llena la tabla de productos que se seleccionaron en la interfaz de compras.
         objControlador.llenarTablaCanasta(tablaCanasta);
-         //Llena la interfaz de canasta con los datos del cliente que se selecciono en la clase ventas        
-        llenarInterfazDatosCliente(); 
+        //Llena la interfaz de canasta con los datos del cliente que se selecciono en la clase ventas        
+        llenarInterfazDatosCliente();
         //Permite seleccionar solo la fila y columna seleccionada por el puntero del mouse
-        tablaCanasta.setCellSelectionEnabled(rootPaneCheckingEnabled);       
+        tablaCanasta.setCellSelectionEnabled(rootPaneCheckingEnabled);
         tablaCanasta.setSurrendersFocusOnKeystroke(rootPaneCheckingEnabled);
         //coloca el nombre del usuario que tenga abierta la sesion en el titulo de la ventana
-       // setTitle(objControlador.empleadoSesionAbierta());
-        
+        // setTitle(objControlador.empleadoSesionAbierta());
+
     }
-    
-      
-     /**
+
+    /**
      * Llena la vista de canasta de compra con los datos del cliente
      */
     public void llenarInterfazDatosCliente() {
@@ -345,7 +356,7 @@ public class CanastaCompra extends javax.swing.JFrame {
 
         if (arreglo.isEmpty() || arreglo == null) {
             JOptionPane.showMessageDialog(null, "Los datos del cliente no pudieron ser cargados");
-            
+
         } else {
 
             //String nombre = arreglo.get(0).getNombreCliente();
@@ -353,37 +364,47 @@ public class CanastaCompra extends javax.swing.JFrame {
             labelDireccion.setText(arreglo.get(0).getDireccion());
             labelTelefono.setText(arreglo.get(0).getTelefono());
             label_Nit_CC.setText(arreglo.get(0).getIdCliente());
-            labelNumFactura.setText(Integer.parseInt(objControlador.asignarNuevoNumFactura()) + 1 +"");
+            labelNumFactura.setText(Integer.parseInt(objControlador.asignarNuevoNumFactura()) + 1 + "");
         }
     }
-    
+
     /**
-     * Cuando se presiona el boton guardar se llama este metodo que organiza los datos para luego
+     * Cuando se presiona el boton guardar se organizan los datos para luego
      * enviarlos al metodo que los guarda
      */
-    
     public void datosNuevaFactura() {
-        
+
         ArrayList<String> arregloFactura;
         arregloFactura = new ArrayList<>();
-        
+
         //Traemos todos los datos del cliente que esta haciendo la compra
-        ArrayList<Clientes>  arreglo = objControlador.getDatosClienteCanasta();
+        ArrayList<Clientes> arreglo = objControlador.getDatosClienteCanasta();
         //Se trae el id del empleado para vincularlo a la factura
         String cedulaEmpleadoSesion = objControlador.cedulaEmpleadoSesionAbierta();
-        String numFactura= labelNumFactura.getText();
+        String numFactura = labelNumFactura.getText();
+
+        String tipoPago;
+        tipoPago = jComboTipoPago.getSelectedItem().toString();
         
+        String estadoPrenda;
+        estadoPrenda = jComboEstadoPrenda.getSelectedItem().toString();
+                
         arregloFactura.add(numFactura);
-        arregloFactura.add(arreglo.get(0).getIdCliente()); 
+        arregloFactura.add(arreglo.get(0).getIdCliente());
         arregloFactura.add(cedulaEmpleadoSesion);
-        arregloFactura.add(hora);
-        arregloFactura.add(fecha);     
-               
+        arregloFactura.add(fecha);
+        arregloFactura.add("5");  //  totalprendas"
+        arregloFactura.add(tipoPago);  //tipo pago
+        arregloFactura.add(estadoPrenda); //estadoPrenda
+        arregloFactura.add("25/04/19"); //fechaEntrega
+        //arregloFactura.add("100.0");  //setTotal
+        
+
         objControlador.crearFactura(arregloFactura);
         JOptionPane.showMessageDialog(null, "Factura Guardada");
 
     }
-    
+
     /**
      * Agrega la cantidad y el numero de factura al detalle de la factura
      */
@@ -392,31 +413,27 @@ public class CanastaCompra extends javax.swing.JFrame {
         int numRegistros = objControlador.getArregloProductosVendidos().size();
         int[] arregloCantidad = new int[numRegistros];
         String[] arregloSerialFactura = new String[numRegistros];
-       
 
         for (int i = 0; i < numRegistros; i++) {
 
-            arregloCantidad[i] =  Integer.parseInt((String) tablaCanasta.getValueAt(i, 0));
-           arregloSerialFactura[i] = labelNumFactura.getText();
+            arregloCantidad[i] = Integer.parseInt((String) tablaCanasta.getValueAt(i, 0));
+            arregloSerialFactura[i] = labelNumFactura.getText();
 
             ///arregloProductos.add(new DetalleFacturaVO(codigoProducto,nombreProducto,valorProducto,0,""));
         }
-        
-        objControlador.creaDetalleFactura(arregloCantidad, arregloSerialFactura);       
 
+        objControlador.creaDetalleFactura(arregloCantidad, arregloSerialFactura);
 
     }
-    
-    
-     
-    
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardarFactura;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboEstadoPrenda;
+    private javax.swing.JComboBox<String> jComboTipoPago;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -39,7 +39,7 @@ public class ConsultasDB {
             Connection accesoDB = conexion.getConexion();
             stmt = accesoDB.createStatement();
 
-            System.out.println("La sentencia es: ");
+            System.out.println("La sentencia es: " + consulta);
 
             ResultSet rs = stmt.executeQuery(consulta);
 

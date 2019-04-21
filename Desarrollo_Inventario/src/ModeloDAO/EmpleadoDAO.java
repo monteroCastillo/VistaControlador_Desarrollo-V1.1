@@ -26,17 +26,16 @@ public class EmpleadoDAO {
      * @param cedula
      * @param usuario
      * @param clave
-     * @param direccionEmpleado
-     * @param telEmpleado
+     
      * @param tipoEmpleado
      * @return 
      */
     public String insertarEmpleado(String nombreEmpleado,String cedula, String usuario, 
-                                  String clave,String direccionEmpleado,String telEmpleado,String tipoEmpleado){
+                                  String clave,String tipoEmpleado){
         String respuestaRegistro = "";
         Connection db = null;
         Statement stmt;
-        String consulta = "SELECT llenaTablaEmpleado('" + nombreEmpleado + "','" + cedula + "','" + usuario + "','" + clave + "','" + direccionEmpleado + "','" + telEmpleado + "','" + tipoEmpleado +  "')";
+        String consulta = "SELECT llenaTablaEmpleado('" + nombreEmpleado + "','" + cedula + "','" + usuario + "','" + clave + "','"  + "','" + tipoEmpleado +  "')";
         System.out.println(consulta);
 
         try {
@@ -76,9 +75,7 @@ public class EmpleadoDAO {
                 empleado.setNombreEmpleado(rs.getString(1));
                 empleado.setCedula(rs.getString(2));
                 empleado.setUsuario(rs.getString(3));
-                empleado.setClave(rs.getString(4));
-                empleado.setDireccionEmpleado(rs.getString(5));
-                empleado.setTelEmpleado(rs.getString(6));
+                empleado.setClave(rs.getString(4));                
                 empleado.setTipoEmpleado(rs.getString(7));
 
                 
@@ -92,14 +89,14 @@ public class EmpleadoDAO {
     
     
     public String actualizarEmpleado(String nombreEmpleado,String cedula, String usuario, 
-                                  String clave,String direccionEmpleado,String telEmpleado,String tipoEmpleado){
+                                  String clave,String tipoEmpleado){
 
         String respuestaRegistro = "";
         Connection db = null;
         Statement stmt;
         String consulta = "UPDATE empleado SET  nombreEmpleado = '" + nombreEmpleado + "', cedula= '" + cedula 
-                + "',usuario= '" + usuario + "', clave ='" + clave + "', direccionEmpleado ='" + direccionEmpleado + 
-                            "', telEmpleado= '" + telEmpleado + "', tipoEmpleado= '" + tipoEmpleado + "' WHERE cedula = '" + cedula +"'";       
+                            + "',usuario= '" + usuario + "', clave ='" + clave  + 
+                             "', tipoEmpleado= '" + tipoEmpleado + "' WHERE cedula = '" + cedula +"'";       
         System.out.println(consulta);
 
         try {
@@ -127,7 +124,7 @@ public class EmpleadoDAO {
         String respuestaRegistro = "";
         Connection db = null;
         Statement stmt;
-        String consulta = "DELETE FROM empleado WHERE cedula = '" + cedula+"';";
+        String consulta = "DELETE FROM empleado WHERE cedula = '" + cedula + "';";
                 
         System.out.println(consulta);
 
@@ -149,8 +146,6 @@ public class EmpleadoDAO {
         }
 
         return respuestaRegistro;
-    }
-    
-    
-    
+    }   
+       
 }

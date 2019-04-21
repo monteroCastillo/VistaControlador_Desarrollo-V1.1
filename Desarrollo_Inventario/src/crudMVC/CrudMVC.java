@@ -7,6 +7,7 @@ package crudMVC;
 
 
 import Vista.Login;
+import Vista.VistaMenuAdmin;
 
 import Controlador.*;
 
@@ -20,19 +21,12 @@ public class CrudMVC {
 
         Controlador controlaC = new Controlador();
         Login objLogin = new Login(controlaC);
-//       DashBoard objDashboard = new DashBoard(controlaC);
-        //      VisualizarClientes vistaClientes = new VisualizarClientes(controlaC);
-//        VisualizarProductos vistaProductos = new VisualizarProductos(controlaC);
-//        ClientesDAO objClientesDAO = new ClientesDAO(controlaC);
-//        Crear objCrear = new Crear(controlaC);
-        //Autenticacion  objAutenticacion =new Autenticacion();
-
-        //Controlador controlaC = new Controlador(vistaClientes, objClientesDAO, objCrear);// vistaProductos );//, objAutenticacion);
-        //objDashboard.setVisible(true);
-        //objAutenticacion.setVisible(true);
-        // vistaClientes.setVisible(true);
+        
+        VistaMenuAdmin objMenu = new VistaMenuAdmin(controlaC);
         
         objLogin.setVisible(true);
+        //objMenu.setVisible(true);
+        
         
 
     }

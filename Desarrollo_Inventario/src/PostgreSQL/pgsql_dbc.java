@@ -354,7 +354,7 @@ public class pgsql_dbc {
             boolean connected = false;
             try {
                 System.out.println("Conectando a la base de datos!");                
-                db = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/Proyecto","postgres","1234");
+                db = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/ProyectoBases","postgres","1234");
                 connected = true;
             } catch (SQLException se) {
                 System.out.println("No se ha podido conectar a la base.");
@@ -416,7 +416,8 @@ public class pgsql_dbc {
             try {
                 System.out.println("Conectando a la base de datos!");
                
-                db = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/Proyecto","postgres","1234");
+                db = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/ProyectoBases","postgres","1234");
+                //db = DriverManager.getConnection("jdbc:postgresql://192.168.0.13:5432/ProyectoBases","postgres","Mccann01");
                 connected = true;
             } catch (SQLException se) {
                 System.out.println("No se ha podido conectar a la base.");

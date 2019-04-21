@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ModeloDAO;
 
 import ModeloVO.DetalleFacturaVO;
@@ -24,15 +20,23 @@ public class DetalleFacturaDAO {
         
         conexion = new ConexionBD();
     } 
+    
+    String serialFactura;
+    String codigoPrenda;
+    int cantidadPrenda;
+    int costoPrenda;
         
-    public String insertarDetalleFactura(String nombreProducto, String codigoProducto, Float 
-                                         precioProducto, int cantidad, String serialFactura) {
+    public String insertarDetalleFactura(String serialFactura, String codigoPrenda, 
+                                            int cantidadPrenda, int costoPrenda  ) {
         String respuestaRegistro = "";
         Connection db = null;
         Statement stmt;
-        String consulta = ("INSERT INTO detalleFactura  (nombreProducto, codigoProducto, precioProducto,cantidad, serialFactura)  "
-                            + "Values" + "('" + nombreProducto + "','" + codigoProducto + 
-                            "','" + precioProducto + "','" + cantidad + "','" + serialFactura + "')");
+//       // String consulta = ("INSERT INTO detalleFactura  (nombreProducto, codigoProducto, precioProducto,cantidad, serialFactura)  "
+//                            + "Values" + "('" + nombreProducto + "','" + codigoProducto + 
+//                            "','" + precioProducto + "','" + cantidad + "','" + serialFactura + "')");
+        String consulta = "SELECT llenaTablaDetalle ( " + serialFactura +","+codigoPrenda +
+                            "," + cantidadPrenda+ ","+ costoPrenda +")";
+
         System.out.println(consulta);
 
         try {
@@ -68,14 +72,13 @@ public class DetalleFacturaDAO {
 
 
                 objDetalleFacturaVO = new DetalleFacturaVO();
+                             
                 
-                objDetalleFacturaVO.setNombreProducto(rs.getString(1));
-                objDetalleFacturaVO.setCodigoProducto(rs.getString(2));
-                objDetalleFacturaVO.setPrecioProducto(Float.parseFloat(rs.getString(3)));
-                objDetalleFacturaVO.setCantidad(Integer.parseInt(rs.getString(4)));
-                objDetalleFacturaVO.setSerialFactura(rs.getString(5));
-                
-               
+                objDetalleFacturaVO.setSerialFactura(rs.getString(1));
+                objDetalleFacturaVO.setCodigoPrenda(rs.getString(2));
+                objDetalleFacturaVO.setCantidadPrenda(Integer.parseInt(rs.getString(3)));
+                objDetalleFacturaVO.setCostoPrenda(Integer.parseInt(rs.getString(4)));
+                                             
                 
                 listaDetalleFactura.add(objDetalleFacturaVO);
             }

@@ -51,10 +51,6 @@ class VistaEmpleadoProveedor extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txCedulaEmpleado = new javax.swing.JTextField();
         txClaveEmpleado = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        txDireccionEmpleado = new javax.swing.JTextField();
-        txTelefonoEmpleado = new javax.swing.JTextField();
         btnCrearEmpleado = new javax.swing.JButton();
         txUsuarioEmpleado = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -107,10 +103,6 @@ class VistaEmpleadoProveedor extends javax.swing.JFrame {
 
         jLabel4.setText("Clave");
 
-        jLabel5.setText("Direccion");
-
-        jLabel7.setText("Telefono");
-
         btnCrearEmpleado.setText("Crear");
         btnCrearEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,16 +149,13 @@ class VistaEmpleadoProveedor extends javax.swing.JFrame {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnCrearEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)))
+                            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(104, 104, 104)
+                        .addComponent(btnCrearEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(btnMostrarEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -179,10 +168,8 @@ class VistaEmpleadoProveedor extends javax.swing.JFrame {
                         .addComponent(txNombreEmp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                         .addComponent(txCedulaEmpleado, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txClaveEmpleado, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txDireccionEmpleado, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txTelefonoEmpleado, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txUsuarioEmpleado, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,15 +190,7 @@ class VistaEmpleadoProveedor extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(txClaveEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txDireccionEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txTelefonoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(jComboTipoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -250,7 +229,7 @@ class VistaEmpleadoProveedor extends javax.swing.JFrame {
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE))
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -647,8 +626,6 @@ class VistaEmpleadoProveedor extends javax.swing.JFrame {
         arrayEmpleadoNuevo.add(txCedulaEmpleado.getText());
         arrayEmpleadoNuevo.add(txUsuarioEmpleado.getText());
         arrayEmpleadoNuevo.add(txClaveEmpleado.getText());
-        arrayEmpleadoNuevo.add(txDireccionEmpleado.getText());
-        arrayEmpleadoNuevo.add(txTelefonoEmpleado.getText());
         arrayEmpleadoNuevo.add(tipoEmpleado);
         
         switch (opcion) {
@@ -725,9 +702,7 @@ class VistaEmpleadoProveedor extends javax.swing.JFrame {
         txNombreEmp.setText(nombreEmpleado);
         txCedulaEmpleado.setText(idEmpleado);
         txUsuarioEmpleado.setText(usuarioEmpleado);
-         txClaveEmpleado.setText(claveEmpleado);
-        txDireccionEmpleado.setText(direccionEmpleado);
-        txTelefonoEmpleado.setText(telEmpleado);       
+        txClaveEmpleado.setText(claveEmpleado);
         jComboTipoEmpleado.setSelectedItem(tipoEmpleado);
     }
     
@@ -747,9 +722,7 @@ class VistaEmpleadoProveedor extends javax.swing.JFrame {
         txNombreEmp.setText("");
         txCedulaEmpleado.setText("");
         txUsuarioEmpleado.setText("");
-        txClaveEmpleado.setText("");
-        txDireccionEmpleado.setText("");
-        txTelefonoEmpleado.setText("");
+        txClaveEmpleado.setText("");     
         
     }
 
@@ -776,9 +749,7 @@ class VistaEmpleadoProveedor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -799,13 +770,11 @@ class VistaEmpleadoProveedor extends javax.swing.JFrame {
     public javax.swing.JTextField txCedulaEmpleado;
     public javax.swing.JTextField txCiudadProveedor;
     public javax.swing.JTextField txClaveEmpleado;
-    public javax.swing.JTextField txDireccionEmpleado;
     private javax.swing.JTextField txDireccionProveedor;
     public javax.swing.JTextField txEmailProveedor;
     public javax.swing.JTextField txNitProveedor;
     public javax.swing.JTextField txNombreEmp;
     public javax.swing.JTextField txNombreProveedor;
-    public javax.swing.JTextField txTelefonoEmpleado;
     private javax.swing.JTextField txUsuarioEmpleado;
     public javax.swing.JTextField txtelefonoProveedor;
     // End of variables declaration//GEN-END:variables

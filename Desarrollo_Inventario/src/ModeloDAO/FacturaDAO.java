@@ -18,25 +18,21 @@ public class FacturaDAO {
     }    
     
     
-    /**
-     * 
-     * @param idFactura
-     * @param idCliente
-     * @param idEmpleado
-     * @param hora
-     * @param fecha
-     * @param totalAPagar
-     * @param serial
-     * @return 
-     */
-    public String insertarFactura(String idFactura,String idCliente, String idEmpleado, 
-            String hora, String fecha, float totalAPagar) {
+    
+    
+    public String insertarFactura(int idFactura, String idCliente, String  idEmpleado,
+                                  String fecha, int totalPrendas, String tipoPago, String estadoPrenda,
+                                  String fechaEntrega, Float totalA_Pagar ) {
         String respuestaRegistro = "";
         Connection db = null;
         Statement stmt;
-        String consulta = ("INSERT INTO factura  (idFactura, idcliente, idempleado, hora,fecha, total_a_Pagar)  Values"
-                + "('" +idFactura + "','" +idCliente + "','" + idEmpleado + 
-                            "','" + hora + "','" + fecha + "'," +totalAPagar   + ")");
+        //String consulta = ("INSERT INTO factura  (idFactura, idcliente, idempleado, hora,fecha, total_a_Pagar)  Values"
+//                + "('" +idFactura + "','" +idCliente + "','" + idEmpleado + 
+//                            "','" + hora + "','" + fecha + "'," +totalAPagar   + ")");
+       
+        String  consulta = "SELECT llenaTablaFactura (" +idFactura+ ",'" + idCliente + "','" + idEmpleado +
+                            "','" + fecha+"'," +totalPrendas +", '" + tipoPago +"', '" + estadoPrenda +"','"+
+                            fechaEntrega + "'," + totalA_Pagar + ")";
         System.out.println(consulta);
 
         try {
@@ -77,17 +73,19 @@ public class FacturaDAO {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
 
+                
                 objFacturaVO = new FacturaVO();
                 
-                objFacturaVO.setSerial(Integer.parseInt(rs.getString(1)));
+                objFacturaVO.setIdFactura(Integer.parseInt(rs.getString(1)));
                 objFacturaVO.setIdCliente(rs.getString(2));
                 objFacturaVO.setIdEmpleado(rs.getString(3));
-                objFacturaVO.setHora((rs.getString(4)));
-                objFacturaVO.setFecha(rs.getString(5));
-                objFacturaVO.setTotalA_Pagar(Float.parseFloat(rs.getString(6)));
-                
-               
-                
+                objFacturaVO.setFecha((rs.getString(4)));
+                objFacturaVO.setTotalPrendas(Integer.parseInt(rs.getString(5)));
+                objFacturaVO.setTipoPago(rs.getString(6));
+                objFacturaVO.setEstadoPrenda(rs.getString(7));
+                objFacturaVO.setFechaEntrega(rs.getString(8));
+                objFacturaVO.setTotalA_Pagar(Float.parseFloat(rs.getString(9)));            
+                               
                 listaFacturas.add(objFacturaVO);
             }
         } catch (Exception e) {
